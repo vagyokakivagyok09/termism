@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Puszta Kaland 🌾</title>
+<title>Természetismeret Játék 🌿</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --grass:#4a7c2f; --grass-light:#6aad42;
-    --earth:#c4914a; --earth-dark:#7a4e1e;
-    --sun:#f7cc3a; --sun-warm:#e89c10;
-    --true-col:#2e7d32; --true-bg:#e8f5e9;
-    --false-col:#c62828; --false-bg:#ffebee;
-    --card-bg:#fffef4; --text-dark:#1e2d0e; --text-mid:#3d5220;
+    --grass:#4a7c2f;--grass-light:#6aad42;
+    --earth:#c4914a;--earth-dark:#7a4e1e;
+    --sun:#f7cc3a;--sun-warm:#e89c10;
+    --water:#2a7faa;--water-light:#4ab0d4;
+    --true-col:#2e7d32;--true-bg:#e8f5e9;
+    --false-col:#c62828;--false-bg:#ffebee;
+    --card-bg:#fffef4;--text-dark:#1e2d0e;--text-mid:#3d5220;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Nunito',sans-serif;min-height:100vh;background:linear-gradient(160deg,#b8dff0 0%,#cfe89a 50%,#c4914a 100%);color:var(--text-dark);overflow-x:hidden;}
@@ -21,46 +22,85 @@
   @keyframes sway{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
   .sun-fixed{position:fixed;top:16px;right:22px;font-size:2.8rem;z-index:2;animation:spin 20s linear infinite;filter:drop-shadow(0 0 10px #f7cc3a);}
   @keyframes spin{to{transform:rotate(360deg)}}
-  #app{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:16px 14px 70px;}
-  header{text-align:center;padding:28px 10px 14px;}
-  header h1{font-family:'Baloo 2',cursive;font-size:2.6rem;font-weight:800;color:var(--text-dark);text-shadow:3px 3px 0 var(--sun),5px 5px 0 var(--earth-dark);line-height:1.1;}
-  header p{margin-top:6px;font-size:1rem;color:var(--text-mid);font-weight:600;}
+  #app{position:relative;z-index:2;max-width:740px;margin:0 auto;padding:16px 14px 70px;}
+  header{text-align:center;padding:24px 10px 10px;}
+  header h1{font-family:'Baloo 2',cursive;font-size:2.2rem;font-weight:800;color:var(--text-dark);text-shadow:3px 3px 0 var(--sun),5px 5px 0 var(--earth-dark);line-height:1.15;}
+  header p{margin-top:6px;font-size:0.97rem;color:var(--text-mid);font-weight:600;}
   @keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(0.97)}to{opacity:1;transform:none}}
-  .card{background:var(--card-bg);border-radius:22px;padding:28px 26px 22px;border:2.5px solid #d4c070;box-shadow:5px 6px 0 #b09030;animation:cardIn 0.35s cubic-bezier(.4,0,.2,1);}
+  .card{background:var(--card-bg);border-radius:22px;padding:26px 24px 22px;border:2.5px solid #d4c070;box-shadow:5px 6px 0 #b09030;animation:cardIn 0.35s cubic-bezier(.4,0,.2,1);}
 
   /* NAME */
   .name-screen{text-align:center;}
   .name-screen h2{font-family:'Baloo 2',cursive;font-size:1.7rem;font-weight:800;color:var(--grass);margin-bottom:8px;}
   .name-screen p{color:var(--text-mid);font-size:1rem;margin-bottom:24px;font-weight:600;}
-  .name-input{font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:700;padding:14px 20px;border-radius:16px;border:2.5px solid var(--grass);width:100%;max-width:320px;text-align:center;outline:none;color:var(--text-dark);background:#f6ffe0;box-shadow:2px 3px 0 var(--grass);margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;}
+  .name-input{font-family:'Baloo 2',cursive;font-size:1.15rem;font-weight:700;padding:13px 18px;border-radius:16px;border:2.5px solid var(--grass);width:100%;max-width:320px;text-align:center;outline:none;color:var(--text-dark);background:#f6ffe0;box-shadow:2px 3px 0 var(--grass);margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;}
   .name-input:focus{border-color:var(--sun-warm);}
 
-  /* MENU */
-  .menu-screen{text-align:center;}
-  .menu-screen h2{font-family:'Baloo 2',cursive;font-size:1.6rem;font-weight:800;color:var(--grass);margin-bottom:6px;}
-  .menu-screen .welcome{font-size:1rem;color:var(--text-mid);font-weight:600;margin-bottom:28px;}
-  .menu-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;}
-  .menu-btn{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;padding:20px 10px;border-radius:20px;border:3px solid;cursor:pointer;transition:all 0.18s;text-align:center;line-height:1.4;}
-  .menu-btn .btn-icon{font-size:2.2rem;display:block;margin-bottom:8px;}
-  .menu-btn .btn-label{display:block;font-size:1rem;}
-  .menu-btn .btn-sub{display:block;font-size:0.75rem;font-weight:600;opacity:0.75;margin-top:4px;}
-  .menu-btn.igaz{background:var(--true-bg);color:var(--true-col);border-color:var(--true-col);box-shadow:3px 4px 0 #1a4f1e;}
-  .menu-btn.igaz:hover{transform:translateY(-3px) scale(1.03);background:#b9f0bc;}
-  .menu-btn.kviz{background:#e8f0ff;color:#1a3a8f;border-color:#3355cc;box-shadow:3px 4px 0 #1a2a8f;}
-  .menu-btn.kviz:hover{transform:translateY(-3px) scale(1.03);background:#c8d8ff;}
-  .menu-btn.lyukas{background:#fff0e8;color:#7a3010;border-color:#e05c1a;box-shadow:3px 4px 0 #8b3010;}
-  .menu-btn.lyukas:hover{transform:translateY(-3px) scale(1.03);background:#ffe0c8;}
-  .back-btn{font-family:'Baloo 2',cursive;font-size:0.95rem;font-weight:700;background:none;border:2px solid var(--earth);color:var(--earth-dark);border-radius:20px;padding:7px 20px;cursor:pointer;transition:all 0.15s;}
-  .back-btn:hover{background:var(--earth);color:white;}
+  /* BIG TOPIC CHOOSER */
+  .bigtopic-screen{text-align:center;}
+  .bigtopic-screen h2{font-family:'Baloo 2',cursive;font-size:1.55rem;font-weight:800;color:var(--grass);margin-bottom:4px;}
+  .bigtopic-screen .sub{font-size:0.95rem;color:var(--text-mid);font-weight:600;margin-bottom:22px;}
+  .bigtopic-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:18px;}
+  .bigtopic-btn{
+    width:100%;font-family:'Baloo 2',cursive;font-weight:800;
+    padding:20px 22px;border-radius:20px;border:3px solid;
+    cursor:pointer;transition:all 0.18s;text-align:left;
+    display:flex;align-items:center;gap:16px;
+    box-shadow:4px 5px 0 var(--earth-dark);
+  }
+  .bigtopic-btn.fuves{border-color:var(--grass);background:linear-gradient(135deg,#e8ffe0,#d0f0b0);color:var(--grass);}
+  .bigtopic-btn.fuves:hover{transform:translateY(-3px) scale(1.02);background:linear-gradient(135deg,#d0f5c0,#b8e890);}
+  .bigtopic-btn.vizek{border-color:var(--water);background:linear-gradient(135deg,#e0f4ff,#b8e0f8);color:var(--water);}
+  .bigtopic-btn.vizek:hover{transform:translateY(-3px) scale(1.02);background:linear-gradient(135deg,#c8ecff,#a0d4f0);}
+  .bigtopic-icon{font-size:2.8rem;flex-shrink:0;}
+  .bigtopic-title{font-size:1.1rem;font-weight:800;color:var(--text-dark);}
+  .bigtopic-sub{font-size:0.8rem;font-weight:600;color:var(--text-mid);margin-top:3px;}
+
+  /* SUBTOPIC LIST */
+  .subtopic-screen h2{font-family:'Baloo 2',cursive;font-size:1.3rem;font-weight:800;color:var(--grass);margin-bottom:4px;text-align:center;}
+  .subtopic-screen.water-theme h2{color:var(--water);}
+  .subtopic-screen .sub{font-size:0.9rem;color:var(--text-mid);font-weight:600;margin-bottom:18px;text-align:center;}
+  .subtopic-grid{display:grid;grid-template-columns:1fr;gap:9px;margin-bottom:16px;}
+  .subtopic-btn{font-family:'Baloo 2',cursive;font-weight:700;font-size:0.97rem;padding:13px 16px;border-radius:15px;border:2.5px solid #b0cc70;background:#f4ffe0;color:var(--text-dark);cursor:pointer;transition:all 0.15s;text-align:left;display:flex;align-items:center;gap:11px;box-shadow:2px 3px 0 #8aaa30;}
+  .subtopic-btn:hover{background:#e0f8b0;border-color:var(--grass);transform:translateX(4px);}
+  .subtopic-btn.water-style{border-color:#7ac8e8;background:#e8f6ff;box-shadow:2px 3px 0 #4a90b8;}
+  .subtopic-btn.water-style:hover{background:#c8ecff;border-color:var(--water);transform:translateX(4px);}
+  .subtopic-btn .snum{font-family:'Baloo 2',cursive;font-size:1.15rem;font-weight:800;color:var(--grass);min-width:26px;}
+  .subtopic-btn.water-style .snum{color:var(--water);}
+  .subtopic-btn .sicon{font-size:1.4rem;flex-shrink:0;}
+  .subtopic-btn .stitle{font-size:0.95rem;font-weight:700;}
+  .subtopic-btn .sstatus{font-size:0.72rem;color:var(--text-mid);margin-top:1px;}
+  .subtopic-btn.locked{opacity:0.5;cursor:not-allowed;}
+  .subtopic-btn.locked:hover{transform:none;background:#f4ffe0;}
+  .subtopic-btn.water-style.locked:hover{transform:none;background:#e8f6ff;}
+  .coming-badge{background:#ffe0c0;color:#8b3010;border-radius:10px;padding:2px 8px;font-size:0.7rem;font-weight:800;margin-left:auto;white-space:nowrap;flex-shrink:0;}
+  .ready-badge{background:#d0f0b0;color:#2a6010;border-radius:10px;padding:2px 8px;font-size:0.7rem;font-weight:800;margin-left:auto;white-space:nowrap;flex-shrink:0;}
+  .ready-badge.water{background:#c8ecff;color:#1a5a7a;}
+
+  /* MODE */
+  .mode-screen h2{font-family:'Baloo 2',cursive;font-size:1.25rem;font-weight:800;color:var(--grass);margin-bottom:4px;text-align:center;}
+  .mode-screen.water-theme h2{color:var(--water);}
+  .mode-screen .sub{font-size:0.9rem;color:var(--text-mid);font-weight:600;margin-bottom:18px;text-align:center;}
+  .mode-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;}
+  .mode-btn{font-family:'Baloo 2',cursive;font-weight:800;font-size:0.95rem;padding:17px 10px;border-radius:17px;border:3px solid;cursor:pointer;transition:all 0.18s;text-align:center;}
+  .mode-btn .btn-icon{font-size:1.9rem;display:block;margin-bottom:5px;}
+  .mode-btn .btn-label{display:block;font-size:0.92rem;}
+  .mode-btn .btn-sub{display:block;font-size:0.7rem;font-weight:600;opacity:0.75;margin-top:3px;}
+  .mode-btn.igaz{background:var(--true-bg);color:var(--true-col);border-color:var(--true-col);box-shadow:3px 4px 0 #1a4f1e;}
+  .mode-btn.igaz:hover{transform:translateY(-3px);background:#b9f0bc;}
+  .mode-btn.kviz{background:#e8f0ff;color:#1a3a8f;border-color:#3355cc;box-shadow:3px 4px 0 #1a2a8f;}
+  .mode-btn.kviz:hover{transform:translateY(-3px);background:#c8d8ff;}
+  .mode-btn.lyukas{background:#fff0e8;color:#7a3010;border-color:#e05c1a;box-shadow:3px 4px 0 #8b3010;}
+  .mode-btn.lyukas:hover{transform:translateY(-3px);background:#ffe0c8;}
 
   /* TOP BAR */
-  .top-bar{display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
-  .q-counter{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:var(--grass);white-space:nowrap;min-width:72px;}
-  .prog-wrap{flex:1;background:rgba(255,255,255,0.45);border-radius:20px;height:14px;overflow:hidden;border:2px solid rgba(74,124,47,0.3);min-width:60px;}
+  .top-bar{display:flex;align-items:center;gap:7px;margin-bottom:18px;flex-wrap:wrap;}
+  .q-counter{font-family:'Baloo 2',cursive;font-weight:800;font-size:0.97rem;color:var(--grass);white-space:nowrap;min-width:68px;}
+  .prog-wrap{flex:1;background:rgba(255,255,255,0.45);border-radius:20px;height:13px;overflow:hidden;border:2px solid rgba(74,124,47,0.3);min-width:50px;}
   .prog-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--grass-light),var(--sun));transition:width 0.5s cubic-bezier(.4,0,.2,1);}
-  .score-pill{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;background:var(--card-bg);border:2px solid var(--grass);border-radius:30px;padding:4px 14px;color:var(--grass);box-shadow:2px 2px 0 var(--grass);white-space:nowrap;}
-  .timer-pill{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;background:#e8f0ff;border:2px solid #5577cc;border-radius:30px;padding:4px 14px;color:#2244aa;box-shadow:2px 2px 0 #2244aa;white-space:nowrap;}
-  .streak-pill{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;background:#fff8e0;border:2px solid var(--sun-warm);border-radius:30px;padding:4px 14px;color:var(--earth-dark);box-shadow:2px 2px 0 var(--sun-warm);white-space:nowrap;transition:background 0.3s,border-color 0.3s,color 0.3s;}
+  .score-pill{font-family:'Baloo 2',cursive;font-weight:800;font-size:0.97rem;background:var(--card-bg);border:2px solid var(--grass);border-radius:30px;padding:3px 11px;color:var(--grass);box-shadow:2px 2px 0 var(--grass);white-space:nowrap;}
+  .timer-pill{font-family:'Baloo 2',cursive;font-weight:800;font-size:0.97rem;background:#e8f0ff;border:2px solid #5577cc;border-radius:30px;padding:3px 11px;color:#2244aa;box-shadow:2px 2px 0 #2244aa;white-space:nowrap;}
+  .streak-pill{font-family:'Baloo 2',cursive;font-weight:800;font-size:0.97rem;background:#fff8e0;border:2px solid var(--sun-warm);border-radius:30px;padding:3px 11px;color:var(--earth-dark);box-shadow:2px 2px 0 var(--sun-warm);white-space:nowrap;transition:background 0.3s,border-color 0.3s,color 0.3s;}
   .streak-pill.pop{animation:streakPop 0.4s cubic-bezier(.4,0,.2,1);}
   @keyframes streakPop{0%{transform:scale(1)}40%{transform:scale(1.45) rotate(-6deg)}70%{transform:scale(0.92) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
   .streak-pill.on-fire{background:linear-gradient(90deg,#ffe066,#ff8c00);border-color:#cc5500;color:white;box-shadow:2px 2px 0 #8b3800;}
@@ -68,18 +108,18 @@
   @keyframes streakBreak{0%{transform:scale(1)}30%{transform:scale(1.12) rotate(8deg)}65%{transform:scale(0.9) rotate(-5deg)}100%{transform:scale(1) rotate(0)}}
 
   /* DIFF */
-  .diff-badge{display:inline-block;border-radius:20px;padding:3px 14px;font-family:'Baloo 2',cursive;font-size:0.82rem;font-weight:800;margin-bottom:14px;}
+  .diff-badge{display:inline-block;border-radius:20px;padding:3px 13px;font-family:'Baloo 2',cursive;font-size:0.8rem;font-weight:800;margin-bottom:13px;}
   .diff-1{background:#d4f7c0;color:#2a6010;border:2px solid #6aad42;}
   .diff-2{background:#fff3c0;color:#7a5000;border:2px solid #e89c10;}
   .diff-3{background:#ffd9c0;color:#7a2800;border:2px solid #e05c1a;}
 
-  /* Q CARD */
-  .q-number{font-family:'Baloo 2',cursive;font-size:0.88rem;font-weight:700;color:#a08030;margin-bottom:6px;}
-  .q-text{font-family:'Baloo 2',cursive;font-size:1.22rem;font-weight:700;color:var(--text-dark);line-height:1.45;margin-bottom:20px;}
+  /* Q */
+  .q-number{font-family:'Baloo 2',cursive;font-size:0.85rem;font-weight:700;color:#a08030;margin-bottom:5px;}
+  .q-text{font-family:'Baloo 2',cursive;font-size:1.15rem;font-weight:700;color:var(--text-dark);line-height:1.45;margin-bottom:18px;}
 
   /* TF */
-  .tf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
-  .ans-btn{font-family:'Baloo 2',cursive;font-size:1.35rem;font-weight:800;padding:18px 10px;border-radius:18px;border:3px solid;cursor:pointer;transition:transform 0.13s,background 0.13s;display:flex;align-items:center;justify-content:center;gap:10px;}
+  .tf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:13px;}
+  .ans-btn{font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:800;padding:15px 10px;border-radius:16px;border:3px solid;cursor:pointer;transition:transform 0.13s,background 0.13s;display:flex;align-items:center;justify-content:center;gap:8px;}
   .btn-true{background:var(--true-bg);color:var(--true-col);border-color:var(--true-col);box-shadow:3px 4px 0 #1a4f1e;}
   .btn-false{background:var(--false-bg);color:var(--false-col);border-color:var(--false-col);box-shadow:3px 4px 0 #7a1010;}
   .ans-btn:hover:not(:disabled){transform:translateY(-3px) scale(1.04);}
@@ -89,95 +129,77 @@
   .ans-btn.reveal-correct{background:#b9f0bc;}
 
   /* QUIZ OPTS */
-  .opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-  .opt-btn{font-family:'Nunito',sans-serif;font-size:0.97rem;font-weight:700;padding:13px 14px;border-radius:14px;border:2.5px solid #aac060;background:#f4ffe0;color:var(--text-dark);cursor:pointer;transition:all 0.15s;text-align:left;line-height:1.35;}
+  .opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px;}
+  .opt-btn{font-family:'Nunito',sans-serif;font-size:0.93rem;font-weight:700;padding:11px 12px;border-radius:13px;border:2.5px solid #aac060;background:#f4ffe0;color:var(--text-dark);cursor:pointer;transition:all 0.15s;text-align:left;line-height:1.35;}
   .opt-btn:hover:not(:disabled){background:#fff176;border-color:var(--sun-warm);transform:scale(1.03);}
   .opt-btn:disabled{cursor:default;}
   .opt-btn.selected-correct{background:#b9f0bc;border-color:var(--true-col);color:#1a4f1e;}
   .opt-btn.selected-wrong{background:#ffb3b3;border-color:var(--false-col);color:#7a0000;}
   .opt-btn.reveal-correct{background:#b9f0bc;border-color:var(--true-col);}
 
-  /* ── LYUKAS SZÖVEG ── */
-  .fill-sentence{
-    font-family:'Nunito',sans-serif; font-size:1.08rem; font-weight:600;
-    line-height:2.2; color:var(--text-dark); margin-bottom:18px;
-    background:#f8ffe8; border-radius:14px; padding:16px 18px;
-    border:2px solid #c8dc80;
-  }
-  .fill-select{
-    font-family:'Baloo 2',cursive; font-size:1rem; font-weight:700;
-    padding:4px 10px; border-radius:10px; border:2.5px solid var(--earth);
-    background:#fff8e0; color:var(--earth-dark);
-    cursor:pointer; outline:none; vertical-align:middle;
-    box-shadow:2px 2px 0 var(--sun-warm);
-    transition:border-color 0.2s, background 0.2s;
-    appearance:auto; min-width:120px;
-  }
+  /* FILL */
+  .fill-sentence{font-family:'Nunito',sans-serif;font-size:1.04rem;font-weight:600;line-height:2.4;color:var(--text-dark);margin-bottom:15px;background:#f8ffe8;border-radius:13px;padding:15px 17px;border:2px solid #c8dc80;}
+  .fill-select{font-family:'Baloo 2',cursive;font-size:0.95rem;font-weight:700;padding:4px 9px;border-radius:9px;border:2.5px solid var(--earth);background:#fff8e0;color:var(--earth-dark);cursor:pointer;outline:none;vertical-align:middle;box-shadow:2px 2px 0 var(--sun-warm);min-width:110px;}
   .fill-select:focus{border-color:var(--grass);}
   .fill-select.correct{background:#b9f0bc;border-color:var(--true-col);color:#1a4f1e;}
   .fill-select.wrong{background:#ffb3b3;border-color:var(--false-col);color:#7a0000;}
   .fill-select:disabled{cursor:default;}
-  .fill-hint{font-size:0.88rem;color:var(--text-mid);font-weight:600;margin-bottom:14px;font-style:italic;}
-  .check-fill-btn{
-    font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;
-    padding:12px 36px;background:var(--earth);color:white;
-    border:none;border-radius:30px;cursor:pointer;
-    box-shadow:3px 4px 0 var(--earth-dark);transition:all 0.15s;
-    display:block;margin:0 auto 14px;
-  }
+  .fill-hint{font-size:0.86rem;color:var(--text-mid);font-weight:600;margin-bottom:13px;font-style:italic;}
+  .check-fill-btn{font-family:'Baloo 2',cursive;font-size:1.02rem;font-weight:800;padding:11px 32px;background:var(--earth);color:white;border:none;border-radius:28px;cursor:pointer;box-shadow:3px 4px 0 var(--earth-dark);transition:all 0.15s;display:block;margin:0 auto 13px;}
   .check-fill-btn:hover{transform:translateY(-2px);background:var(--sun-warm);}
   .check-fill-btn:disabled{opacity:0.5;cursor:default;transform:none;}
-  .fill-result{
-    border-radius:14px;padding:13px 16px;font-size:0.97rem;font-weight:700;
-    line-height:1.5;margin-bottom:14px;display:none;
-  }
+  .fill-result{border-radius:13px;padding:12px 15px;font-size:0.95rem;font-weight:700;line-height:1.5;margin-bottom:13px;display:none;}
   .fill-result.show{display:block;animation:feedIn 0.25s ease;}
   .fill-result.correct{background:#d4f7d4;border:2.5px solid var(--true-col);color:#1a4f1e;}
   .fill-result.wrong{background:#ffe0e0;border:2.5px solid var(--false-col);color:#7a0000;}
   .fill-result.partial{background:#fff3c0;border:2.5px solid var(--sun-warm);color:#7a5000;}
 
   /* FEEDBACK */
-  .feedback{border-radius:14px;padding:13px 16px;font-size:0.97rem;font-weight:700;line-height:1.5;margin-bottom:14px;display:none;}
+  .feedback{border-radius:13px;padding:12px 15px;font-size:0.95rem;font-weight:700;line-height:1.5;margin-bottom:13px;display:none;}
   .feedback.show{display:block;animation:feedIn 0.25s ease;}
   @keyframes feedIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .feedback.correct{background:#d4f7d4;border:2.5px solid var(--true-col);color:#1a4f1e;}
   .feedback.wrong{background:#ffe0e0;border:2.5px solid var(--false-col);color:#7a0000;}
 
-  .next-btn{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;padding:13px 40px;background:var(--grass);color:white;border:none;border-radius:30px;cursor:pointer;box-shadow:3px 4px 0 var(--earth-dark);transition:all 0.15s;display:none;margin:0 auto;}
+  .next-btn{font-family:'Baloo 2',cursive;font-size:1.02rem;font-weight:800;padding:12px 36px;background:var(--grass);color:white;border:none;border-radius:28px;cursor:pointer;box-shadow:3px 4px 0 var(--earth-dark);transition:all 0.15s;display:none;margin:0 auto;}
   .next-btn.show{display:block;}
   .next-btn:hover{background:var(--grass-light);transform:translateY(-2px);}
 
   /* RESULT */
   .result-screen{text-align:center;}
-  .result-emoji{font-size:4.5rem;display:block;margin-bottom:12px;}
-  .result-title{font-family:'Baloo 2',cursive;font-size:2rem;font-weight:800;color:var(--grass);margin-bottom:8px;}
-  .result-sub{font-size:1.05rem;color:var(--text-mid);margin-bottom:22px;font-weight:600;}
-  .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
-  .stat-box{background:#f4ffe4;border:2px solid var(--grass-light);border-radius:14px;padding:12px 6px;}
+  .result-emoji{font-size:3.8rem;display:block;margin-bottom:10px;}
+  .result-title{font-family:'Baloo 2',cursive;font-size:1.85rem;font-weight:800;color:var(--grass);margin-bottom:6px;}
+  .result-sub{font-size:0.97rem;color:var(--text-mid);margin-bottom:18px;font-weight:600;}
+  .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px;}
+  .stat-box{background:#f4ffe4;border:2px solid var(--grass-light);border-radius:13px;padding:11px 6px;}
   .stat-box.streak-stat{background:#fff8e0;border-color:var(--sun-warm);}
   .stat-box.time-stat{background:#e8f0ff;border-color:#5577cc;}
-  .stat-num{font-family:'Baloo 2',cursive;font-size:1.8rem;font-weight:800;color:var(--grass);}
+  .stat-num{font-family:'Baloo 2',cursive;font-size:1.6rem;font-weight:800;color:var(--grass);}
   .stat-box.streak-stat .stat-num{color:var(--earth-dark);}
   .stat-box.time-stat .stat-num{color:#2244aa;}
-  .stat-lbl{font-size:0.75rem;color:var(--text-mid);font-weight:700;}
-  .stars{font-size:2rem;letter-spacing:4px;margin-bottom:10px;}
-  .saving-msg{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;color:var(--text-mid);margin-bottom:16px;min-height:28px;}
-  .saving-msg.ok{color:var(--true-col);} .saving-msg.err{color:var(--false-col);}
-  .result-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-  .restart-btn{font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:800;padding:13px 28px;background:var(--earth);color:white;border:none;border-radius:30px;cursor:pointer;box-shadow:3px 4px 0 var(--earth-dark);transition:all 0.15s;}
-  .restart-btn:hover{transform:translateY(-2px);background:var(--sun-warm);}
-  .menu-back-btn{font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:800;padding:13px 28px;background:var(--grass);color:white;border:none;border-radius:30px;cursor:pointer;box-shadow:3px 4px 0 var(--earth-dark);transition:all 0.15s;}
-  .menu-back-btn:hover{transform:translateY(-2px);background:var(--grass-light);}
-  .start-btn{font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:800;padding:14px 44px;background:var(--grass);color:white;border:none;border-radius:30px;cursor:pointer;box-shadow:3px 4px 0 var(--earth-dark);transition:all 0.15s;}
+  .stat-lbl{font-size:0.72rem;color:var(--text-mid);font-weight:700;}
+  .stars{font-size:1.8rem;letter-spacing:4px;margin-bottom:10px;}
+  .saving-msg{font-family:'Baloo 2',cursive;font-size:0.95rem;font-weight:700;color:var(--text-mid);margin-bottom:13px;min-height:24px;}
+  .saving-msg.ok{color:var(--true-col);}.saving-msg.err{color:var(--false-col);}
+  .result-btns{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;}
+  .rbtn{font-family:'Baloo 2',cursive;font-size:0.95rem;font-weight:800;padding:11px 20px;border:none;border-radius:28px;cursor:pointer;box-shadow:3px 3px 0 var(--earth-dark);transition:all 0.15s;color:white;}
+  .rbtn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+  .rbtn.orange{background:var(--earth);}
+  .rbtn.green{background:var(--grass);}
+  .rbtn.blue{background:#3366cc;}
+
+  /* BACK */
+  .back-btn{font-family:'Baloo 2',cursive;font-size:0.9rem;font-weight:700;background:none;border:2px solid var(--earth);color:var(--earth-dark);border-radius:18px;padding:6px 16px;cursor:pointer;transition:all 0.15s;margin-right:6px;}
+  .back-btn:hover{background:var(--earth);color:white;}
+  .start-btn{font-family:'Baloo 2',cursive;font-size:1.15rem;font-weight:800;padding:13px 40px;background:var(--grass);color:white;border:none;border-radius:28px;cursor:pointer;box-shadow:3px 4px 0 var(--earth-dark);transition:all 0.15s;}
   .start-btn:hover{background:var(--grass-light);transform:translateY(-2px);}
   .start-btn:disabled{opacity:0.5;cursor:default;transform:none;}
 
-  @media(max-width:540px){
-    .menu-grid{grid-template-columns:1fr;}
-    .q-text{font-size:1.05rem;}
+  @media(max-width:520px){
+    header h1{font-size:1.7rem;}
+    .mode-grid{grid-template-columns:1fr;}
     .opts-grid{grid-template-columns:1fr;}
-    .tf-row .ans-btn{font-size:1.1rem;padding:14px 8px;}
-    .fill-sentence{font-size:0.97rem;}
+    .tf-row .ans-btn{font-size:1.05rem;padding:13px 8px;}
   }
 </style>
 </head>
@@ -186,126 +208,107 @@
 <div class="sun-fixed">☀️</div>
 <div id="app">
   <header>
-    <h1>🌾 Puszta Kaland</h1>
-    <p>Puszták és mocsárrétek — játssz és tanulj!</p>
+    <h1>🌿 Természetismeret</h1>
+    <p>Válassz témakört és játssz!</p>
   </header>
   <div id="gameArea"></div>
 </div>
-
 <script>
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbxhBeO23qbXIToArYsiquZxpxlAdidFPtjt23vKW9kP8JbJMZ3cXu6JyhsFza6vl7iH/exec";
+const SHEET_URL="https://script.google.com/macros/s/AKfycbxhBeO23qbXIToArYsiquZxpxlAdidFPtjt23vKW9kP8JbJMZ3cXu6JyhsFza6vl7iH/exec";
 
-// ═══════════════════════════════
-// IGAZ / HAMIS
-// ═══════════════════════════════
-const tfQuestions = [
-  {text:"A puszták az Alföldön is megtalálhatók.",answer:true,diff:1,explain:"Igen! Az Alföld a puszták egyik legismertebb helyszíne Magyarországon."},
-  {text:"A pázsitfűfélék szárát szalmaszárnak nevezzük.",answer:true,diff:1,explain:"Igen! A szalmaszár belül üreges és hajlékony."},
-  {text:"A mezeizsálya lila virágú növény.",answer:true,diff:1,explain:"Pontosan! A mezeizsálya jellegzetesen lila virágú, illatos gyógynövény."},
-  {text:"A mocsárrét talaja mindig száraz.",answer:false,diff:1,explain:"Nem igaz! A mocsárrét állandóan nedves talajon alakul ki."},
-  {text:"A réti boglárka sárga virágú növény.",answer:true,diff:1,explain:"Igen! Élénksárga, fényes szirmú virágai tavasszal sárgára festik a réteket."},
-  {text:"A pázsitfűfélék levelei hosszúak és keskenyek.",answer:true,diff:1,explain:"Igen! A hosszú, keskeny levelek segítenek alkalmazkodni a szeles pusztai körülményekhez."},
-  {text:"A mocsári zsurló valódi virágokat nevel.",answer:false,diff:1,explain:"Nem! A mocsári zsurló spórákkal szaporodik, nincs valódi virága."},
-  {text:"A puszták kizárólag emberi beavatkozás hatására jöttek létre.",answer:false,diff:2,explain:"Nem igaz! Az őshonos puszták emberi beavatkozás nélkül, természetes úton alakultak ki."},
-  {text:"A pázsitfűfélék virágait a szél porozza be.",answer:true,diff:2,explain:"Helyes! A virágok aprók — a szél végzi a beporzást, nem a rovarok."},
-  {text:"Az angolperje magas termetű, sűrű csomókban növő fű.",answer:false,diff:2,explain:"Nem! Ez a siskanád leírása. Az angolperje alacsony termetű fű."},
-  {text:"A mezeizsálya szőrös levelei csökkentik a párolgást.",answer:true,diff:2,explain:"Igen! Ezért bírja jól a tűző napot — a szőrök védik a levelet a kiszáradástól."},
-  {text:"A mocsári zsurló szárát a benne lévő kovasav teszi érdesé.",answer:true,diff:2,explain:"Helyes! A kovasav miatt érdes a szára — régen edények tisztítására is használták."},
-  {text:"A réti boglárka szárított állapotban is mérgező.",answer:false,diff:2,explain:"Nem igaz! Frissen mérgező, de szárítva már veszélytelen az állatok számára."},
-  {text:"A puszták megjelennek a középhegységek északi, hűvösebb oldalain is.",answer:false,diff:2,explain:"Nem! A puszták a középhegységek déli, melegebb oldalain alakulnak ki."},
-  {text:"A pázsitfűfélék bojtos gyökérzete segít a felszíni nedvesség gyors felszívásában.",answer:true,diff:3,explain:"Igen! A sűrű bojtos gyökérzet nemcsak rögzíti a növényt, hanem gyorsan fel is szívja a csapadékot."},
-  {text:"A siskanád jól tűri a száraz időszakokat.",answer:true,diff:3,explain:"Helyes! A siskanád magasabb termetű, de kitűnően bírja a szárazságot is."},
-  {text:"A pázsitfűfélék szára azért ellenálló a szélnek, mert kemény és fás.",answer:false,diff:3,explain:"Nem! A szalmaszár éppen azért ellenálló, mert üreges és HAJLÉKONY — rugalmas, nem kemény."},
-  {text:"A mocsárrétek buja növényzete annak köszönhető, hogy ott a víz nem korlátozó tényező.",answer:true,diff:3,explain:"Pontosan! Mivel a talaj állandóan nedves, a növények korlátlanul jutnak vízhez."},
-  {text:"A pázsitfűfélék szárölelő levelei gyengítik a szár szerkezetét.",answer:false,diff:3,explain:"Nem igaz! A szárölelő levélhüvely rásimul a szárra és VÉDI, valamint MEREVÍTI azt."},
-  {text:"A mocsári zsurló minden állat számára mérgező hatású lehet.",answer:true,diff:3,explain:"Igen! A mocsári zsurló a háziállatok számára mérgező — fontos felismerni a legelőkön."},
-];
-
-// ═══════════════════════════════
-// KVÍZ
-// ═══════════════════════════════
-const quizQuestions = [
-  {text:"A mezeizsálya illatos gyógynövény. Mire használják a mindennapokban?",opts:["Festékként","Gyógyteának és fűszernek","Tüzelőanyagként","Szigetelőanyagként"],correct:1,diff:1,explain:"A mezeizsályát teának és gyógynövényként használják torokfájásra, emésztési problémákra — a konyhában is népszerű fűszer!"},
-  {text:"Az angolperjét a háziállatok szívesen legelik. Miért jó ez a gazdálkodóknak?",opts:["Mert mérgező a vadállatoknak","Mert olcsó takarmányt ad","Mert elijeszti a kártevőket","Mert vizet tárol"],correct:1,diff:1,explain:"Az angolperje kiváló természetes legelő — a gazdák nem kell drága takarmányt vegyenek, ha van elegendő angolperje a legelőn."},
-  {text:"A réti boglárka frissen mérgező. Mit kell tudni erről a legelő állatok szempontjából?",opts:["Nem kell törődni vele","Frissen veszélyes, szénában már nem","Csak a gyökere mérgező","Télen mérgező, nyáron nem"],correct:1,diff:1,explain:"A gazdák tudják: friss réten a boglárkától betegek lehetnek az állatok, de a megszárított szénában már nem jelent veszélyt."},
-  {text:"A puszta talaján kevés a csapadék. Hogyan hat ez a mezőgazdaságra?",opts:["Könnyebb gabonát termeszteni","Öntözés nélkül nehéz a gazdálkodás","A talaj termékenyebb lesz","Több erdőt lehet telepíteni"],correct:1,diff:1,explain:"A száraz pusztai éghajlaton öntözés nélkül nem lehet hatékonyan gazdálkodni — ezért a pusztákon inkább állattenyésztéssel foglalkoznak."},
-  {text:"A mocsári zsurló szárát kovasav teszi érdesé. Mire használták ezt régen?",opts:["Fonásra","Edények és fazekak súrolására","Gyógyteának","Festéknek"],correct:1,diff:1,explain:"A zsurló érdes szárával régen edényeket, fazekakat súroltak — természetes súroló volt, akárcsak a mai dörzsszivacsok!"},
-  {text:"Ha egy pusztán megnő a csapadék mennyisége évről évre, mi várható?",opts:["A pázsitfüvek jobban szaporodnak","Lassan fák és bokrok telepednek meg","A talaj kiszárad","A puszta eltűnik a szélben"],correct:1,diff:2,explain:"Ha több csapadék hull, a fák és bokrok is meg tudnak telepedni — a puszta elveszítheti jellegét és erdővé vagy cserjéssé alakulhat."},
-  {text:"A pázsitfűfélék szalmaszára üreges. Milyen emberi találmány hasonlít erre az elvre?",opts:["A kerék","Az ivószalma és a bambusz csövek","A napelem","A vitorla"],correct:1,diff:2,explain:"Az ivószalma és a bambuszból készült csövek ugyanolyan elvű: az üreges, de erős szerkezet rugalmas és könnyű — a természet már rég feltalálta!"},
-  {text:"Ha egy mocsárrétet lecsapolnak, mi történik a növényzettel?",opts:["Gazdagabb lesz a növényzet","A mocsári növények elpusztulnak, szárazabb fajok jelennek meg","Semmi nem változik","Több zsurló nő"],correct:1,diff:2,explain:"A mocsárréti növények vízhez szoktak — ha lecsapolják, elpusztulnak. A kiszáradt területen más, szárazságtűrő növények veszik át a helyüket."},
-  {text:"Miért telepítenek pázsitfűféléket útrézsűkre, gátak oldalára?",opts:["Mert szép a látványuk","Mert bojtos gyökerük rögzíti a talajt, megakadályozza az eróziót","Mert mérgezők a kártevőkre","Mert nem kell öntözni őket"],correct:1,diff:2,explain:"A pázsitfüvek sűrű, bojtos gyökérzete szorosan összekapcsolja a talajszemcséket — így a csapadék nem mossa el a rézsűt vagy a gát oldalát."},
-  {text:"Ha egy folyó mentén megszűnik az áradás (pl. gát épül), hogyan változik meg a mocsárrét?",opts:["Több mocsárrét keletkezik","A mocsárrét kiszárad, biodiverzitása csökken","A növényzet gazdagabb lesz","A zsurló jobban szaporodik"],correct:1,diff:2,explain:"A mocsárrétek az áradásoknak köszönhetik nedvességüket. Ha gát épül és megszűnnek az áradások, a talaj kiszárad — a ritka mocsári növény- és állatvilág eltűnhet."},
-  {text:"A klímaváltozás miatt csökken a csapadék a Kárpát-medencében. Hogyan hat ez a pusztákra?",opts:["A puszták zsugorodnak","A puszták terjeszkednek, szárazabb területek jönnek létre","Több mocsárrét keletkezik","A középhegységek elveszítik erdeiket"],correct:1,diff:3,explain:"Kevesebb csapadék → szárazabb talaj → a fák még kevésbé tudnak megtelepedni → a puszta jellegű területek kiterjedhetnek."},
-  {text:"Miért alakulnak ki puszták a középhegységek déli oldalain, de nem az északin?",opts:["Mert délen több az eső","Mert a déli oldal a napnak kitett, melegebb és szárazabb","Mert az emberek délen vágták ki az erdőket","Mert délen homokos a talaj"],correct:1,diff:3,explain:"A déli oldal több napsütést kap → melegebb és gyorsabban párolog a víz → szárazabb a talaj → a fák nem tudnak megtelepedni. Ezt nevezzük lejtőkitettségnek."},
-  {text:"Ha egy mezőgazdász felszántja a pusztát és évekig nem gondozza, mi várható?",opts:["Örökre kopár marad","A pázsitfüvek visszatelepednek — a puszta regenerálódik","Erdő nő rajta","Mocsárrét keletkezik"],correct:1,diff:3,explain:"A pázsitfüvek rendkívül szívósak — ha hagyják, gyorsan visszatelepednek a felszántott területre."},
-  {text:"A mocsári zsurló spórákkal szaporodik, nem maggal. Mi ennek az előnye nedves élőhelyen?",opts:["A spórák jobban bírják a szárazságot","A spórák könnyűek, messzire repülnek és nedves talajon gyorsan csíráznak","A spórákat rovarok terjesztik","A spórák mérgezők a ragadozókra"],correct:1,diff:3,explain:"A zsurló apró, könnyű spórái a szél és víz segítségével messzire jutnak, és a nedves, iszapos talajon gyorsan kicsíráznak."},
-  {text:"Ha egy pusztán drasztikusan megnő a legelő állatok száma, mi történik?",opts:["A pázsitfüvek jobban szaporodnak","Túllegeltetés miatt a talaj csupasszá válik, erózió indul meg","A terület erdővé alakul","A mocsárrétek terjeszkednek"],correct:1,diff:3,explain:"A túllegeltetés komoly probléma: ha túl sok állat legel, a növényzet nem tud regenerálódni → kopár talaj → erózió → sivatagosodás."},
-];
-
-// ═══════════════════════════════
-// LYUKAS SZÖVEG (10 mondat)
-// ═══════════════════════════════
-// Minden mondatban: parts = szövegrészek tömb, gaps = lyukak (correct + options)
-const fillSentences = [
-  // KÖNNYŰ
+// ═══════════════════════════════════════════
+// NAGY TÉMAKÖRÖK
+// ═══════════════════════════════════════════
+const BIG_TOPICS = [
   {
-    diff:1,
-    parts:["A pázsitfűfélék szárát ",{id:0}," nevezzük, mert belül üreges."],
-    gaps:[{id:0,correct:"szalmaszárnak",options:["szalmaszárnak","faágnak","kúszószárnak","gyökérszárnak"]}]
+    id: "fuves",
+    icon: "🌾",
+    title: "Az őshonos füves területek és a mezők életközössége",
+    style: "fuves",
+    subtopics: [
+      {
+        id:1,icon:"🌿",title:"Az őshonos füves puszták kialakulása, növényei",ready:true,
+        tf:[
+          {text:"A puszták az Alföldön is megtalálhatók.",answer:true,diff:1,explain:"Igen! Az Alföld a puszták egyik legismertebb helyszíne Magyarországon."},
+          {text:"A pázsitfűfélék szárát szalmaszárnak nevezzük.",answer:true,diff:1,explain:"Igen! A szalmaszár belül üreges és hajlékony."},
+          {text:"A mezeizsálya lila virágú növény.",answer:true,diff:1,explain:"Pontosan! A mezeizsálya jellegzetesen lila virágú, illatos gyógynövény."},
+          {text:"A mocsárrét talaja mindig száraz.",answer:false,diff:1,explain:"Nem igaz! A mocsárrét állandóan nedves talajon alakul ki."},
+          {text:"A réti boglárka sárga virágú növény.",answer:true,diff:1,explain:"Igen! Élénksárga, fényes szirmú virágai tavasszal sárgára festik a réteket."},
+          {text:"A pázsitfűfélék levelei hosszúak és keskenyek.",answer:true,diff:1,explain:"Igen! A hosszú, keskeny levelek segítenek alkalmazkodni a szeles pusztai körülményekhez."},
+          {text:"A mocsári zsurló valódi virágokat nevel.",answer:false,diff:1,explain:"Nem! A mocsári zsurló spórákkal szaporodik, nincs valódi virága."},
+          {text:"A puszták kizárólag emberi beavatkozás hatására jöttek létre.",answer:false,diff:2,explain:"Nem igaz! Az őshonos puszták emberi beavatkozás nélkül, természetes úton alakultak ki."},
+          {text:"A pázsitfűfélék virágait a szél porozza be.",answer:true,diff:2,explain:"Helyes! A virágok aprók — a szél végzi a beporzást, nem a rovarok."},
+          {text:"Az angolperje magas termetű, sűrű csomókban növő fű.",answer:false,diff:2,explain:"Nem! Ez a siskanád leírása. Az angolperje alacsony termetű fű."},
+          {text:"A mezeizsálya szőrös levelei csökkentik a párolgást.",answer:true,diff:2,explain:"Igen! Ezért bírja jól a tűző napot — a szőrök védik a levelet a kiszáradástól."},
+          {text:"A mocsári zsurló szárát a benne lévő kovasav teszi érdesé.",answer:true,diff:2,explain:"Helyes! A kovasav miatt érdes a szára — régen edények tisztítására is használták."},
+          {text:"A réti boglárka szárított állapotban is mérgező.",answer:false,diff:2,explain:"Nem igaz! Frissen mérgező, de szárítva már veszélytelen az állatok számára."},
+          {text:"A puszták megjelennek a középhegységek északi, hűvösebb oldalain is.",answer:false,diff:2,explain:"Nem! A puszták a középhegységek déli, melegebb oldalain alakulnak ki."},
+          {text:"A pázsitfűfélék bojtos gyökérzete segít a felszíni nedvesség gyors felszívásában.",answer:true,diff:3,explain:"Igen! A sűrű bojtos gyökérzet nemcsak rögzíti a növényt, hanem gyorsan fel is szívja a csapadékot."},
+          {text:"A siskanád jól tűri a száraz időszakokat.",answer:true,diff:3,explain:"Helyes! A siskanád magasabb termetű, de kitűnően bírja a szárazságot is."},
+          {text:"A pázsitfűfélék szára azért ellenálló a szélnek, mert kemény és fás.",answer:false,diff:3,explain:"Nem! A szalmaszár éppen azért ellenálló, mert üreges és HAJLÉKONY — rugalmas, nem kemény."},
+          {text:"A mocsárrétek buja növényzete annak köszönhető, hogy ott a víz nem korlátozó tényező.",answer:true,diff:3,explain:"Pontosan! Mivel a talaj állandóan nedves, a növények korlátlanul jutnak vízhez."},
+          {text:"A pázsitfűfélék szárölelő levelei gyengítik a szár szerkezetét.",answer:false,diff:3,explain:"Nem igaz! A szárölelő levélhüvely rásimul a szárra és VÉDI, valamint MEREVÍTI azt."},
+          {text:"A mocsári zsurló minden állat számára mérgező hatású lehet.",answer:true,diff:3,explain:"Igen! A mocsári zsurló a háziállatok számára mérgező — fontos felismerni a legelőkön."},
+        ],
+        quiz:[
+          {text:"A mezeizsálya illatos gyógynövény. Mire használják a mindennapokban?",opts:["Festékként","Gyógyteának és fűszernek","Tüzelőanyagként","Szigetelőanyagként"],correct:1,diff:1,explain:"A mezeizsályát teának és gyógynövényként használják torokfájásra, emésztési problémákra."},
+          {text:"Az angolperjét a háziállatok szívesen legelik. Miért jó ez a gazdálkodóknak?",opts:["Mert mérgező a vadállatoknak","Mert olcsó takarmányt ad","Mert elijeszti a kártevőket","Mert vizet tárol"],correct:1,diff:1,explain:"Az angolperje kiváló természetes legelő — a gazdák nem kell drága takarmányt vegyenek."},
+          {text:"A réti boglárka frissen mérgező. Mit kell tudni erről a legelő állatok szempontjából?",opts:["Nem kell törődni vele","Frissen veszélyes, szénában már nem","Csak a gyökere mérgező","Télen mérgező, nyáron nem"],correct:1,diff:1,explain:"Friss réten a boglárkától betegek lehetnek az állatok, de a megszárított szénában már nem jelent veszélyt."},
+          {text:"A puszta talaján kevés a csapadék. Hogyan hat ez a mezőgazdaságra?",opts:["Könnyebb gabonát termeszteni","Öntözés nélkül nehéz a gazdálkodás","A talaj termékenyebb lesz","Több erdőt lehet telepíteni"],correct:1,diff:1,explain:"A száraz pusztai éghajlaton öntözés nélkül nem lehet hatékonyan gazdálkodni."},
+          {text:"A mocsári zsurló szárát kovasav teszi érdesé. Mire használták ezt régen?",opts:["Fonásra","Edények és fazekak súrolására","Gyógyteának","Festéknek"],correct:1,diff:1,explain:"A zsurló érdes szárával régen edényeket, fazekakat súroltak — természetes súroló volt!"},
+          {text:"Ha egy pusztán megnő a csapadék mennyisége, mi várható?",opts:["A pázsitfüvek jobban szaporodnak","Lassan fák és bokrok telepednek meg","A talaj kiszárad","A puszta eltűnik a szélben"],correct:1,diff:2,explain:"Ha több csapadék hull, a fák és bokrok is meg tudnak telepedni — a puszta elveszítheti jellegét."},
+          {text:"Miért telepítenek pázsitfűféléket útrézsűkre, gátak oldalára?",opts:["Mert szép a látványuk","Mert bojtos gyökerük rögzíti a talajt, megakadályozza az eróziót","Mert mérgezők a kártevőkre","Mert nem kell öntözni őket"],correct:1,diff:2,explain:"A pázsitfüvek sűrű, bojtos gyökérzete szorosan összekapcsolja a talajszemcséket — gátolja az eróziót."},
+          {text:"Ha egy mocsárrétet lecsapolnak, mi történik a növényzettel?",opts:["Gazdagabb lesz a növényzet","A mocsári növények elpusztulnak, szárazabb fajok jelennek meg","Semmi nem változik","Több zsurló nő"],correct:1,diff:2,explain:"A mocsárréti növények vízhez szoktak — ha lecsapolják, elpusztulnak."},
+          {text:"Miért alakulnak ki puszták a középhegységek déli oldalain, de nem az északin?",opts:["Mert délen több az eső","Mert a déli oldal a napnak kitett, melegebb és szárazabb","Mert az emberek délen vágták ki az erdőket","Mert délen homokos a talaj"],correct:1,diff:2,explain:"A déli oldal több napsütést kap → melegebb, gyorsabban párolog a víz → szárazabb a talaj. Ez a lejtőkitettség."},
+          {text:"A klímaváltozás miatt csökken a csapadék. Hogyan hat ez a pusztákra?",opts:["A puszták zsugorodnak","A puszták terjeszkednek, szárazabb területek jönnek létre","Több mocsárrét keletkezik","A középhegységek elveszítik erdeiket"],correct:1,diff:3,explain:"Kevesebb csapadék → szárazabb talaj → a puszta jellegű területek kiterjedhetnek."},
+        ],
+        fill:[
+          {diff:1,parts:["A pázsitfűfélék szárát ",{id:0}," nevezzük, mert belül üreges."],gaps:[{id:0,correct:"szalmaszárnak",options:["szalmaszárnak","faágnak","kúszószárnak","gyökérszárnak"]}]},
+          {diff:1,parts:["A mezeizsálya virágának színe ",{id:0},", és kellemes illatú gyógynövény."],gaps:[{id:0,correct:"lila",options:["lila","sárga","fehér","kék"]}]},
+          {diff:1,parts:["A mocsárrét talaja állandóan ",{id:0},", ezért ott buja növényzet él."],gaps:[{id:0,correct:"nedves",options:["nedves","száraz","homokos","jeges"]}]},
+          {diff:1,parts:["A réti boglárka frissen ",{id:0}," az állatok számára, de szárítva már veszélytelen."],gaps:[{id:0,correct:"mérgező",options:["mérgező","gyógyító","tápláló","ízletes"]}]},
+          {diff:2,parts:["A pázsitfűfélék virágait a ",{id:0}," porozza be, ezért a virágok aprók és feltűnésmentes."],gaps:[{id:0,correct:"szél",options:["szél","méh","lepke","bogár"]}]},
+          {diff:2,parts:["A pázsitfűfélék ",{id:0}," gyökérzete erősen rögzíti a növényt a talajban."],gaps:[{id:0,correct:"bojtos",options:["bojtos","karó","gumós","léggyökér"]}]},
+          {diff:2,parts:["Az ",{id:0}," alacsony termetű, taposást jól tűrő fű, amelyet a háziállatok szívesen legelnek."],gaps:[{id:0,correct:"angolperje",options:["angolperje","siskanád","mezeizsálya","mocsári zsurló"]}]},
+          {diff:2,parts:["A puszták a középhegységek ",{id:0}," kitettségű oldalain is megjelennek."],gaps:[{id:0,correct:"déli",options:["déli","északi","keleti","nyugati"]}]},
+          {diff:3,parts:["A mocsári zsurló szárát a benne lévő ",{id:0}," teszi érdesé — régen edények tisztítására használták."],gaps:[{id:0,correct:"kovasav",options:["kovasav","mész","só","cukor"]}]},
+          {diff:3,parts:["A pázsitfűfélék ",{id:0}," levelei rásimulnak a szárra, védve és merevítve azt a szél ellen."],gaps:[{id:0,correct:"szárölelő",options:["szárölelő","tüskés","húsos","úszó"]}]},
+        ]
+      },
+      {id:2,icon:"🦗",title:"Ízeltlábúak a füves területeken",ready:false,tf:[],quiz:[],fill:[]},
+      {id:3,icon:"🦎",title:"A fürge gyík és a vakond",ready:false,tf:[],quiz:[],fill:[]},
+      {id:4,icon:"🐇",title:"A mezei nyúl és a füves területek rágcsáló kisemősei",ready:false,tf:[],quiz:[],fill:[]},
+      {id:5,icon:"🦅",title:"A fácán és a füves területek ragadozó madarai",ready:false,tf:[],quiz:[],fill:[]},
+      {id:6,icon:"🌾",title:"Termesztett növényeink: búza és a kukorica",ready:false,tf:[],quiz:[],fill:[]},
+      {id:7,icon:"🌻",title:"Termesztett növényeink: napraforgó, repce, lucerna",ready:false,tf:[],quiz:[],fill:[]},
+    ]
   },
   {
-    diff:1,
-    parts:["A mezeizsálya virágának színe ",{id:0},", és kellemes illatú gyógynövény."],
-    gaps:[{id:0,correct:"lila",options:["lila","sárga","fehér","kék"]}]
-  },
-  {
-    diff:1,
-    parts:["A mocsárrét talaja állandóan ",{id:0},", ezért ott buja növényzet él."],
-    gaps:[{id:0,correct:"nedves",options:["nedves","száraz","homokos","jeges"]}]
-  },
-  {
-    diff:1,
-    parts:["A réti boglárka frissen ",{id:0}," az állatok számára, de szárítva már veszélytelen."],
-    gaps:[{id:0,correct:"mérgező",options:["mérgező","gyógyító","tápláló","ízletes"]}]
-  },
-  // KÖZEPES
-  {
-    diff:2,
-    parts:["A pázsitfűfélék virágait a ",{id:0}," porozza be, ezért a virágok aprók és feltűnésmentes."],
-    gaps:[{id:0,correct:"szél",options:["szél","méh","lepke","bogár"]}]
-  },
-  {
-    diff:2,
-    parts:["A pázsitfűfélék ",{id:0}," gyökérzete erősen rögzíti a növényt a talajban és gyorsan szívja a nedvességet."],
-    gaps:[{id:0,correct:"bojtos",options:["bojtos","karó","gumós","léggyökér"]}]
-  },
-  {
-    diff:2,
-    parts:["Az ",{id:0}," alacsony termetű, taposást jól tűrő fű, amelyet a háziállatok szívesen legelnek."],
-    gaps:[{id:0,correct:"angolperje",options:["angolperje","siskanád","mezeizsálya","mocsári zsurló"]}]
-  },
-  {
-    diff:2,
-    parts:["A puszták a középhegységek ",{id:0}," kitettségű oldalain is megjelennek, ahol melegebb és szárazabb az éghajlat."],
-    gaps:[{id:0,correct:"déli",options:["déli","északi","keleti","nyugati"]}]
-  },
-  // NEHÉZ
-  {
-    diff:3,
-    parts:["A mocsári zsurló szárát a benne lévő ",{id:0}," teszi érdesé — régen edények tisztítására használták."],
-    gaps:[{id:0,correct:"kovasav",options:["kovasav","mész","só","cukor"]}]
-  },
-  {
-    diff:3,
-    parts:["A pázsitfűfélék ",{id:0}," levelei rásimulnak a szárra, védve és merevítve azt a szél ellen."],
-    gaps:[{id:0,correct:"szárölelő",options:["szárölelő","tüskés","húsos","úszó"]}]
-  },
+    id: "vizek",
+    icon: "💧",
+    title: "Vizek, vízpartok életközössége",
+    style: "vizek",
+    subtopics: [
+      {id:1,icon:"🔬",title:"A víz jelentősége. A vizek parányi élőlényei",ready:false,tf:[],quiz:[],fill:[]},
+      {id:2,icon:"🌿",title:"Lágyszárúak a vízben és a vízparton",ready:false,tf:[],quiz:[],fill:[]},
+      {id:3,icon:"🌳",title:"A ligeterdők és a vízparti fák",ready:false,tf:[],quiz:[],fill:[]},
+      {id:4,icon:"🐌",title:"Az orvosi pióca. Csigák és kagylók a vízben",ready:false,tf:[],quiz:[],fill:[]},
+      {id:5,icon:"🦟",title:"Ízeltlábúak a vízben és a vízparton",ready:false,tf:[],quiz:[],fill:[]},
+      {id:6,icon:"🐟",title:"A hazai vizekben élő halak",ready:false,tf:[],quiz:[],fill:[]},
+      {id:7,icon:"🐸",title:"Békák a vízben és a vízparton",ready:false,tf:[],quiz:[],fill:[]},
+      {id:8,icon:"🐍",title:"A vízisikló és a mocsári teknős",ready:false,tf:[],quiz:[],fill:[]},
+      {id:9,icon:"🦢",title:"A vizek, vízpartok madarai",ready:false,tf:[],quiz:[],fill:[]},
+      {id:10,icon:"🌊",title:"A vizek, vízpartok életközössége",ready:false,tf:[],quiz:[],fill:[]},
+      {id:11,icon:"♻️",title:"A vizek szennyezése. A vizes élőhelyek védelme",ready:false,tf:[],quiz:[],fill:[]},
+    ]
+  }
 ];
 
 // ═══════════════════════════════
 // ÁLLAPOT
 // ═══════════════════════════════
-let playerName='', mode='', current=0, score=0, streak=0, bestStreak=0, answered=false;
+let playerName='', currentBigTopic=null, currentTopic=null, mode='';
+let current=0, score=0, streak=0, bestStreak=0, answered=false;
 let startTime=0, timerInterval=null, elapsedSeconds=0;
 
 function formatTime(s){const m=Math.floor(s/60),sec=s%60;return(m>0?m+' perc ':'')+sec+' mp';}
@@ -317,53 +320,101 @@ function updateTimer(){elapsedSeconds=Math.floor((Date.now()-startTime)/1000);co
 // ═══════════════════════════════
 // KÉPERNYŐK
 // ═══════════════════════════════
-function showNameScreen(){
-  mode='';current=0;score=0;streak=0;bestStreak=0;
+function showNameScreen(pendingTopicId){
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   document.getElementById('gameArea').innerHTML=
     '<div class="card name-screen">'+
-      '<div style="font-size:3rem;margin-bottom:10px;">🌾</div>'+
+      '<div style="font-size:3rem;margin-bottom:10px;">🌿</div>'+
       '<h2>Üdvözöllek!</h2>'+
-      '<p>Írd be a neved a kezdés előtt!</p>'+
+      '<p>Írd be a neved a játék előtt!</p>'+
       '<input class="name-input" id="nameInput" type="text" placeholder="Pl. Kovács Péter" maxlength="40"/>'+
-      '<button class="start-btn" id="startBtn" onclick="goToMenu()" disabled>Tovább →</button>'+
+      '<button class="start-btn" id="startBtn" onclick="goToModes('+pendingTopicId+')" disabled>Tovább →</button>'+
     '</div>';
   const inp=document.getElementById('nameInput');
   inp.addEventListener('input',function(){document.getElementById('startBtn').disabled=this.value.trim().length<2;});
-  inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&this.value.trim().length>=2)goToMenu();});
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&this.value.trim().length>=2)goToModes(pendingTopicId);});
   inp.focus();
 }
 
-function goToMenu(){
+function goToModes(topicId){
   const inp=document.getElementById('nameInput');
   if(inp)playerName=inp.value.trim();
   if(playerName.length<2)return;
-  showMenu();
+  showModes(topicId);
 }
 
-function showMenu(){
+function showBigTopics(){
+  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+  let btns='';
+  BIG_TOPICS.forEach(function(bt){
+    const readyCount=bt.subtopics.filter(function(s){return s.ready;}).length;
+    btns+=
+      '<button class="bigtopic-btn '+bt.style+'" onclick="showSubtopics(\''+bt.id+'\')">'+
+        '<span class="bigtopic-icon">'+bt.icon+'</span>'+
+        '<span>'+
+          '<span class="bigtopic-title">'+bt.title+'</span>'+
+          '<span class="bigtopic-sub">'+bt.subtopics.length+' altéma · '+readyCount+' elérhető</span>'+
+        '</span>'+
+      '</button>';
+  });
   document.getElementById('gameArea').innerHTML=
-    '<div class="card menu-screen">'+
-      '<h2>Szia, '+playerName+'! 👋</h2>'+
-      '<p class="welcome">Melyik játékmódot választod?</p>'+
-      '<div class="menu-grid">'+
-        '<button class="menu-btn igaz" onclick="startGame(\'tf\')">'+
-          '<span class="btn-icon">✅</span>'+
-          '<span class="btn-label">Igaz vagy Hamis?</span>'+
-          '<span class="btn-sub">20 állítás</span>'+
+    '<div class="card bigtopic-screen">'+
+      '<h2>🌿 Természetismeret</h2>'+
+      '<p class="sub">Válaszd ki a nagy témakört!</p>'+
+      '<div class="bigtopic-grid">'+btns+'</div>'+
+    '</div>';
+}
+
+function showSubtopics(bigId){
+  currentBigTopic=BIG_TOPICS.find(function(bt){return bt.id===bigId;});
+  const isWater=bigId==='vizek';
+  let rows='';
+  currentBigTopic.subtopics.forEach(function(t){
+    const locked=t.ready?'':'locked';
+    const click=t.ready?'onclick="showNameScreen('+t.id+')"':'';
+    const wStyle=isWater?'water-style':'';
+    const badge=t.ready
+      ?'<span class="ready-badge'+(isWater?' water':'')+'">✅ Elérhető</span>'
+      :'<span class="coming-badge">⏳ Hamarosan</span>';
+    rows+=
+      '<button class="subtopic-btn '+wStyle+' '+locked+'" '+click+'>'+
+        '<span class="snum">'+t.id+'.</span>'+
+        '<span class="sicon">'+t.icon+'</span>'+
+        '<span>'+
+          '<span class="stitle">'+t.title+'</span>'+
+          '<span class="sstatus">'+(t.ready?'20 Ig/H · 10 Kvíz · 10 Lyukas':'Hamarosan feltölti a tanár')+'</span>'+
+        '</span>'+
+        badge+
+      '</button>';
+  });
+  document.getElementById('gameArea').innerHTML=
+    '<div class="card subtopic-screen'+(isWater?' water-theme':'')+'">'+
+      '<h2>'+currentBigTopic.icon+' '+currentBigTopic.title+'</h2>'+
+      '<p class="sub">Válaszd ki az altémát!</p>'+
+      '<div class="subtopic-grid">'+rows+'</div>'+
+      '<button class="back-btn" onclick="showBigTopics()">← Vissza</button>'+
+    '</div>';
+}
+
+function showModes(topicId){
+  currentTopic=currentBigTopic.subtopics.find(function(t){return t.id===topicId;});
+  const isWater=currentBigTopic.id==='vizek';
+  document.getElementById('gameArea').innerHTML=
+    '<div class="card mode-screen'+(isWater?' water-theme':'')+'">'+
+      '<h2>'+currentTopic.icon+' '+currentTopic.title+'</h2>'+
+      '<p class="sub">Melyik játékmódot választod, '+playerName+'?</p>'+
+      '<div class="mode-grid">'+
+        '<button class="mode-btn igaz" onclick="startGame(\'tf\')">'+
+          '<span class="btn-icon">✅</span><span class="btn-label">Igaz vagy Hamis?</span><span class="btn-sub">20 állítás</span>'+
         '</button>'+
-        '<button class="menu-btn kviz" onclick="startGame(\'quiz\')">'+
-          '<span class="btn-icon">🧠</span>'+
-          '<span class="btn-label">Kvíz</span>'+
-          '<span class="btn-sub">20 kérdés · ok-okozat</span>'+
+        '<button class="mode-btn kviz" onclick="startGame(\'quiz\')">'+
+          '<span class="btn-icon">🧠</span><span class="btn-label">Kvíz</span><span class="btn-sub">10 kérdés</span>'+
         '</button>'+
-        '<button class="menu-btn lyukas" onclick="startGame(\'fill\')">'+
-          '<span class="btn-icon">✏️</span>'+
-          '<span class="btn-label">Lyukas szöveg</span>'+
-          '<span class="btn-sub">10 mondat · szókitöltés</span>'+
+        '<button class="mode-btn lyukas" onclick="startGame(\'fill\')">'+
+          '<span class="btn-icon">✏️</span><span class="btn-label">Lyukas szöveg</span><span class="btn-sub">10 mondat</span>'+
         '</button>'+
       '</div>'+
-      '<button class="back-btn" onclick="showNameScreen()">← Névcsere</button>'+
+      '<button class="back-btn" onclick="showSubtopics(\''+currentBigTopic.id+'\')">← Vissza</button>'+
     '</div>';
 }
 
@@ -380,9 +431,8 @@ function startGame(m){
 // ═══════════════════════════════
 function render(){
   const area=document.getElementById('gameArea');
-  const questions=mode==='tf'?tfQuestions:mode==='quiz'?quizQuestions:fillSentences;
+  const questions=mode==='tf'?currentTopic.tf:mode==='quiz'?currentTopic.quiz:currentTopic.fill;
   const total=questions.length;
-
   if(current>=total){
     if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
     const pct=Math.round(score/total*100);
@@ -406,20 +456,19 @@ function render(){
         '</div>'+
         '<div class="saving-msg" id="savingMsg">⏳ Eredmény mentése...</div>'+
         '<div class="result-btns">'+
-          '<button class="restart-btn" onclick="startGame(\''+mode+'\')">🔄 Újra játszom</button>'+
-          '<button class="menu-back-btn" onclick="showMenu()">🏠 Főmenü</button>'+
+          '<button class="rbtn orange" onclick="startGame(\''+mode+'\')">🔄 Újra</button>'+
+          '<button class="rbtn green" onclick="showModes('+currentTopic.id+')">📚 Módok</button>'+
+          '<button class="rbtn blue" onclick="showBigTopics()">🏠 Főmenü</button>'+
         '</div>'+
       '</div>';
-    saveResult(playerName,modeLabel,score,total,elapsedSeconds,bestStreak);
+    saveResult(playerName,currentBigTopic.title,currentTopic.title,modeLabel,score,total,elapsedSeconds,bestStreak);
     return;
   }
-
   const q=questions[current];
   const[dClass,dLabel]=diffLabel(q.diff);
   const prog=Math.round((current/total)*100);
   const onFire=streak>=3;
   const nextLabel=current+1<total?'Következő ➡️':'Eredmény 🏆';
-
   const topBar=
     '<div class="top-bar">'+
       '<div class="q-counter">'+(current+1)+' / '+total+'</div>'+
@@ -428,162 +477,93 @@ function render(){
       '<div class="streak-pill '+(onFire?'on-fire':'')+'" id="streakPill">'+streakLabel()+'</div>'+
       '<div class="timer-pill" id="timerPill">⏱ '+formatTime(elapsedSeconds)+'</div>'+
     '</div>';
-
-  if(mode==='fill'){
-    renderFill(area, q, topBar, dClass, dLabel, nextLabel);
-  } else {
-    let answerHTML='';
+  if(mode==='fill'){renderFill(area,q,topBar,dClass,dLabel,nextLabel);}
+  else{
+    let ansHTML='';
     if(mode==='tf'){
-      answerHTML='<div class="tf-row"><button class="ans-btn btn-true" id="btnTrue" onclick="answerTF(true)">✅ IGAZ</button><button class="ans-btn btn-false" id="btnFalse" onclick="answerTF(false)">❌ HAMIS</button></div>';
+      ansHTML='<div class="tf-row"><button class="ans-btn btn-true" id="btnTrue" onclick="answerTF(true)">✅ IGAZ</button><button class="ans-btn btn-false" id="btnFalse" onclick="answerTF(false)">❌ HAMIS</button></div>';
     } else {
-      answerHTML='<div class="opts-grid">';
-      q.opts.forEach(function(o,i){answerHTML+='<button class="opt-btn" id="opt'+i+'" onclick="answerQuiz('+i+')">'+o+'</button>';});
-      answerHTML+='</div>';
+      ansHTML='<div class="opts-grid">';
+      q.opts.forEach(function(o,i){ansHTML+='<button class="opt-btn" id="opt'+i+'" onclick="answerQuiz('+i+')">'+o+'</button>';});
+      ansHTML+='</div>';
     }
-    area.innerHTML=
-      topBar+
-      '<div class="card">'+
-        '<div class="q-number">📋 '+(current+1)+'. kérdés — '+playerName+'</div>'+
-        '<span class="diff-badge '+dClass+'">'+dLabel+'</span>'+
-        '<div class="q-text">'+q.text+'</div>'+
-        answerHTML+
-        '<div class="feedback" id="feedback"></div>'+
-        '<button class="next-btn" id="nextBtn" onclick="next()">'+nextLabel+'</button>'+
-      '</div>';
+    area.innerHTML=topBar+'<div class="card"><div class="q-number">📋 '+(current+1)+'. kérdés — '+playerName+'</div><span class="diff-badge '+dClass+'">'+dLabel+'</span><div class="q-text">'+q.text+'</div>'+ansHTML+'<div class="feedback" id="feedback"></div><button class="next-btn" id="nextBtn" onclick="next()">'+nextLabel+'</button></div>';
     answered=false;
   }
 }
 
-// ═══════════════════════════════
-// LYUKAS SZÖVEG RENDER
-// ═══════════════════════════════
-function renderFill(area, q, topBar, dClass, dLabel, nextLabel){
-  // Build sentence HTML
+function renderFill(area,q,topBar,dClass,dLabel,nextLabel){
   let sentenceHTML='<div class="fill-sentence">';
   q.parts.forEach(function(part){
-    if(typeof part==='string'){
-      sentenceHTML+=part;
-    } else {
+    if(typeof part==='string'){sentenceHTML+=part;}
+    else{
       const gap=q.gaps.find(function(g){return g.id===part.id;});
       const shuffled=[...gap.options].sort(function(){return Math.random()-0.5;});
-      sentenceHTML+='<select class="fill-select" id="gap'+gap.id+'">';
-      sentenceHTML+='<option value="">— válassz —</option>';
+      sentenceHTML+='<select class="fill-select" id="gap'+gap.id+'"><option value="">— válassz —</option>';
       shuffled.forEach(function(opt){sentenceHTML+='<option value="'+opt+'">'+opt+'</option>';});
       sentenceHTML+='</select>';
     }
   });
   sentenceHTML+='</div>';
-
-  area.innerHTML=
-    topBar+
-    '<div class="card">'+
-      '<div class="q-number">✏️ '+(current+1)+'. mondat — '+playerName+'</div>'+
-      '<span class="diff-badge '+dClass+'">'+dLabel+'</span>'+
-      '<p class="fill-hint">Válaszd ki a legördülő menüből a megfelelő szót!</p>'+
-      sentenceHTML+
-      '<div class="fill-result" id="fillResult"></div>'+
-      '<button class="check-fill-btn" id="checkBtn" onclick="checkFill()">✅ Ellenőrzés</button>'+
-      '<button class="next-btn" id="nextBtn" onclick="next()">'+nextLabel+'</button>'+
-    '</div>';
+  area.innerHTML=topBar+'<div class="card"><div class="q-number">✏️ '+(current+1)+'. mondat — '+playerName+'</div><span class="diff-badge '+dClass+'">'+dLabel+'</span><p class="fill-hint">Válaszd ki a legördülő menüből a megfelelő szót!</p>'+sentenceHTML+'<div class="fill-result" id="fillResult"></div><button class="check-fill-btn" id="checkBtn" onclick="checkFill()">✅ Ellenőrzés</button><button class="next-btn" id="nextBtn" onclick="next()">'+nextLabel+'</button></div>';
   answered=false;
 }
 
 function checkFill(){
   if(answered)return;
-  const q=fillSentences[current];
-  let allCorrect=true;
-  let anyEmpty=false;
+  const q=currentTopic.fill[current];
+  let allCorrect=true,anyEmpty=false;
   q.gaps.forEach(function(gap){
     const sel=document.getElementById('gap'+gap.id);
-    if(!sel.value){anyEmpty=true;}
-    else if(sel.value!==gap.correct){allCorrect=false;}
+    if(!sel.value)anyEmpty=true;
+    else if(sel.value!==gap.correct)allCorrect=false;
   });
   if(anyEmpty){
     const res=document.getElementById('fillResult');
-    res.className='fill-result show partial';
-    res.textContent='⚠️ Kérlek töltsd ki az összes üres helyet!';
-    return;
+    res.className='fill-result show partial';res.textContent='⚠️ Kérlek töltsd ki az összes üres helyet!';return;
   }
-  answered=true;
-  document.getElementById('checkBtn').disabled=true;
-
-  // Color selects
+  answered=true;document.getElementById('checkBtn').disabled=true;
   q.gaps.forEach(function(gap){
-    const sel=document.getElementById('gap'+gap.id);
-    sel.disabled=true;
-    if(sel.value===gap.correct){sel.classList.add('correct');}
-    else{sel.classList.add('wrong');}
+    const sel=document.getElementById('gap'+gap.id);sel.disabled=true;
+    sel.classList.add(sel.value===gap.correct?'correct':'wrong');
   });
-
-  const correct=allCorrect;
-  if(correct){score++;streak++;if(streak>bestStreak)bestStreak=streak;}
-  else{streak=0;}
-
-  // Streak pill
+  if(allCorrect){score++;streak++;if(streak>bestStreak)bestStreak=streak;}else{streak=0;}
   const pill=document.getElementById('streakPill');
-  if(pill){
-    pill.textContent=streakLabel();
-    pill.className='streak-pill';
-    void pill.offsetWidth;
-    if(!correct)pill.classList.add('broken');
-    else{if(streak>=3)pill.classList.add('on-fire');pill.classList.add('pop');}
-  }
-
-  // Build correct answer text
+  if(pill){pill.textContent=streakLabel();pill.className='streak-pill';void pill.offsetWidth;if(!allCorrect)pill.classList.add('broken');else{if(streak>=3)pill.classList.add('on-fire');pill.classList.add('pop');}}
   let correctText='A helyes válasz: ';
   q.gaps.forEach(function(gap,i){if(i>0)correctText+=', ';correctText+='"'+gap.correct+'"';});
-
   const res=document.getElementById('fillResult');
-  if(correct){
-    let prefix='✅ Helyes! ';
-    if(streak>=5)prefix='🔥🔥 '+streak+' sorozat! ';
-    else if(streak>=3)prefix='🔥 '+streak+' sorozat! ';
-    res.className='fill-result show correct';
-    res.textContent=prefix+'Minden szót jól választottál!';
-  } else {
-    res.className='fill-result show wrong';
-    res.textContent='❌ Nem egészen. '+correctText;
-  }
+  if(allCorrect){let prefix='✅ Helyes! ';if(streak>=5)prefix='🔥🔥 '+streak+' sorozat! ';else if(streak>=3)prefix='🔥 '+streak+' sorozat! ';res.className='fill-result show correct';res.textContent=prefix+'Minden szót jól választottál!';}
+  else{res.className='fill-result show wrong';res.textContent='❌ Nem egészen. '+correctText;}
   document.getElementById('nextBtn').classList.add('show');
 }
 
-// ═══════════════════════════════
-// VÁLASZOK
-// ═══════════════════════════════
 function handleResult(correct,explain){
-  if(correct){score++;streak++;if(streak>bestStreak)bestStreak=streak;}
-  else streak=0;
+  if(correct){score++;streak++;if(streak>bestStreak)bestStreak=streak;}else streak=0;
   const pill=document.getElementById('streakPill');
-  if(pill){
-    pill.textContent=streakLabel();pill.className='streak-pill';void pill.offsetWidth;
-    if(!correct)pill.classList.add('broken');
-    else{if(streak>=3)pill.classList.add('on-fire');pill.classList.add('pop');}
-  }
+  if(pill){pill.textContent=streakLabel();pill.className='streak-pill';void pill.offsetWidth;if(!correct)pill.classList.add('broken');else{if(streak>=3)pill.classList.add('on-fire');pill.classList.add('pop');}}
   const fb=document.getElementById('feedback');
   let prefix=correct?'✅ Helyes! ':'❌ Nem egészen. ';
   if(correct&&streak>=5)prefix='🔥🔥 '+streak+' egymás utáni helyes! ';
   else if(correct&&streak>=3)prefix='🔥 '+streak+' sorozat! ';
-  fb.className='feedback show '+(correct?'correct':'wrong');
-  fb.textContent=prefix+explain;
+  fb.className='feedback show '+(correct?'correct':'wrong');fb.textContent=prefix+explain;
   document.getElementById('nextBtn').classList.add('show');
 }
 
 function answerTF(choice){
   if(answered)return;answered=true;
-  const q=tfQuestions[current];
-  const correct=choice===q.answer;
-  const btnTrue=document.getElementById('btnTrue'),btnFalse=document.getElementById('btnFalse');
-  btnTrue.disabled=true;btnFalse.disabled=true;
-  const chosen=choice?btnTrue:btnFalse;
+  const q=currentTopic.tf[current];const correct=choice===q.answer;
+  const bT=document.getElementById('btnTrue'),bF=document.getElementById('btnFalse');
+  bT.disabled=true;bF.disabled=true;
+  const chosen=choice?bT:bF;
   if(correct)chosen.classList.add('selected-correct');
-  else{chosen.classList.add('selected-wrong');(q.answer?btnTrue:btnFalse).classList.add('reveal-correct');}
+  else{chosen.classList.add('selected-wrong');(q.answer?bT:bF).classList.add('reveal-correct');}
   handleResult(correct,q.explain);
 }
 
 function answerQuiz(i){
   if(answered)return;answered=true;
-  const q=quizQuestions[current];
-  const correct=i===q.correct;
+  const q=currentTopic.quiz[current];const correct=i===q.correct;
   for(let j=0;j<q.opts.length;j++){
     const btn=document.getElementById('opt'+j);btn.disabled=true;
     if(j===i&&correct)btn.classList.add('selected-correct');
@@ -595,36 +575,25 @@ function answerQuiz(i){
 
 function next(){current++;render();window.scrollTo({top:0,behavior:'smooth'});}
 
-// ═══════════════════════════════
-// MENTÉS
-// ═══════════════════════════════
-function saveResult(name,modeLabel,score,total,time,bestStreak){
+function saveResult(name,bigTopic,subTopic,modeLabel,score,total,time,bestStreak){
   fetch(SHEET_URL,{
     method:'POST',headers:{'Content-Type':'text/plain'},
-    body:JSON.stringify({name:name,mode:modeLabel,score:score+' / '+total,time:formatTime(time),bestStreak:bestStreak})
+    body:JSON.stringify({name:name,mode:bigTopic+' › '+subTopic+' — '+modeLabel,score:score+' / '+total,time:formatTime(time),bestStreak:bestStreak})
   })
   .then(function(r){return r.json();})
-  .then(function(){
-    const msg=document.getElementById('savingMsg');
-    if(msg){msg.textContent='✅ Eredmény elmentve a táblázatba!';msg.className='saving-msg ok';}
-  })
-  .catch(function(){
-    const msg=document.getElementById('savingMsg');
-    if(msg){msg.textContent='⚠️ Mentés nem sikerült — ellenőrizd az internet kapcsolatot.';msg.className='saving-msg err';}
-  });
+  .then(function(){const msg=document.getElementById('savingMsg');if(msg){msg.textContent='✅ Eredmény elmentve!';msg.className='saving-msg ok';}})
+  .catch(function(){const msg=document.getElementById('savingMsg');if(msg){msg.textContent='⚠️ Mentés nem sikerült.';msg.className='saving-msg err';}});
 }
 
-// ═══════════════════════════════
-// DÍSZ + INDÍTÁS
-// ═══════════════════════════════
+// DÍSZ
 const deco=document.getElementById('bgDeco');
 const cols=['#5a8a3c','#4a7c2f','#6aad42','#3d6e25'];
 for(let i=0;i<22;i++){
   const b=document.createElement('div');b.className='blade';
-  b.style.cssText='left:'+(Math.random()*100)+'%; height:'+(40+Math.random()*80)+'px; background:'+cols[i%4]+'; opacity:'+(0.25+Math.random()*0.3)+'; animation-duration:'+(2.5+Math.random()*2)+'s; animation-delay:'+(Math.random()*2)+'s;';
+  b.style.cssText='left:'+(Math.random()*100)+'%;height:'+(40+Math.random()*80)+'px;background:'+cols[i%4]+';opacity:'+(0.25+Math.random()*0.3)+';animation-duration:'+(2.5+Math.random()*2)+'s;animation-delay:'+(Math.random()*2)+'s;';
   deco.appendChild(b);
 }
-showNameScreen();
+showBigTopics();
 </script>
 </body>
 </html>
