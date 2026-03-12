@@ -1,11 +1,11 @@
->
+<!DOCTYPE html>
+<html lang="hu">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Természetismeret Játék 🌿</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  
 :root {
   --grass:#22c55e;--grass-light:#4ade80;
   --earth:#f59e0b;--earth-dark:#92400e;
@@ -18,89 +18,33 @@
   --border:rgba(255,255,255,0.10);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-
-body {
-  font-family:'DM Sans',sans-serif;
-  min-height:100vh;
-  background:#12121f;
-  color:var(--text-dark);
-  overflow-x:hidden;
-}
-
-/* ── PARTICLES ── */
+body{font-family:'DM Sans',sans-serif;min-height:100vh;background:#12121f;color:var(--text-dark);overflow-x:hidden;}
 .particle{position:fixed;border-radius:50%;pointer-events:none;animation:floatUp linear infinite;opacity:0;}
 @keyframes floatUp{0%{transform:translateY(110vh) scale(0);opacity:0}10%{opacity:.7}90%{opacity:.2}100%{transform:translateY(-10vh) scale(1.2);opacity:0}}
-
-/* ── BG GLOW ── */
 .bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .bg-deco::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(124,58,237,.10) 0%,transparent 70%);}
 .bg-deco::after{content:'';position:absolute;bottom:-20%;left:10%;width:80%;height:60%;background:radial-gradient(ellipse at 50% 100%,rgba(34,197,94,.06) 0%,transparent 70%);}
-
-/* hide old sun */
 .sun-fixed{display:none;}
-
-/* ── APP ── */
 #app{position:relative;z-index:2;max-width:740px;margin:0 auto;padding:16px 14px 70px;}
-
 header{text-align:center;padding:32px 10px 14px;}
-header h1{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;
-  font-size:2.4rem;
-  font-weight:400;
-  color:#fff;
-  letter-spacing:-.01em;
-  line-height:1.1;
-  text-shadow:0 0 40px rgba(124,58,237,.5);
-}
+header h1{font-family:'DM Serif Display',serif;font-style:italic;font-size:2.4rem;font-weight:400;color:#fff;letter-spacing:-.01em;line-height:1.1;text-shadow:0 0 40px rgba(124,58,237,.5);}
 header h1 em{color:#7c3aed;font-style:normal;}
 header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#334155;font-weight:500;}
-
 @keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(0.97)}to{opacity:1;transform:none}}
-
-.card{
-  background:rgba(22,22,40,0.90);
-  border-radius:20px;
-  padding:26px 24px 22px;
-  border:1px solid var(--border);
-  box-shadow:0 0 0 1px rgba(124,58,237,.1), 0 20px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.05);
-  animation:cardIn 0.35s cubic-bezier(.4,0,.2,1);
-  backdrop-filter:blur(12px);
-}
+.card{background:rgba(22,22,40,0.90);border-radius:20px;padding:26px 24px 22px;border:1px solid var(--border);box-shadow:0 0 0 1px rgba(124,58,237,.1), 0 20px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.05);animation:cardIn 0.35s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px);}
 .card::before{content:'';position:absolute;inset:0;border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.03) 0%,transparent 50%);pointer-events:none;}
-
-/* corner brackets on cards */
 .card{position:relative;}
-
-/* ── NAME ── */
 .name-screen{text-align:center;}
 .name-screen h2{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.7rem;font-weight:400;color:#fff;margin-bottom:8px;text-shadow:0 0 20px rgba(124,58,237,.4);}
 .name-screen p{color:var(--text-mid);font-size:.9rem;margin-bottom:24px;font-weight:400;letter-spacing:.03em;}
-.name-input{
-  font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:500;
-  padding:13px 18px;border-radius:12px;
-  border:1px solid rgba(124,58,237,.4);
-  width:100%;max-width:320px;text-align:center;outline:none;
-  color:#fff;background:rgba(124,58,237,.08);
-  box-shadow:0 0 0 0 rgba(124,58,237,0);
-  margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;
-  transition:border-color .2s, box-shadow .2s;
-}
+.name-input{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:500;padding:13px 18px;border-radius:12px;border:1px solid rgba(124,58,237,.4);width:100%;max-width:320px;text-align:center;outline:none;color:#fff;background:rgba(124,58,237,.08);box-shadow:0 0 0 0 rgba(124,58,237,0);margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;transition:border-color .2s, box-shadow .2s;}
 .name-input:focus{border-color:rgba(124,58,237,.8);box-shadow:0 0 0 3px rgba(124,58,237,.2);}
 .name-input::placeholder{color:#334155;}
-
-/* ── BIG TOPIC ── */
 .bigtopic-screen{text-align:center;}
 .bigtopic-screen h2{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.55rem;font-weight:400;color:#fff;margin-bottom:4px;}
 .bigtopic-screen .sub{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#334155;font-weight:500;margin-bottom:22px;}
 .bigtopic-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:18px;}
-.bigtopic-btn{
-  width:100%;font-family:'DM Sans',sans-serif;font-weight:600;
-  padding:20px 22px;border-radius:16px;border:1px solid;
-  cursor:pointer;transition:all 0.2s;text-align:left;
-  display:flex;align-items:center;gap:16px;
-  position:relative;overflow:hidden;
-}
+.bigtopic-btn{width:100%;font-family:'DM Sans',sans-serif;font-weight:600;padding:20px 22px;border-radius:16px;border:1px solid;cursor:pointer;transition:all 0.2s;text-align:left;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;}
 .bigtopic-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 60%);pointer-events:none;}
 .bigtopic-btn.fuves{border-color:rgba(34,197,94,.3);background:radial-gradient(ellipse at 30% 50%,rgba(34,197,94,.08),rgba(10,20,14,.9));color:#4ade80;}
 .bigtopic-btn.fuves:hover{border-color:rgba(34,197,94,.6);background:radial-gradient(ellipse at 30% 50%,rgba(34,197,94,.15),rgba(10,20,14,.9));transform:translateY(-2px);box-shadow:0 8px 30px rgba(34,197,94,.15);}
@@ -109,19 +53,11 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .bigtopic-icon{font-size:2.4rem;flex-shrink:0;filter:drop-shadow(0 0 10px currentColor);}
 .bigtopic-title{font-size:1rem;font-weight:600;color:#e2e8f0;}
 .bigtopic-sub{font-size:.72rem;font-weight:400;color:var(--text-mid);margin-top:3px;letter-spacing:.02em;}
-
-/* ── SUBTOPIC ── */
 .subtopic-screen h2{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.3rem;font-weight:400;color:#fff;margin-bottom:4px;text-align:center;}
 .subtopic-screen.water-theme h2{color:var(--water-light);}
 .subtopic-screen .sub{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#334155;font-weight:500;margin-bottom:18px;text-align:center;}
 .subtopic-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:16px;}
-.subtopic-btn{
-  font-family:'DM Sans',sans-serif;font-weight:500;font-size:.93rem;
-  padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.07);
-  background:rgba(255,255,255,.03);color:#e2e8f0;
-  cursor:pointer;transition:all 0.15s;text-align:left;
-  display:flex;align-items:center;gap:11px;
-}
+.subtopic-btn{font-family:'DM Sans',sans-serif;font-weight:500;font-size:.93rem;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);color:#e2e8f0;cursor:pointer;transition:all 0.15s;text-align:left;display:flex;align-items:center;gap:11px;}
 .subtopic-btn:hover{background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.3);transform:translateX(4px);}
 .subtopic-btn.water-style:hover{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.3);}
 .subtopic-btn .snum{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#475569;min-width:26px;flex-shrink:0;}
@@ -134,19 +70,11 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .coming-badge{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:2px 8px;font-size:.68rem;font-weight:600;margin-left:auto;white-space:nowrap;flex-shrink:0;}
 .ready-badge{background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:2px 8px;font-size:.68rem;font-weight:600;margin-left:auto;white-space:nowrap;flex-shrink:0;}
 .ready-badge.water{background:rgba(56,189,248,.1);color:#7dd3fc;border-color:rgba(56,189,248,.3);}
-
-/* ── MODE ── */
 .mode-screen h2{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.25rem;font-weight:400;color:#fff;margin-bottom:4px;text-align:center;}
 .mode-screen.water-theme h2{color:var(--water-light);}
 .mode-screen .sub{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#334155;font-weight:500;margin-bottom:18px;text-align:center;}
 .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
-.mode-btn{
-  font-family:'DM Sans',sans-serif;font-weight:600;font-size:.88rem;
-  padding:16px 10px;border-radius:14px;border:1px solid;
-  cursor:pointer;transition:all 0.18s;text-align:center;
-  position:relative;overflow:hidden;
-  background:rgba(20,20,38,.85);
-}
+.mode-btn{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.88rem;padding:16px 10px;border-radius:14px;border:1px solid;cursor:pointer;transition:all 0.18s;text-align:center;position:relative;overflow:hidden;background:rgba(20,20,38,.85);}
 .mode-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 60%);pointer-events:none;}
 .mode-btn .btn-icon{font-size:1.8rem;display:block;margin-bottom:5px;filter:drop-shadow(0 0 8px currentColor);}
 .mode-btn .btn-label{display:block;font-size:.88rem;color:#e2e8f0;}
@@ -161,8 +89,6 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .mode-btn.sort:hover{border-color:rgba(244,63,94,.7);background:rgba(244,63,94,.08);transform:translateY(-3px);box-shadow:0 8px 24px rgba(244,63,94,.15);}
 .mode-btn.cat{border-color:rgba(124,58,237,.3);color:#a78bfa;}
 .mode-btn.cat:hover{border-color:rgba(124,58,237,.7);background:rgba(124,58,237,.08);transform:translateY(-3px);box-shadow:0 8px 24px rgba(124,58,237,.15);}
-
-/* ── TOP BAR ── */
 .top-bar{display:flex;align-items:center;gap:7px;margin-bottom:18px;flex-wrap:wrap;}
 .q-counter{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.9rem;color:#94a3b8;white-space:nowrap;min-width:60px;}
 .back-game-btn{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:600;background:transparent;border:1px solid rgba(255,255,255,.12);color:#475569;border-radius:12px;padding:4px 10px;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0;}
@@ -177,18 +103,12 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .streak-pill.on-fire{background:linear-gradient(90deg,rgba(251,191,36,.2),rgba(239,68,68,.2));border-color:rgba(239,68,68,.5);color:#fca5a5;}
 .streak-pill.broken{background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.4);color:#fb7185;animation:streakBreak 0.45s ease;}
 @keyframes streakBreak{0%{transform:scale(1)}30%{transform:scale(1.12) rotate(8deg)}65%{transform:scale(0.9) rotate(-5deg)}100%{transform:scale(1) rotate(0)}}
-
-/* ── DIFF ── */
 .diff-badge{display:inline-block;border-radius:20px;padding:3px 13px;font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;margin-bottom:13px;letter-spacing:.05em;}
 .diff-1{background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.3);}
 .diff-2{background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.3);}
 .diff-3{background:rgba(244,63,94,.1);color:#fb7185;border:1px solid rgba(244,63,94,.3);}
-
-/* ── Q ── */
 .q-number{font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:500;color:#475569;margin-bottom:5px;letter-spacing:.05em;}
 .q-text{font-family:'DM Sans',sans-serif;font-size:1.1rem;font-weight:500;color:#e2e8f0;line-height:1.55;margin-bottom:18px;}
-
-/* TF */
 .tf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:13px;}
 .ans-btn{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;padding:15px 10px;border-radius:14px;border:1px solid;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-true{background:rgba(34,197,94,.08);color:#4ade80;border-color:rgba(34,197,94,.3);}
@@ -198,8 +118,6 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .ans-btn.selected-correct{background:rgba(34,197,94,.2);border-color:#22c55e;box-shadow:0 0 20px rgba(34,197,94,.2);}
 .ans-btn.selected-wrong{background:rgba(244,63,94,.2);border-color:#f43f5e;}
 .ans-btn.reveal-correct{background:rgba(34,197,94,.15);border-color:#22c55e;}
-
-/* QUIZ OPTS */
 .opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px;}
 .opt-btn{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;padding:11px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#cbd5e1;cursor:pointer;transition:all 0.15s;text-align:left;line-height:1.4;}
 .opt-btn:hover:not(:disabled){background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.4);color:#e2e8f0;}
@@ -207,8 +125,6 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .opt-btn.selected-correct{background:rgba(34,197,94,.15);border-color:#22c55e;color:#4ade80;}
 .opt-btn.selected-wrong{background:rgba(244,63,94,.15);border-color:#f43f5e;color:#fb7185;}
 .opt-btn.reveal-correct{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.5);}
-
-/* FILL */
 .fill-sentence{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:400;line-height:2.5;color:#e2e8f0;margin-bottom:15px;background:rgba(255,255,255,.03);border-radius:12px;padding:15px 17px;border:1px solid rgba(255,255,255,.07);}
 .fill-select{font-family:'Space Grotesk',sans-serif;font-size:.88rem;font-weight:600;padding:4px 9px;border-radius:8px;border:1px solid rgba(124,58,237,.4);background:rgba(124,58,237,.1);color:#a78bfa;cursor:pointer;outline:none;vertical-align:middle;min-width:110px;}
 .fill-select:focus{border-color:rgba(124,58,237,.8);}
@@ -216,15 +132,11 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .fill-select.wrong{background:rgba(244,63,94,.15);border-color:#f43f5e;color:#fb7185;}
 .fill-select:disabled{cursor:default;}
 .fill-hint{font-size:.8rem;color:var(--text-mid);font-weight:400;margin-bottom:13px;font-style:italic;letter-spacing:.02em;}
-
-/* FEEDBACK */
 .feedback{border-radius:12px;padding:12px 15px;font-size:.9rem;font-weight:500;line-height:1.55;margin-bottom:13px;display:none;}
 .feedback.show{display:block;animation:feedIn 0.25s ease;}
 @keyframes feedIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .feedback.correct{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#4ade80;}
 .feedback.wrong{background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.3);color:#fb7185;}
-
-/* FILL RESULT */
 .fill-result{border-radius:12px;padding:12px 15px;font-size:.9rem;font-weight:500;line-height:1.55;margin-bottom:13px;display:none;}
 .fill-result.show{display:block;animation:feedIn 0.25s ease;}
 .fill-result.correct{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#4ade80;}
@@ -233,8 +145,6 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .check-fill-btn{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;padding:11px 32px;background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.4);border-radius:25px;cursor:pointer;transition:all 0.15s;display:block;margin:0 auto 13px;}
 .check-fill-btn:hover{background:rgba(124,58,237,.25);border-color:rgba(124,58,237,.7);transform:translateY(-2px);}
 .check-fill-btn:disabled{opacity:0.4;cursor:default;transform:none;}
-
-/* SORT */
 .sort-intro{font-size:.8rem;color:var(--text-mid);font-weight:400;margin-bottom:14px;font-style:italic;background:rgba(255,255,255,.03);border-radius:10px;padding:9px 13px;border:1px solid rgba(255,255,255,.07);letter-spacing:.02em;}
 .sort-list{display:flex;flex-direction:column;gap:8px;margin-bottom:15px;min-height:40px;}
 .sort-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 15px;font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:500;color:#e2e8f0;cursor:grab;user-select:none;display:flex;align-items:center;gap:10px;transition:all 0.15s;}
@@ -252,8 +162,6 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .sort-result.show{display:block;animation:feedIn .25s ease;}
 .sort-result.correct{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#4ade80;}
 .sort-result.wrong{background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.3);color:#fb7185;}
-
-/* CAT */
 .cat-intro{font-size:.8rem;color:var(--text-mid);font-weight:400;margin-bottom:14px;font-style:italic;background:rgba(255,255,255,.03);border-radius:10px;padding:9px 13px;border:1px solid rgba(255,255,255,.07);letter-spacing:.02em;}
 .cat-items-pool{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;padding:10px;background:rgba(255,255,255,.02);border-radius:12px;border:1px dashed rgba(255,255,255,.1);min-height:44px;}
 .cat-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:7px 13px;font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:600;color:#cbd5e1;cursor:grab;user-select:none;transition:all 0.15s;}
@@ -277,13 +185,9 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .cat-result.show{display:block;animation:feedIn .25s ease;}
 .cat-result.correct{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#4ade80;}
 .cat-result.wrong{background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.3);color:#fb7185;}
-
-/* NEXT BTN */
 .next-btn{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;padding:12px 36px;background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.4);border-radius:25px;cursor:pointer;transition:all 0.15s;display:none;margin:0 auto;}
 .next-btn.show{display:block;}
 .next-btn:hover{background:rgba(124,58,237,.28);border-color:rgba(124,58,237,.7);transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.2);}
-
-/* RESULT */
 .result-screen{text-align:center;}
 .result-emoji{font-size:3.6rem;display:block;margin-bottom:10px;}
 .result-title{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.85rem;font-weight:400;color:#fff;margin-bottom:6px;text-shadow:0 0 30px rgba(124,58,237,.4);}
@@ -308,245 +212,71 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .rbtn.green:hover{background:rgba(34,197,94,.22);}
 .rbtn.blue{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.35);color:#7dd3fc;}
 .rbtn.blue:hover{background:rgba(56,189,248,.22);}
-
-/* BACK / START BTN */
 .back-btn{font-family:'Space Grotesk',sans-serif;font-size:.82rem;font-weight:600;background:transparent;border:1px solid rgba(255,255,255,.1);color:#475569;border-radius:16px;padding:6px 16px;cursor:pointer;transition:all 0.15s;margin-right:6px;}
 .back-btn:hover{border-color:rgba(255,255,255,.25);color:#94a3b8;}
 .start-btn{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;padding:13px 40px;background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.45);border-radius:25px;cursor:pointer;transition:all 0.15s;}
 .start-btn:hover{background:rgba(124,58,237,.28);border-color:rgba(124,58,237,.7);transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.25);}
 .start-btn:disabled{opacity:0.3;cursor:default;transform:none;}
-
-/* RETRY */
-.retry-screen{text-align:center;}
-.retry-emoji{font-size:4rem;display:block;margin-bottom:12px;animation:shake 0.6s ease;}
-@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
-.retry-title{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.85rem;font-weight:400;color:#fb7185;margin-bottom:8px;}
-.retry-sub{font-size:.92rem;color:var(--text-mid);margin-bottom:20px;font-weight:400;line-height:1.6;}
-.retry-score{font-family:'Space Grotesk',sans-serif;font-size:2.6rem;font-weight:700;color:#fb7185;margin-bottom:4px;}
-.retry-score-lbl{font-size:.78rem;color:var(--text-mid);font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:22px;}
-.retry-threshold{display:inline-block;background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.35);border-radius:12px;padding:10px 20px;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;color:#fb7185;margin-bottom:22px;}
-.retry-btn{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;padding:15px 44px;background:rgba(244,63,94,.15);color:#fb7185;border:1px solid rgba(244,63,94,.45);border-radius:25px;cursor:pointer;transition:all 0.15s;animation:pulse 1.5s ease-in-out infinite;}
-.retry-btn:hover{background:rgba(244,63,94,.28);border-color:rgba(244,63,94,.7);transform:translateY(-3px);animation:none;box-shadow:0 8px 24px rgba(244,63,94,.2);}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
-
-@media(max-width:520px){
-  header h1{font-size:1.8rem;}
-  .mode-grid{grid-template-columns:1fr;}
-  .opts-grid{grid-template-columns:1fr;}
-  .tf-row .ans-btn{font-size:.95rem;padding:13px 8px;}
-}
-
-  /* ══════════════════════════════
-     DUAL KOCKA FŐOLDAL
-  ══════════════════════════════ */
-  .cube-landing{
-    display:flex;flex-direction:column;align-items:center;
-    justify-content:center;padding:10px 0 6px;min-height:400px;
-  }
-  .cube-hint{
-    font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
-    color:#475569;font-weight:500;margin-bottom:20px;
-    animation:hintFade 5s 1.5s both;
-  }
-  @keyframes hintFade{0%{opacity:0}15%{opacity:1}75%{opacity:1}100%{opacity:0}}
-
-  .dual-cubes{
-    display:flex;align-items:flex-start;justify-content:center;
-    gap:70px;width:100%;position:relative;
-  }
-  .cube-wrapper{
-    display:flex;flex-direction:column;align-items:center;gap:0;
-    position:relative;
-    padding-top:62px;
-    padding-bottom:36px;
-  }
-  /* FELIRAT A KOCKA FELETT — abszolút, nem folyam */
-  .cube-wrapper-title{
-    position:absolute;top:0;left:50%;transform:translateX(-50%);
-    width:180px;
-    font-family:'DM Serif Display',serif;font-style:italic;
-    font-size:.92rem;font-weight:400;color:#fff;
-    text-align:center;line-height:1.3;
-    text-shadow:0 0 14px rgba(255,255,255,.2);
-    pointer-events:none;
-    z-index:10;
-  }
-  .cube-wrapper-title.green{color:#4ade80;text-shadow:0 0 14px rgba(34,197,94,.4);}
-  .cube-wrapper-title.blue {color:#7dd3fc;text-shadow:0 0 14px rgba(56,189,248,.4);}
-  /* ALTÉMA SZÁM A KOCKA ALATT — abszolút, nem folyam */
-  .cube-wrapper-label{
-    position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-    white-space:nowrap;
-    font-family:'Space Grotesk',sans-serif;font-size:.7rem;
-    letter-spacing:.08em;font-weight:600;
-    opacity:.55;text-align:center;
-    pointer-events:none;
-    z-index:10;
-  }
-  .cube-wrapper-label.green{color:#4ade80;}
-  .cube-wrapper-label.blue{color:#7dd3fc;}
-
-  .scene{width:160px;height:160px;perspective:600px;perspective-origin:50% 40%;cursor:pointer;}
-  .cube3d{
-    width:100%;height:100%;position:relative;
-    transform-style:preserve-3d;
-    transform:rotateX(-18deg) rotateY(22deg);
-    animation:cubeIntro .8s cubic-bezier(.22,.82,.26,1) both;
-    transition:filter .25s;
-  }
-  #cube3dGreen{--cube-glow:rgba(34,197,94,.5);animation-delay:.05s;}
-  #cube3dBlue{--cube-glow:rgba(56,189,248,.5);animation-delay:.18s;}
-  .cube3d:hover{cursor:grab;}
-  @keyframes cubeIntro{
-    from{transform:rotateX(-18deg) rotateY(22deg) scale3d(.3,.3,.3);opacity:0}
-    to{transform:rotateX(-18deg) rotateY(22deg) scale3d(1,1,1);opacity:1}
-  }
-  @keyframes rollLeft{
-    0%{transform:rotateX(-18deg) rotateY(22deg) translateX(0) translateY(0) scale(1);opacity:1;}
-    30%{transform:rotateX(180deg) rotateY(300deg) translateX(-160px) translateY(15px) scale(.95);opacity:1;}
-    70%{transform:rotateX(450deg) rotateY(720deg) translateX(-380px) translateY(35px) scale(.9);opacity:.7;}
-    100%{transform:rotateX(650deg) rotateY(1000deg) translateX(-600px) translateY(60px) scale(.8);opacity:0;}
-  }
-  @keyframes rollRight{
-    0%{transform:rotateX(-18deg) rotateY(22deg) translateX(0) translateY(0) scale(1);opacity:1;}
-    30%{transform:rotateX(180deg) rotateY(-300deg) translateX(160px) translateY(15px) scale(.95);opacity:1;}
-    70%{transform:rotateX(450deg) rotateY(-720deg) translateX(380px) translateY(35px) scale(.9);opacity:.7;}
-    100%{transform:rotateX(650deg) rotateY(-1000deg) translateX(600px) translateY(60px) scale(.8);opacity:0;}
-  }
-  .cube3d.rolling-left{animation:rollLeft .7s cubic-bezier(.3,0,.8,1) forwards !important;transition:none;}
-  .cube3d.rolling-right{animation:rollRight .7s cubic-bezier(.3,0,.8,1) forwards !important;transition:none;}
-
-  /* ROBBANÁS */
-  .explosion-container{
-    position:absolute;top:80px;left:50%;
-    width:0;height:0;pointer-events:none;z-index:60;
-  }
-  .exp-ring{
-    position:absolute;top:0;left:0;border-radius:50%;
-    transform:translate(-50%,-50%);border:3px solid;opacity:0;
-    animation:expRing .55s ease-out forwards;
-  }
-  @keyframes expRing{
-    0%{width:10px;height:10px;opacity:.9;}
-    50%{width:160px;height:160px;opacity:.6;}
-    100%{width:260px;height:260px;opacity:0;}
-  }
-  .exp-ring2{
-    position:absolute;top:0;left:0;border-radius:50%;
-    transform:translate(-50%,-50%);border:2px solid;opacity:0;
-    animation:expRing .45s .08s ease-out forwards;
-  }
-  .exp-spark{
-    position:absolute;top:0;left:0;
-    width:7px;height:7px;border-radius:50%;
-    animation:expSpark .6s ease-out forwards;
-  }
-  @keyframes expSpark{
-    0%{transform:translate(-50%,-50%) rotate(var(--ang)) translateX(10px);opacity:1;}
-    100%{transform:translate(-50%,-50%) rotate(var(--ang)) translateX(var(--dist));opacity:0;}
-  }
-  .exp-text{
-    position:absolute;top:0;left:0;
-    transform:translate(-50%,-70%);
-    font-size:1.6rem;
-    animation:expText .5s ease-out forwards;
-    pointer-events:none;
-  }
-  @keyframes expText{
-    0%{transform:translate(-50%,-50%) scale(.5);opacity:1;}
-    60%{transform:translate(-50%,-100%) scale(1.4);opacity:1;}
-    100%{transform:translate(-50%,-130%) scale(1.1);opacity:0;}
-  }
-  .exp-flash{
-    position:fixed;inset:0;pointer-events:none;z-index:99;
-    animation:expFlash .35s ease-out forwards;
-  }
-  @keyframes expFlash{0%{opacity:1}100%{opacity:0}}
-
-  .cface{
-    position:absolute;width:160px;height:160px;
-    border-radius:10px;overflow:hidden;backface-visibility:hidden;
-    border:1px solid rgba(255,255,255,.1);
-  }
-  .cface::after{
-    content:'';position:absolute;inset:0;
-    background:
-      linear-gradient(transparent calc(33.3% - .5px),rgba(0,0,0,.35) calc(33.3% - .5px),rgba(0,0,0,.35) calc(33.3% + .5px),transparent calc(33.3% + .5px)),
-      linear-gradient(transparent calc(66.6% - .5px),rgba(0,0,0,.35) calc(66.6% - .5px),rgba(0,0,0,.35) calc(66.6% + .5px),transparent calc(66.6% + .5px)),
-      linear-gradient(90deg,transparent calc(33.3% - .5px),rgba(0,0,0,.35) calc(33.3% - .5px),rgba(0,0,0,.35) calc(33.3% + .5px),transparent calc(33.3% + .5px)),
-      linear-gradient(90deg,transparent calc(66.6% - .5px),rgba(0,0,0,.35) calc(66.6% - .5px),rgba(0,0,0,.35) calc(66.6% + .5px),transparent calc(66.6% + .5px));
-    z-index:3;pointer-events:none;
-  }
-  .cface::before{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 55%);
-    z-index:2;pointer-events:none;
-  }
-  .cf-front {transform:translateZ(80px);}
-  .cf-back  {transform:rotateY(180deg) translateZ(80px);}
-  .cf-right {transform:rotateY(90deg) translateZ(80px);}
-  .cf-left  {transform:rotateY(-90deg) translateZ(80px);}
-  .cf-top   {transform:rotateX(90deg) translateZ(80px);}
-  .cf-bot   {transform:rotateX(-90deg) translateZ(80px);}
-
-  .green-face,.blue-face{position:absolute;inset:0;}
-  .green-face{background:radial-gradient(ellipse at 40% 30%,#0d3520,#021008);color:#22c55e;}
-  .blue-face {background:radial-gradient(ellipse at 40% 30%,#092540,#030c1a);color:#38bdf8;}
-  .cface-fill{width:100%;height:100%;position:relative;}
-
-  .cface-inner{
-    position:absolute;inset:0;
-    display:flex;flex-direction:column;align-items:center;
-    justify-content:center;z-index:1;padding:12px;text-align:center;
-  }
-  .cface-num{
-    position:absolute;top:8px;right:10px;
-    font-family:'Space Grotesk',sans-serif;font-size:.6rem;font-weight:700;
-    opacity:.5;letter-spacing:.05em;
-  }
-  .cface-icon{
-    font-size:2.6rem;line-height:1;margin-bottom:8px;
-    filter:drop-shadow(0 0 10px currentColor);
-    animation:iconGlow 3s ease-in-out infinite;
-  }
-  @keyframes iconGlow{
-    0%,100%{filter:drop-shadow(0 0 6px currentColor)}
-    50%{filter:drop-shadow(0 0 20px currentColor)}
-  }
-  .cface-title{
-    font-family:'DM Serif Display',serif;font-style:italic;
-    font-size:.72rem;color:#fff;line-height:1.2;
-    text-shadow:0 0 14px rgba(255,255,255,.25);
-  }
-  .cbr{position:absolute;width:12px;height:12px;border-color:currentColor;border-style:solid;opacity:.25;}
-  .cbr.tl{top:5px;left:5px;border-width:1.5px 0 0 1.5px;}
-  .cbr.tr{top:5px;right:5px;border-width:1.5px 1.5px 0 0;}
-  .cbr.bl{bottom:5px;left:5px;border-width:0 0 1.5px 1.5px;}
-  .cbr.br{bottom:5px;right:5px;border-width:0 1.5px 1.5px 0;}
-
-  /* ALTÉMA MEGJELENÉS */
-  .subtopic-reveal-grid{
-    display:grid;grid-template-columns:1fr;gap:8px;
-    margin-top:6px;width:100%;
-  }
-  .subtopic-reveal-grid .subtopic-btn{
-    animation:stReveal .4s cubic-bezier(.22,.82,.26,1) both;
-  }
-  @keyframes stReveal{
-    from{opacity:0;transform:translateY(16px) scale(.96);}
-    to{opacity:1;transform:none;}
-  }
-
-  /* toast */
-  #cubeToast{
-    position:fixed;bottom:60px;left:50%;transform:translateX(-50%) translateY(10px);
-    background:rgba(12,12,22,.95);border:1px solid rgba(255,255,255,.1);
-    border-radius:12px;padding:8px 20px;font-size:.75rem;color:#cbd5e1;
-    opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;
-    white-space:nowrap;z-index:20;font-family:'Space Grotesk',sans-serif;
-  }
-  #cubeToast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
+.cube-landing{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0 6px;min-height:400px;}
+.cube-hint{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#475569;font-weight:500;margin-bottom:20px;animation:hintFade 5s 1.5s both;}
+@keyframes hintFade{0%{opacity:0}15%{opacity:1}75%{opacity:1}100%{opacity:0}}
+.dual-cubes{display:flex;align-items:flex-start;justify-content:center;gap:70px;width:100%;position:relative;}
+.cube-wrapper{display:flex;flex-direction:column;align-items:center;gap:0;position:relative;padding-top:62px;padding-bottom:36px;}
+.cube-wrapper-title{position:absolute;top:0;left:50%;transform:translateX(-50%);width:180px;font-family:'DM Serif Display',serif;font-style:italic;font-size:.92rem;font-weight:400;color:#fff;text-align:center;line-height:1.3;text-shadow:0 0 14px rgba(255,255,255,.2);pointer-events:none;z-index:10;}
+.cube-wrapper-title.green{color:#4ade80;text-shadow:0 0 14px rgba(34,197,94,.4);}
+.cube-wrapper-title.blue{color:#7dd3fc;text-shadow:0 0 14px rgba(56,189,248,.4);}
+.cube-wrapper-label{position:absolute;bottom:0;left:50%;transform:translateX(-50%);white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:.7rem;letter-spacing:.08em;font-weight:600;opacity:.55;text-align:center;pointer-events:none;z-index:10;}
+.cube-wrapper-label.green{color:#4ade80;}
+.cube-wrapper-label.blue{color:#7dd3fc;}
+.scene{width:160px;height:160px;perspective:600px;perspective-origin:50% 40%;cursor:pointer;}
+.cube3d{width:100%;height:100%;position:relative;transform-style:preserve-3d;transform:rotateX(-18deg) rotateY(22deg);animation:cubeIntro .8s cubic-bezier(.22,.82,.26,1) both;transition:filter .25s;}
+#cube3dGreen{--cube-glow:rgba(34,197,94,.5);animation-delay:.05s;}
+#cube3dBlue{--cube-glow:rgba(56,189,248,.5);animation-delay:.18s;}
+.cube3d:hover{cursor:grab;}
+@keyframes cubeIntro{from{transform:rotateX(-18deg) rotateY(22deg) scale3d(.3,.3,.3);opacity:0}to{transform:rotateX(-18deg) rotateY(22deg) scale3d(1,1,1);opacity:1}}
+@keyframes rollLeft{0%{transform:rotateX(-18deg) rotateY(22deg) translateX(0) translateY(0) scale(1);opacity:1;}30%{transform:rotateX(180deg) rotateY(300deg) translateX(-160px) translateY(15px) scale(.95);opacity:1;}70%{transform:rotateX(450deg) rotateY(720deg) translateX(-380px) translateY(35px) scale(.9);opacity:.7;}100%{transform:rotateX(650deg) rotateY(1000deg) translateX(-600px) translateY(60px) scale(.8);opacity:0;}}
+@keyframes rollRight{0%{transform:rotateX(-18deg) rotateY(22deg) translateX(0) translateY(0) scale(1);opacity:1;}30%{transform:rotateX(180deg) rotateY(-300deg) translateX(160px) translateY(15px) scale(.95);opacity:1;}70%{transform:rotateX(450deg) rotateY(-720deg) translateX(380px) translateY(35px) scale(.9);opacity:.7;}100%{transform:rotateX(650deg) rotateY(-1000deg) translateX(600px) translateY(60px) scale(.8);opacity:0;}}
+.cube3d.rolling-left{animation:rollLeft .7s cubic-bezier(.3,0,.8,1) forwards !important;transition:none;}
+.cube3d.rolling-right{animation:rollRight .7s cubic-bezier(.3,0,.8,1) forwards !important;transition:none;}
+.explosion-container{position:absolute;top:80px;left:50%;width:0;height:0;pointer-events:none;z-index:60;}
+.exp-ring{position:absolute;top:0;left:0;border-radius:50%;transform:translate(-50%,-50%);border:3px solid;opacity:0;animation:expRing .55s ease-out forwards;}
+@keyframes expRing{0%{width:10px;height:10px;opacity:.9;}50%{width:160px;height:160px;opacity:.6;}100%{width:260px;height:260px;opacity:0;}}
+.exp-ring2{position:absolute;top:0;left:0;border-radius:50%;transform:translate(-50%,-50%);border:2px solid;opacity:0;animation:expRing .45s .08s ease-out forwards;}
+.exp-spark{position:absolute;top:0;left:0;width:7px;height:7px;border-radius:50%;animation:expSpark .6s ease-out forwards;}
+@keyframes expSpark{0%{transform:translate(-50%,-50%) rotate(var(--ang)) translateX(10px);opacity:1;}100%{transform:translate(-50%,-50%) rotate(var(--ang)) translateX(var(--dist));opacity:0;}}
+.exp-text{position:absolute;top:0;left:0;transform:translate(-50%,-70%);font-size:1.6rem;animation:expText .5s ease-out forwards;pointer-events:none;}
+@keyframes expText{0%{transform:translate(-50%,-50%) scale(.5);opacity:1;}60%{transform:translate(-50%,-100%) scale(1.4);opacity:1;}100%{transform:translate(-50%,-130%) scale(1.1);opacity:0;}}
+.exp-flash{position:fixed;inset:0;pointer-events:none;z-index:99;animation:expFlash .35s ease-out forwards;}
+@keyframes expFlash{0%{opacity:1}100%{opacity:0}}
+.cface{position:absolute;width:160px;height:160px;border-radius:10px;overflow:hidden;backface-visibility:hidden;border:1px solid rgba(255,255,255,.1);}
+.cface::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent calc(33.3% - .5px),rgba(0,0,0,.35) calc(33.3% - .5px),rgba(0,0,0,.35) calc(33.3% + .5px),transparent calc(33.3% + .5px)),linear-gradient(transparent calc(66.6% - .5px),rgba(0,0,0,.35) calc(66.6% - .5px),rgba(0,0,0,.35) calc(66.6% + .5px),transparent calc(66.6% + .5px)),linear-gradient(90deg,transparent calc(33.3% - .5px),rgba(0,0,0,.35) calc(33.3% - .5px),rgba(0,0,0,.35) calc(33.3% + .5px),transparent calc(33.3% + .5px)),linear-gradient(90deg,transparent calc(66.6% - .5px),rgba(0,0,0,.35) calc(66.6% - .5px),rgba(0,0,0,.35) calc(66.6% + .5px),transparent calc(66.6% + .5px));z-index:3;pointer-events:none;}
+.cface::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 55%);z-index:2;pointer-events:none;}
+.cf-front{transform:translateZ(80px);}
+.cf-back{transform:rotateY(180deg) translateZ(80px);}
+.cf-right{transform:rotateY(90deg) translateZ(80px);}
+.cf-left{transform:rotateY(-90deg) translateZ(80px);}
+.cf-top{transform:rotateX(90deg) translateZ(80px);}
+.cf-bot{transform:rotateX(-90deg) translateZ(80px);}
+.green-face,.blue-face{position:absolute;inset:0;}
+.green-face{background:radial-gradient(ellipse at 40% 30%,#0d3520,#021008);color:#22c55e;}
+.blue-face{background:radial-gradient(ellipse at 40% 30%,#092540,#030c1a);color:#38bdf8;}
+.cface-fill{width:100%;height:100%;position:relative;}
+.cface-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;padding:12px;text-align:center;}
+.cface-num{position:absolute;top:8px;right:10px;font-family:'Space Grotesk',sans-serif;font-size:.6rem;font-weight:700;opacity:.5;letter-spacing:.05em;}
+.cface-icon{font-size:2.6rem;line-height:1;margin-bottom:8px;filter:drop-shadow(0 0 10px currentColor);animation:iconGlow 3s ease-in-out infinite;}
+@keyframes iconGlow{0%,100%{filter:drop-shadow(0 0 6px currentColor)}50%{filter:drop-shadow(0 0 20px currentColor)}}
+.cface-title{font-family:'DM Serif Display',serif;font-style:italic;font-size:.72rem;color:#fff;line-height:1.2;text-shadow:0 0 14px rgba(255,255,255,.25);}
+.cbr{position:absolute;width:12px;height:12px;border-color:currentColor;border-style:solid;opacity:.25;}
+.cbr.tl{top:5px;left:5px;border-width:1.5px 0 0 1.5px;}
+.cbr.tr{top:5px;right:5px;border-width:1.5px 1.5px 0 0;}
+.cbr.bl{bottom:5px;left:5px;border-width:0 0 1.5px 1.5px;}
+.cbr.br{bottom:5px;right:5px;border-width:0 1.5px 1.5px 0;}
+.subtopic-reveal-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:6px;width:100%;}
+.subtopic-reveal-grid .subtopic-btn{animation:stReveal .4s cubic-bezier(.22,.82,.26,1) both;}
+@keyframes stReveal{from{opacity:0;transform:translateY(16px) scale(.96);}to{opacity:1;transform:none;}}
+#cubeToast{position:fixed;bottom:60px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(12,12,22,.95);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:8px 20px;font-size:.75rem;color:#cbd5e1;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap;z-index:20;font-family:'Space Grotesk',sans-serif;}
+#cubeToast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@media(max-width:520px){header h1{font-size:1.8rem;}.mode-grid{grid-template-columns:1fr;}.opts-grid{grid-template-columns:1fr;}.tf-row .ans-btn{font-size:.95rem;padding:13px 8px;}}
 </style>
 </head>
 <body>
@@ -562,9 +292,6 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 <script>
 const SHEET_URL="https://script.google.com/macros/s/AKfycbxhBeO23qbXIToArYsiquZxpxlAdidFPtjt23vKW9kP8JbJMZ3cXu6JyhsFza6vl7iH/exec";
 
-// ═══════════════════════════════════════════
-// NAGY TÉMAKÖRÖK
-// ═══════════════════════════════════════════
 const BIG_TOPICS = [
   {
     id: "fuves",
@@ -572,8 +299,7 @@ const BIG_TOPICS = [
     title: "Az őshonos füves területek és a mezők életközössége",
     style: "fuves",
     subtopics: [
-      {
-        id:1,icon:"🌿",title:"Az őshonos füves puszták kialakulása, növényei",ready:true,
+      {id:1,icon:"🌿",title:"Az őshonos füves puszták kialakulása, növényei",ready:true,
         tf:[
           {text:"A puszták az Alföldön is megtalálhatók.",answer:true,diff:1,explain:"Igen! Az Alföld a puszták egyik legismertebb helyszíne Magyarországon."},
           {text:"A pázsitfűfélék szárát szalmaszárnak nevezzük.",answer:true,diff:1,explain:"Igen! A szalmaszár belül üreges és hajlékony."},
@@ -621,130 +347,16 @@ const BIG_TOPICS = [
           {diff:3,parts:["A pázsitfűfélék ",{id:0}," levelei rásimulnak a szárra, védve és merevítve azt a szél ellen."],gaps:[{id:0,correct:"szárölelő",options:["szárölelő","tüskés","húsos","úszó"]}]},
         ],
         sort:[
-          {
-            diff:2,
-            question:"Rendezd időrendi sorrendbe, hogyan alakult ki a puszta!",
-            items:[
-              "Az erdős sztyepp fokozatosan elvékonyodik az erdős területek határán.",
-              "A csapadék mennyisége csökken, a talaj szárazabbá válik.",
-              "A fák és bokrok eltűnnek, csak a szárazságtűrő füvek maradnak meg.",
-              "Kialakul a nyílt, füves puszta növényzete.",
-              "A puszta élővilága alkalmazkodik a szélsőséges körülményekhez."
-            ],
-            correct:[1,0,2,3,4],
-            explain:"A puszta kialakulása egy fokozatos folyamat: először csökken a csapadék, az erdők visszahúzódnak, majd kizárólag szárazságtűrő fűfélék maradnak meg."
-          },
-          {
-            diff:2,
-            question:"Állítsd sorrendbe a pázsitfű növekedésének szakaszait tavasztól őszig!",
-            items:[
-              "A tél elmúltával a bojtos gyökerek tápanyagot szállítanak fel.",
-              "Tavasszal apró, zöld hajtások törnek elő a talajból.",
-              "Nyáron a szalmaszár megerősödik, a levélhüvelyek védik a szárat.",
-              "Virágzáskor a szél szétviszi a pollent a pusztán.",
-              "Ősszel a száraz szalmaszár lecsuklik, magvak hullanak a talajra."
-            ],
-            correct:[0,1,2,3,4],
-            explain:"A pázsitfüvek életciklusa jól követhető: gyökér aktiválódik → hajtás → szár megerősödése → szélbeporzás → maghullás."
-          },
-          {
-            diff:3,
-            question:"Rendezd sorrendbe az ok-okozati láncot: mi történik, ha egy pusztát túllegeltetnek?",
-            items:[
-              "A növényzet nem tud regenerálódni, a talaj kopárrá válik.",
-              "Egyre több állat legel a területen.",
-              "A szél és az eső elmossa a termőtalaj rétegét.",
-              "A füves terület elsivatagosodik.",
-              "A pázsitfüvek gyökerei meglazulnak, a talaj védtelenebbé válik."
-            ],
-            correct:[1,0,4,2,3],
-            explain:"Túllegeltetés → kopár talaj → laza gyökérzet → erózió → sivatagosodás. Ez az egyik legkomolyabb ökológiai probléma."
-          },
-          {
-            diff:2,
-            question:"Rendezd sorrendbe a pázsitfűféle szár részeit alulról felfelé!",
-            items:[
-              "Bojtos gyökérzet a talajban.",
-              "Szárölelő levélhüvely a szár tövénél.",
-              "Üreges szalmaszár a közepén.",
-              "Szárcsomó, ahol a levél csatlakozik.",
-              "Apró virágzat a szár csúcsán."
-            ],
-            correct:[0,1,3,2,4],
-            explain:"A pázsitfű felépítése alulról felfelé: bojtos gyökér → levélhüvely → szárcsomó → szalmaszár → virágzat a csúcson."
-          },
-          {
-            diff:3,
-            question:"Rendezd sorrendbe, mi történik, ha egy mocsárrétet lecsapolnak!",
-            items:[
-              "A vízigényes mocsári növények elpusztulnak.",
-              "A gát vagy csatorna megépítésével elvezeti a vizet az ember.",
-              "Szárazságtűrő növények jelennek meg a területen.",
-              "A talaj fokozatosan kiszárad.",
-              "Az eredeti élőhely biodiverzitása csökken."
-            ],
-            correct:[1,3,0,2,4],
-            explain:"Lecsapolás → talaj kiszárad → mocsári növények elpusztulnak → száraz fajok telepednek meg → biodiverzitás csökken. Ez az emberi beavatkozás egyik legpusztítóbb hatása a mocsárrétek élővilágára."
-          }
+          {diff:2,question:"Rendezd időrendi sorrendbe, hogyan alakult ki a puszta!",items:["Az erdős sztyepp fokozatosan elvékonyodik az erdős területek határán.","A csapadék mennyisége csökken, a talaj szárazabbá válik.","A fák és bokrok eltűnnek, csak a szárazságtűrő füvek maradnak meg.","Kialakul a nyílt, füves puszta növényzete.","A puszta élővilága alkalmazkodik a szélsőséges körülményekhez."],correct:[1,0,2,3,4],explain:"A puszta kialakulása egy fokozatos folyamat: először csökken a csapadék, az erdők visszahúzódnak, majd kizárólag szárazságtűrő fűfélék maradnak meg."},
+          {diff:2,question:"Állítsd sorrendbe a pázsitfű növekedésének szakaszait tavasztól őszig!",items:["A tél elmúltával a bojtos gyökerek tápanyagot szállítanak fel.","Tavasszal apró, zöld hajtások törnek elő a talajból.","Nyáron a szalmaszár megerősödik, a levélhüvelyek védik a szárat.","Virágzáskor a szél szétviszi a pollent a pusztán.","Ősszel a száraz szalmaszár lecsuklik, magvak hullanak a talajra."],correct:[0,1,2,3,4],explain:"A pázsitfüvek életciklusa jól követhető: gyökér aktiválódik → hajtás → szár megerősödése → szélbeporzás → maghullás."},
+          {diff:3,question:"Rendezd sorrendbe az ok-okozati láncot: mi történik, ha egy pusztát túllegeltetnek?",items:["A növényzet nem tud regenerálódni, a talaj kopárrá válik.","Egyre több állat legel a területen.","A szél és az eső elmossa a termőtalaj rétegét.","A füves terület elsivatagosodik.","A pázsitfüvek gyökerei meglazulnak, a talaj védtelenebbé válik."],correct:[1,0,4,2,3],explain:"Túllegeltetés → kopár talaj → laza gyökérzet → erózió → sivatagosodás."},
+          {diff:2,question:"Rendezd sorrendbe a pázsitfűféle szár részeit alulról felfelé!",items:["Bojtos gyökérzet a talajban.","Szárölelő levélhüvely a szár tövénél.","Üreges szalmaszár a közepén.","Szárcsomó, ahol a levél csatlakozik.","Apró virágzat a szár csúcsán."],correct:[0,1,3,2,4],explain:"A pázsitfű felépítése alulról felfelé: bojtos gyökér → levélhüvely → szárcsomó → szalmaszár → virágzat a csúcson."},
+          {diff:3,question:"Rendezd sorrendbe, mi történik, ha egy mocsárrétet lecsapolnak!",items:["A vízigényes mocsári növények elpusztulnak.","A gát vagy csatorna megépítésével elvezeti a vizet az ember.","Szárazságtűrő növények jelennek meg a területen.","A talaj fokozatosan kiszárad.","Az eredeti élőhely biodiverzitása csökken."],correct:[1,3,0,2,4],explain:"Lecsapolás → talaj kiszárad → mocsári növények elpusztulnak → száraz fajok telepednek meg → biodiverzitás csökken."}
         ],
         cat:[
-          {
-            diff:2,
-            question:"Válaszd szét: melyik jellemző a pázsitfűfélékre, és melyik NEM?",
-            boxYes:"🌿 Pázsitfűfélékre jellemző",
-            boxNo:"❌ NEM jellemző rájuk",
-            items:[
-              {text:"Szalmaszár",correct:true},
-              {text:"Bojtos gyökérzet",correct:true},
-              {text:"Szárölelő levél",correct:true},
-              {text:"Szél általi beporzás",correct:true},
-              {text:"Húsos, lédús szár",correct:false},
-              {text:"Nagy, feltűnő virág",correct:false},
-              {text:"Karógyökér",correct:false},
-              {text:"Rovarok általi beporzás",correct:false},
-              {text:"Üreges, csomós szár",correct:true},
-              {text:"Fás, vastag törzs",correct:false}
-            ],
-            explain:"A pázsitfűfélék legfontosabb jellemzői: szalmaszár (üreges, csomós), bojtos gyökérzet, szárölelő levélhüvely, szél általi beporzás. Húsos szár, nagy virág, karógyökér és fás törzs más növénycsaládokra jellemző."
-          },
-          {
-            diff:2,
-            question:"Melyik növény él a pusztán, és melyik NEM pusztai növény?",
-            boxYes:"🌾 Pusztai növény",
-            boxNo:"🌊 Nem pusztai (vízparti/erdei)",
-            items:[
-              {text:"Angolperje",correct:true},
-              {text:"Siskanád",correct:true},
-              {text:"Mezeizsálya",correct:true},
-              {text:"Réti boglárka",correct:true},
-              {text:"Mocsári zsurló",correct:false},
-              {text:"Fehér fűz",correct:false},
-              {text:"Gyékény",correct:false},
-              {text:"Vízitök",correct:false},
-              {text:"Mezei kakukkfű",correct:true},
-              {text:"Nádas",correct:false}
-            ],
-            explain:"A puszta száraz, nyílt élőhely — angolperje, siskanád, mezeizsálya, réti boglárka és mezei kakukkfű jellemzői. A mocsári zsurló, fehér fűz, gyékény, vízitök és nádas vízparti vagy vízben élő növények."
-          },
-          {
-            diff:3,
-            question:"Kategorizáld az állításokat: melyik igaz a pusztára, és melyik NEM igaz?",
-            boxYes:"✅ Igaz a pusztára",
-            boxNo:"❌ Nem igaz a pusztára",
-            items:[
-              {text:"Kevés csapadék jellemzi",correct:true},
-              {text:"Szélbeporzás jellemző",correct:true},
-              {text:"Bokros, fás növényzet dominál",correct:false},
-              {text:"A talaj állandóan nedves",correct:false},
-              {text:"Nyílt, füves élőhely",correct:true},
-              {text:"Szélsőséges hőmérsékletek jellemzik",correct:true},
-              {text:"Örökzöld fák borítják",correct:false},
-              {text:"Déli kitettségen is megjelenik",correct:true},
-              {text:"Mindig ember alakítja ki",correct:false},
-              {text:"Bojtos gyökerű növények dominálnak",correct:true}
-            ],
-            explain:"A puszta jellemzői: kevés csapadék, szélbeporzás, nyílt füves élőhely, szélsőséges hőmérséklet, déli kitettségen is megjelenik, bojtos gyökerű növények dominálnak. Bokros-fás növényzet, állandóan nedves talaj, örökzöld fák és kizárólag emberi kialakítás NEM jellemző."
-          }
+          {diff:2,question:"Válaszd szét: melyik jellemző a pázsitfűfélékre, és melyik NEM?",boxYes:"🌿 Pázsitfűfélékre jellemző",boxNo:"❌ NEM jellemző rájuk",items:[{text:"Szalmaszár",correct:true},{text:"Bojtos gyökérzet",correct:true},{text:"Szárölelő levél",correct:true},{text:"Szél általi beporzás",correct:true},{text:"Húsos, lédús szár",correct:false},{text:"Nagy, feltűnő virág",correct:false},{text:"Karógyökér",correct:false},{text:"Rovarok általi beporzás",correct:false},{text:"Üreges, csomós szár",correct:true},{text:"Fás, vastag törzs",correct:false}],explain:"A pázsitfűfélék legfontosabb jellemzői: szalmaszár, bojtos gyökérzet, szárölelő levélhüvely, szél általi beporzás."},
+          {diff:2,question:"Melyik növény él a pusztán, és melyik NEM pusztai növény?",boxYes:"🌾 Pusztai növény",boxNo:"🌊 Nem pusztai (vízparti/erdei)",items:[{text:"Angolperje",correct:true},{text:"Siskanád",correct:true},{text:"Mezeizsálya",correct:true},{text:"Réti boglárka",correct:true},{text:"Mocsári zsurló",correct:false},{text:"Fehér fűz",correct:false},{text:"Gyékény",correct:false},{text:"Vízitök",correct:false},{text:"Mezei kakukkfű",correct:true},{text:"Nádas",correct:false}],explain:"A puszta száraz, nyílt élőhely — angolperje, siskanád, mezeizsálya, réti boglárka jellemzői. A mocsári zsurló, fehér fűz, gyékény, vízitök és nádas vízparti növények."},
+          {diff:3,question:"Kategorizáld az állításokat: melyik igaz a pusztára, és melyik NEM igaz?",boxYes:"✅ Igaz a pusztára",boxNo:"❌ Nem igaz a pusztára",items:[{text:"Kevés csapadék jellemzi",correct:true},{text:"Szélbeporzás jellemző",correct:true},{text:"Bokros, fás növényzet dominál",correct:false},{text:"A talaj állandóan nedves",correct:false},{text:"Nyílt, füves élőhely",correct:true},{text:"Szélsőséges hőmérsékletek jellemzik",correct:true},{text:"Örökzöld fák borítják",correct:false},{text:"Déli kitettségen is megjelenik",correct:true},{text:"Mindig ember alakítja ki",correct:false},{text:"Bojtos gyökerű növények dominálnak",correct:true}],explain:"A puszta jellemzői: kevés csapadék, szélbeporzás, nyílt füves élőhely, szélsőséges hőmérséklet, déli kitettségen is megjelenik, bojtos gyökerű növények dominálnak."}
         ]
       },
       {id:2,icon:"🦗",title:"Ízeltlábúak a füves területeken",ready:true,
@@ -795,68 +407,70 @@ const BIG_TOPICS = [
           {diff:3,parts:["A lepkék ",{id:0}," fejlődnek — petéből hernyó, majd báb, végül lepke lesz."],gaps:[{id:0,correct:"teljes átalakulással",options:["teljes átalakulással","kifejléssel","egyenes fejlődéssel","hasadással"]}]},
         ],
         sort:[
-          {
-            diff:2,
-            question:"Rendezd sorrendbe a sáska (kifejlés) fejlődési szakaszait!",
-            items:[
-              "A lárva többször vedlik, egyre nagyobb lesz.",
-              "A nőstény petét rak a talajba.",
-              "Az utolsó vedlés után megjelennek a szárnyak — kész a kifejlett állat.",
-              "A petéből kis lárva kel ki, amely már hasonlít a szülőre.",
-            ],
-            correct:[1,3,0,2],
-            explain:"Kifejlés sorrendben: pete lerakása → lárva kikelése → vedlések → kifejlett állat szárnyakkal. Nincs bábállapot!"
-          },
-          {
-            diff:3,
-            question:"Rendezd sorrendbe a lepke (teljes átalakulás) fejlődési szakaszait!",
-            items:[
-              "A báb felnyílik, kifejlett lepke bújik elő.",
-              "A nőstény petét rak a tápnövényre.",
-              "A petéből hernyó (lárva) kel ki és eszik.",
-              "A hernyó bebábozódik.",
-            ],
-            correct:[1,2,3,0],
-            explain:"Teljes átalakulás: pete → hernyó → báb → lepke. A bábállapot a legfőbb különbség a kifejléssel szemben."
-          },
+          {diff:2,question:"Rendezd sorrendbe a sáska (kifejlés) fejlődési szakaszait!",items:["A lárva többször vedlik, egyre nagyobb lesz.","A nőstény petét rak a talajba.","Az utolsó vedlés után megjelennek a szárnyak — kész a kifejlett állat.","A petéből kis lárva kel ki, amely már hasonlít a szülőre."],correct:[1,3,0,2],explain:"Kifejlés sorrendben: pete lerakása → lárva kikelése → vedlések → kifejlett állat szárnyakkal. Nincs bábállapot!"},
+          {diff:3,question:"Rendezd sorrendbe a lepke (teljes átalakulás) fejlődési szakaszait!",items:["A báb felnyílik, kifejlett lepke bújik elő.","A nőstény petét rak a tápnövényre.","A petéből hernyó (lárva) kel ki és eszik.","A hernyó bebábozódik."],correct:[1,2,3,0],explain:"Teljes átalakulás: pete → hernyó → báb → lepke. A bábállapot a legfőbb különbség a kifejléssel szemben."},
         ],
         cat:[
-          {
-            diff:2,
-            question:"Válaszd szét: melyik jellemző a KIFEJLÉSRE, és melyik a TELJES ÁTALAKULÁSRA?",
-            boxYes:"🦗 Kifejlés (pl. sáska)",
-            boxNo:"🦋 Teljes átalakulás (pl. lepke)",
-            items:[
-              {text:"Nincs bábállapot",correct:true},
-              {text:"Van bábállapot",correct:false},
-              {text:"Lárva hasonlít a szülőre",correct:true},
-              {text:"Hernyó alakú lárva",correct:false},
-              {text:"Pete → lárva → kifejlett",correct:true},
-              {text:"Pete → lárva → báb → kifejlett",correct:false},
-              {text:"Tücsök, szöcske fejlődése",correct:true},
-              {text:"Lepke, bogár fejlődése",correct:false},
-            ],
-            explain:"Kifejlésnél nincs báb, a lárva hasonlít a szülőre (sáska, tücsök, szöcske). Teljes átalakulásnál van báb, a lárva teljesen eltér a kifejlett állattól (lepke, bogár)."
-          },
-          {
-            diff:2,
-            question:"Melyik jellemző melyik rovarra?",
-            boxYes:"🦗 Olaszsáska / Tücsök",
-            boxNo:"🦋 Fecskefarkú lepke",
-            items:[
-              {text:"Rágó szájszerv",correct:true},
-              {text:"Pödörnyelv",correct:false},
-              {text:"Ugrólábak",correct:true},
-              {text:"Farkszerű szárnynyúlvány",correct:false},
-              {text:"Hegedülés (szárny dörzsölés)",correct:true},
-              {text:"Nektárral táplálkozik",correct:false},
-              {text:"Védett faj",correct:false},
-            ],
-            explain:"Olaszsáska/tücsök: rágó száj, ugrólábak, hegedülés. Fecskefarkú lepke: pödörnyelv, farknyúlvány, nektárevő, védett faj."
-          },
+          {diff:2,question:"Válaszd szét: melyik jellemző a KIFEJLÉSRE, és melyik a TELJES ÁTALAKULÁSRA?",boxYes:"🦗 Kifejlés (pl. sáska)",boxNo:"🦋 Teljes átalakulás (pl. lepke)",items:[{text:"Nincs bábállapot",correct:true},{text:"Van bábállapot",correct:false},{text:"Lárva hasonlít a szülőre",correct:true},{text:"Hernyó alakú lárva",correct:false},{text:"Pete → lárva → kifejlett",correct:true},{text:"Pete → lárva → báb → kifejlett",correct:false},{text:"Tücsök, szöcske fejlődése",correct:true},{text:"Lepke, bogár fejlődése",correct:false}],explain:"Kifejlésnél nincs báb, a lárva hasonlít a szülőre (sáska, tücsök, szöcske). Teljes átalakulásnál van báb, a lárva teljesen eltér a kifejlett állattól (lepke, bogár)."},
+          {diff:2,question:"Melyik jellemző melyik rovarra?",boxYes:"🦗 Olaszsáska / Tücsök",boxNo:"🦋 Fecskefarkú lepke",items:[{text:"Rágó szájszerv",correct:true},{text:"Pödörnyelv",correct:false},{text:"Ugrólábak",correct:true},{text:"Farkszerű szárnynyúlvány",correct:false},{text:"Hegedülés (szárny dörzsölés)",correct:true},{text:"Nektárral táplálkozik",correct:false},{text:"Védett faj",correct:false}],explain:"Olaszsáska/tücsök: rágó száj, ugrólábak, hegedülés. Fecskefarkú lepke: pödörnyelv, farknyúlvány, nektárevő, védett faj."},
         ]
       },
-      {id:3,icon:"🦎",title:"A fürge gyík és a vakond",ready:false,tf:[],quiz:[],fill:[]},
+      {id:3,icon:"🦎",title:"A fürge gyík és a vakond",ready:true,
+        tf:[
+          {text:"A fürge gyík testét szarupikkelyek borítják.",answer:true,diff:1,explain:"Igen! A szarupikkelyek és pajzsok védik a gyíkot a környezeti hatásoktól és a kiszáradástól."},
+          {text:"A fürge gyík állandó testhőmérsékletű állat.",answer:false,diff:1,explain:"Nem! A gyík változó testhőmérsékletű — hőmérséklete a környezetétől függ, ezért sütkérezik a napon."},
+          {text:"A fürge gyík rovarokkal és pókokkal táplálkozik.",answer:true,diff:1,explain:"Pontosan! A gyík kiváló vadász — gyorsasága és éles látása segíti a zsákmány elfogásában."},
+          {text:"A fürge gyík egyszerre vedlik le egész bőrüket.",answer:false,diff:1,explain:"Nem igaz! A gyík darabokban vedlik, a kövekhez és ágakhoz dörgölőzve segíti a folyamatot."},
+          {text:"A fürge gyík téli álmot alszik.",answer:true,diff:1,explain:"Igen! Fagymentes helyen telel át — hidegben életfolyamatai lelassulnak, ezért telelni kénytelen."},
+          {text:"A fürge gyík tojásait homokos talajba rakja.",answer:true,diff:1,explain:"Helyes! Az 5-10 lágy héjú tojást a nap melege költ ki a homokban."},
+          {text:"A gyík lábai erősek és felemelhetik a testét.",answer:false,diff:1,explain:"Nem! A gyík lábai gyengék — nem bírják felemelni a testét, ezért kígyózó mozgással halad."},
+          {text:"A fürge gyík gerincoszlopa rendkívül hajlékony.",answer:true,diff:2,explain:"Igen! A hajlékony gerinc teszi lehetővé a jellegzetes kígyózó, gyors mozgást."},
+          {text:"A fürge gyík melegben elbújik és lehűti magát.",answer:false,diff:2,explain:"Fordítva! Melegben sütkérezik (felgyorsítja az életfolyamatait), hűvös időben bújik el."},
+          {text:"A fürge gyík ellenségei közé tartozik a rézsikló és a gólya.",answer:true,diff:2,explain:"Pontosan! A rézsikló, gólya, varjú és nyest egyaránt vadászik rá."},
+          {text:"A fürge gyík tojásait maga költi ki testmelegével.",answer:false,diff:2,explain:"Nem! A tojásokat NEM a szülő, hanem a nap melege költ ki a homokos talajban."},
+          {text:"A gyík szarupikkelyei segítik a kiszáradás elleni védekezést.",answer:true,diff:2,explain:"Helyes! A pikkelyek vízálló réteget alkotnak, gátolja a test kiszáradását száraz élőhelyeken."},
+          {text:"A fürge gyík hangjelzésekkel kommunikál fajtársaival.",answer:false,diff:2,explain:"Nem! A gyíkok nem adnak ki hangjelzéseket — elsősorban látásuk alapján tájékozódnak."},
+          {text:"A gyík színe rejtőzködést (kamuflázst) tesz lehetővé.",answer:true,diff:2,explain:"Igen! A zöldesbarna szín tökéletesen beolvad a füves-bokros élőhelyen."},
+          {text:"A fürge gyík vedlése azért szükséges, mert pikkelyei nem tudnak növekedni.",answer:true,diff:3,explain:"Helyes! A kemény szarupikkelyek nem nyúlhatnak meg, ezért a növekedés csak vedléssel lehetséges."},
+          {text:"A fürge gyík sütkérezési viselkedése energia-pazarlás.",answer:false,diff:3,explain:"Nem! A napozás létfontosságú: a változó testhőmérsékletű állat így gyorsítja fel anyagcseréjét és mozgásait."},
+          {text:"A fürge gyík tojásainak lágy héja lehetővé teszi a gázcserét.",answer:true,diff:3,explain:"Igen! A lágy, pergamenhéjú tojáson át oxigén jut be és szén-dioxid távozik — ez szükséges a fejlődéshez."},
+          {text:"Ha a rézsikló felfal egy gyíkot, azt jelenti, hogy a gyík elpusztult, nem menekülhetett.",answer:false,diff:3,explain:"Nem feltétlenül! A gyík képes az öncsorbítás (autotómia) révén levetni a farkát — a farok visszanő, és a gyík menekülhet."},
+          {text:"A fürge gyík és a vakond is a füves területek jellegzetes gerinces állata.",answer:true,diff:3,explain:"Igen! Mindkettő a puszták és rétek jellegzetes gerinces lakója, bár egészen más életmódot folytatnak."},
+          {text:"A fürge gyík rovarevő fogazattal rendelkezik.",answer:false,diff:3,explain:"Nem! A rovarevő fogazat a vakond jellemzője. A gyíknak saját fogazata van, de 'rovarevő fogazat' kifejezetten nem a gyík jellemzője."},
+        ],
+        quiz:[
+          {text:"Mi jellemző a fürge gyík mozgására?",opts:["Egyenes, gyors futás","Kígyózó mozgás, mert lábai gyengék","Ugrálva közlekedik","A talajon csúszik lábak nélkül"],correct:1,diff:1,explain:"A gyík lábai nem bírják felemelni a testét, ezért a gerincoszlop hajlékonyságára támaszkodva kígyózva mozog."},
+          {text:"Mivel táplálkozik a fürge gyík?",opts:["Magvakkal és gyökerekkel","Füvekkel és bogyókkal","Rovarokkal és pókokkal","Kizárólag hernyókkal"],correct:2,diff:1,explain:"A gyík ragadozó: rovarokat és pókokat fogyaszt. Vadászatát kiváló látása és gyorsasága segíti."},
+          {text:"Hány tojást rak a fürge gyík?",opts:["1-2 tojást","5-10 tojást","15-20 tojást","30-40 tojást"],correct:1,diff:1,explain:"A fürge gyík 5-10 lágy héjú tojást rak homokos talajba, amelyeket a nap melege költ ki."},
+          {text:"Mi jellemző a fürge gyík testhőmérsékletére?",opts:["Állandó, mint az emlősöknél","Változó, a környezettől függ","Mindig alacsonyabb a környezeténél","Mindig magasabb a környezeténél"],correct:1,diff:1,explain:"A gyík változó testhőmérsékletű hüllő — ezért kénytelen sütkérezni, hogy felmelegítse testét."},
+          {text:"Hogyan segíti a gyíkot a pikkelyes kültakaró?",opts:["Hőveszteség ellen véd","Hangot vezet","Kiszáradás ellen véd és rejtőzést segít","Úszást segít"],correct:2,diff:2,explain:"A szarupikkelyek vízálló réteget alkotnak (kiszáradás ellen), és a szín kamuflázst biztosít."},
+          {text:"Mi történik a fürge gyíkkal hideg időben?",opts:["Dél felé vándorol","Sütkérezik","Elbújik, életfolyamatai lelassulnak","Gyorsabban mozog"],correct:2,diff:2,explain:"Hűvös időben elbújik, és fagymentes helyen téli álmot alszik — változó testhőmérséklete miatt nem tud aktív maradni."},
+          {text:"Kik a fürge gyík legfontosabb ellenségei?",opts:["Farkas, róka, medve","Rézsikló, gólya, varjú, nyest","Vaddisznó, szarvas","Patkány, egér"],correct:1,diff:2,explain:"A rézsikló, gólya, varjú és nyest mind vadászik a gyíkra — kicsi mérete miatt sok ragadozónak céltáblája."},
+          {text:"Miért vedlik a fürge gyík?",opts:["Mert beteg","Mert a pikkelyek nem tudnak növekedni","Mert télen elveszíti a bőrét","Mert megijed"],correct:1,diff:2,explain:"A kemény szarupikkelyek nem nyúlhatnak meg, ezért a test növekedésével a régi bőrt le kell vetni."},
+          {text:"Mi különbözteti meg a gyík tojását a madártojástól?",opts:["A gyík tojása keményebb héjú","A gyík tojása lágy héjú","A gyík tojása kék színű","A gyík tojása nem fejlődik napfényen"],correct:1,diff:3,explain:"A gyík tojásának lágy, pergamenhéja van — ez lehetővé teszi a gázcserét, de kényes a kiszáradásra, ezért kerül homokba."},
+          {text:"Miért sütkérezik a fürge gyík a napon?",opts:["Mert szereti a meleget","Hogy felgyorsítsa életfolyamatait — változó testhőmérséklete miatt","Hogy szárítsák meg a pikkelyeit","Hogy lássák a fajtársai"],correct:1,diff:3,explain:"A változó testhőmérsékletű állat életfolyamatai (emésztés, mozgás, vadászat) csak megfelelő testhőn működnek hatékonyan."},
+        ],
+        fill:[
+          {diff:1,parts:["A fürge gyík testét ",{id:0}," borítják, amelyek védenek a kiszáradástól."],gaps:[{id:0,correct:"szarupikkelyek",options:["szarupikkelyek","tollak","szőr","mészpajzsok"]}]},
+          {diff:1,parts:["A gyík ",{id:0}," testhőmérsékletű, ezért melegben sütkérezik a napon."],gaps:[{id:0,correct:"változó",options:["változó","állandó","magas","alacsony"]}]},
+          {diff:1,parts:["A fürge gyík 5-10 ",{id:0}," tojását homokos talajba rakja."],gaps:[{id:0,correct:"lágy héjú",options:["lágy héjú","kemény héjú","kék","nagy"]}]},
+          {diff:1,parts:["A gyík rovarokkal és ",{id:0}," táplálkozik."],gaps:[{id:0,correct:"pókokkal",options:["pókokkal","magvakkal","gyümölcsökkel","füvekkel"]}]},
+          {diff:2,parts:["A gyík mozgása ",{id:0},", mert lábai gyengék és nem bírják felemelni a testét."],gaps:[{id:0,correct:"kígyózó",options:["kígyózó","ugró","egyenes","csúszó"]}]},
+          {diff:2,parts:["Hideg időben a fürge gyík fagymentes helyen ",{id:0}," alszik."],gaps:[{id:0,correct:"téli álmot",options:["téli álmot","nyári álmot","nappali álmot","rövid szünetet"]}]},
+          {diff:2,parts:["A gyík vedléskor a ",{id:0}," dörgölőzve segíti a régi bőr levetését."],gaps:[{id:0,correct:"kövekhez és ágakhoz",options:["kövekhez és ágakhoz","vízhez","fűhöz","homokhoz"]}]},
+          {diff:2,parts:["A fürge gyík ellenségei közé tartozik a ",{id:0},", a gólya, a varjú és a nyest."],gaps:[{id:0,correct:"rézsikló",options:["rézsikló","vipera","keresztes vipera","mocsári vipera"]}]},
+          {diff:3,parts:["A gyík tojásait nem a szülő, hanem a ",{id:0}," melege költ ki."],gaps:[{id:0,correct:"nap",options:["nap","talaj","víz","szél"]}]},
+          {diff:3,parts:["A gyík vedlése azért szükséges, mert a ",{id:0}," nem tudnak növekedéssel megnyúlni."],gaps:[{id:0,correct:"szarupikkelyek",options:["szarupikkelyek","izmok","csontok","mirigyek"]}]},
+        ],
+        sort:[
+          {diff:2,question:"Rendezd sorrendbe a fürge gyík éves életciklusát!",items:["Tavasz elején elhagyja a téli búvóhelyet és sütkérezni kezd.","Fagymentes helyen téli álomba merül.","Nyáron aktívan vadászik és párzik.","A tojásokat homokos talajba rakja, a nap költ.","Ősz közeledtével egyre kevesebbet aktív."],correct:[0,2,3,4,1],explain:"A gyík éves ciklusa: tavaszi ébredés → nyári aktív időszak (vadászat, párzás) → tojásrakás → őszi lelassulás → téli álom fagymentes helyen."},
+          {diff:3,question:"Rendezd sorrendbe, mi történik, amikor a gyíkot ragadozó támadja meg!",items:["A ragadozó megragadja a gyík farkát.","A gyík ledobja a farkát (autotómia).","A gyík gyorsan elbújik a növényzet között.","A farok a talajon rángatózva eltereli a ragadozó figyelmét.","A farok idő múltán visszanő."],correct:[0,1,3,2,4],explain:"Ragadozó megragadja a farkát → gyík ledobja → farok rángatózik (eltereli a figyelmet) → gyík elmenekül → farok visszanő. Ez az autotómia."},
+        ],
+        cat:[
+          {diff:2,question:"Válaszd szét: melyik jellemző a fürge gyíkra, és melyik NEM?",boxYes:"🦎 Gyíkra jellemző",boxNo:"❌ NEM jellemző rá",items:[{text:"Szarupikkelyek",correct:true},{text:"Változó testhőmérséklet",correct:true},{text:"Kígyózó mozgás",correct:true},{text:"Lágy héjú tojás",correct:true},{text:"Téli álom",correct:true},{text:"Bársonyos szőrzet",correct:false},{text:"Ásóláb",correct:false},{text:"Anyatejjel szoptat",correct:false},{text:"Rovarokat és pókokat eszik",correct:true},{text:"Nem alszik téli álmot",correct:false}],explain:"A gyík jellemzői: szarupikkelyek, változó testhőmérséklet, kígyózó mozgás, lágy héjú tojás, téli álom, rovarevő. Bársonyos szőrzet, ásóláb, szoptatás a VAKOND jellemzői."},
+          {diff:3,question:"Melyik jellemző a GYÍKRA, és melyik a VAKONDRA?",boxYes:"🦎 Fürge gyík",boxNo:"🦔 Vakond",items:[{text:"Szarupikkelyes kültakaró",correct:true},{text:"Bársonyos fekete szőrzet",correct:false},{text:"Változó testhőmérséklet",correct:true},{text:"Állandó testhőmérséklet",correct:false},{text:"Tojásokat rak",correct:true},{text:"Élve szüli kicsinyeit",correct:false},{text:"Sütkérezik a napon",correct:true},{text:"Ásóláb jellemzi",correct:false},{text:"Rovarevő fogazat (minden foga hegyes)",correct:false},{text:"Téli álmot alszik",correct:true}],explain:"Gyík: pikkelyes, változó testhőmérséklet, tojásrakó, sütkérezik, téli álom. Vakond: szőrös, állandó testhőmérséklet, elevenen szül, ásóláb, rovarevő fogazat, NEM alszik téli álmot."},
+        ]
+      },
       {id:4,icon:"🐇",title:"A mezei nyúl és a füves területek rágcsáló kisemősei",ready:false,tf:[],quiz:[],fill:[]},
       {id:5,icon:"🦅",title:"A fácán és a füves területek ragadozó madarai",ready:false,tf:[],quiz:[],fill:[]},
       {id:6,icon:"🌾",title:"Termesztett növényeink: búza és a kukorica",ready:false,tf:[],quiz:[],fill:[]},
@@ -884,9 +498,6 @@ const BIG_TOPICS = [
   }
 ];
 
-// ═══════════════════════════════
-// ÁLLAPOT
-// ═══════════════════════════════
 let playerName='', currentBigTopic=null, currentTopic=null, mode='';
 let current=0, score=0, streak=0, bestStreak=0, answered=false;
 let startTime=0, timerInterval=null, elapsedSeconds=0;
@@ -897,9 +508,6 @@ function diffLabel(d){if(d===1)return['diff-1','🟢 Könnyű'];if(d===2)return[
 function starsStr(sc,total){const p=sc/total;if(p>=0.9)return'⭐⭐⭐';if(p>=0.65)return'⭐⭐';return'⭐';}
 function updateTimer(){elapsedSeconds=Math.floor((Date.now()-startTime)/1000);const el=document.getElementById('timerPill');if(el)el.textContent='⏱ '+formatTime(elapsedSeconds);}
 
-// ═══════════════════════════════
-// KÉPERNYŐK
-// ═══════════════════════════════
 function showNameScreen(pendingTopicId){
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   document.getElementById('gameArea').innerHTML=
@@ -944,30 +552,23 @@ function goToModeOrGame(topicId, modeOverride){
   if(inp)playerName=inp.value.trim();
   if(playerName.length<2)return;
   currentTopic=currentBigTopic.subtopics.find(function(t){return t.id===topicId;});
-  if(modeOverride && modeOverride!=='null'){
-    startGame(modeOverride);
-  } else {
-    showModes(topicId);
-  }
+  if(modeOverride && modeOverride!=='null'){startGame(modeOverride);}
+  else{showModes(topicId);}
 }
 
 let pendingMode=null;
 
 function makeCubeFaces(colorClass, bt){
-  const subs = bt.subtopics;
-  const total = subs.length;
-  // 6 arc: minden arcra egy altéma (ha van), vagy a főikon
-  const faceData = [];
+  const subs=bt.subtopics;
+  const total=subs.length;
+  const faceData=[];
   for(let i=0;i<6;i++){
-    if(i < subs.length){
-      faceData.push({icon: subs[i].icon, title: subs[i].title, num: (i+1)+'/'+total, ready: subs[i].ready});
-    } else {
-      faceData.push({icon: bt.icon, title: bt.title, num: total+' altéma', ready: false});
-    }
+    if(i<subs.length){faceData.push({icon:subs[i].icon,title:subs[i].title,num:(i+1)+'/'+total,ready:subs[i].ready});}
+    else{faceData.push({icon:bt.icon,title:bt.title,num:total+' altéma',ready:false});}
   }
-  const faces = ['cf-front','cf-back','cf-right','cf-left','cf-top','cf-bot'];
+  const faces=['cf-front','cf-back','cf-right','cf-left','cf-top','cf-bot'];
   return faces.map(function(pos,i){
-    const d = faceData[i];
+    const d=faceData[i];
     return '<div class="cface '+pos+'">'+
       '<div class="'+colorClass+' cface-fill">'+
         '<div class="cbr tl"></div><div class="cbr tr"></div>'+
@@ -985,206 +586,112 @@ function makeCubeFaces(colorClass, bt){
 function showBigTopics(){
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   pendingMode=null;
-
-  const green = BIG_TOPICS[0];
-  const blue  = BIG_TOPICS[1];
-  const rG = green.subtopics.filter(function(s){return s.ready;}).length;
-  const rB = blue.subtopics.filter(function(s){return s.ready;}).length;
-
+  const green=BIG_TOPICS[0];
+  const blue=BIG_TOPICS[1];
+  const rG=green.subtopics.filter(function(s){return s.ready;}).length;
+  const rB=blue.subtopics.filter(function(s){return s.ready;}).length;
   document.getElementById('gameArea').innerHTML=
     '<div class="cube-landing">'+
       '<div class="cube-hint">← Kattints a kockára! →</div>'+
       '<div class="dual-cubes" id="dualCubes">'+
-
-        // ZÖLD KOCKA
         '<div class="cube-wrapper" id="wrapperGreen">'+
           '<div class="cube-wrapper-title green">🌾 '+green.title+'</div>'+
-          '<div class="scene" id="sceneGreen">'+
-            '<div class="cube3d" id="cube3dGreen">'+
-              makeCubeFaces('green-face', green)+
-            '</div>'+
-          '</div>'+
+          '<div class="scene" id="sceneGreen"><div class="cube3d" id="cube3dGreen">'+makeCubeFaces('green-face',green)+'</div></div>'+
           '<div class="cube-wrapper-label green">'+rG+' / '+green.subtopics.length+' altéma elérhető</div>'+
         '</div>'+
-
-        // KÉK KOCKA
         '<div class="cube-wrapper" id="wrapperBlue">'+
           '<div class="cube-wrapper-title blue">💧 '+blue.title+'</div>'+
-          '<div class="scene" id="sceneBlue">'+
-            '<div class="cube3d" id="cube3dBlue">'+
-              makeCubeFaces('blue-face', blue)+
-            '</div>'+
-          '</div>'+
+          '<div class="scene" id="sceneBlue"><div class="cube3d" id="cube3dBlue">'+makeCubeFaces('blue-face',blue)+'</div></div>'+
           '<div class="cube-wrapper-label blue">'+rB+' / '+blue.subtopics.length+' altéma elérhető</div>'+
         '</div>'+
-
       '</div>'+
     '</div>';
-
-  initDualCubeSpin('cube3dGreen','sceneGreen', false);
-  initDualCubeSpin('cube3dBlue','sceneBlue', true);
+  initDualCubeSpin('cube3dGreen','sceneGreen',false);
+  initDualCubeSpin('cube3dBlue','sceneBlue',true);
 }
 
-function initDualCubeSpin(cubeId, sceneId, mirror){
+function initDualCubeSpin(cubeId,sceneId,mirror){
   const cube=document.getElementById(cubeId);
   const scene=document.getElementById(sceneId);
   if(!cube||!scene)return;
-  let rotX=-18, rotY=mirror?-22:22, autoSpin=true, raf=null, lastT=null;
-  const dir = mirror ? -1 : 1;
-  let dragging=false, moved=false, prev={x:0,y:0}, vel={x:0,y:0};
-
+  let rotX=-18,rotY=mirror?-22:22,autoSpin=true,raf=null,lastT=null;
+  const dir=mirror?-1:1;
+  let dragging=false,moved=false,prev={x:0,y:0},vel={x:0,y:0};
   function applyRot(){cube.style.transform='rotateX('+rotX+'deg) rotateY('+rotY+'deg)';}
   cube.addEventListener('animationend',function(){
-    if(!cube.classList.contains('rolling-left')&&!cube.classList.contains('rolling-right')){
-      cube.style.animation='none';applyRot();
-    }
+    if(!cube.classList.contains('rolling-left')&&!cube.classList.contains('rolling-right')){cube.style.animation='none';applyRot();}
   });
-
-  function onStart(x,y){
-    dragging=true;moved=false;autoSpin=false;
-    prev={x:x,y:y};vel={x:0,y:0};
-    cancelAnimationFrame(raf);lastT=null;
-  }
+  function onStart(x,y){dragging=true;moved=false;autoSpin=false;prev={x:x,y:y};vel={x:0,y:0};cancelAnimationFrame(raf);lastT=null;}
   function onMove(x,y){
     if(!dragging)return;
     const dx=x-prev.x,dy=y-prev.y;
     if(Math.abs(dx)>2||Math.abs(dy)>2)moved=true;
-    rotY+=dx*.5;rotX-=dy*.5;
-    rotX=Math.max(-80,Math.min(80,rotX));
-    vel={x:-dy*.4,y:dx*.4};
-    prev={x:x,y:y};
-    applyRot();
+    rotY+=dx*.5;rotX-=dy*.5;rotX=Math.max(-80,Math.min(80,rotX));vel={x:-dy*.4,y:dx*.4};prev={x:x,y:y};applyRot();
   }
-  function onEnd(x,y){
-    if(!dragging)return;
-    dragging=false;
-    if(!moved){
-      // kattintás = gurulás
-      const which = cubeId==='cube3dGreen'?'green':'blue';
-      triggerCubeRoll(which);
-      return;
-    }
-    // momentum
-    (function mom(){
-      vel.x*=.92;vel.y*=.92;
-      rotX+=vel.x;rotY+=vel.y;
-      rotX=Math.max(-80,Math.min(80,rotX));
-      applyRot();
-      if(Math.abs(vel.x)>.05||Math.abs(vel.y)>.05)raf=requestAnimationFrame(mom);
-      else{autoSpin=true;requestAnimationFrame(spin);}
-    })();
+  function onEnd(){
+    if(!dragging)return;dragging=false;
+    if(!moved){const which=cubeId==='cube3dGreen'?'green':'blue';triggerCubeRoll(which);return;}
+    (function mom(){vel.x*=.92;vel.y*=.92;rotX+=vel.x;rotY+=vel.y;rotX=Math.max(-80,Math.min(80,rotX));applyRot();if(Math.abs(vel.x)>.05||Math.abs(vel.y)>.05)raf=requestAnimationFrame(mom);else{autoSpin=true;requestAnimationFrame(spin);}})();
   }
-
   scene.addEventListener('mousedown',function(e){e.preventDefault();onStart(e.clientX,e.clientY);});
   window.addEventListener('mousemove',function(e){if(dragging)onMove(e.clientX,e.clientY);});
-  window.addEventListener('mouseup',function(e){if(dragging)onEnd(e.clientX,e.clientY);});
+  window.addEventListener('mouseup',function(){if(dragging)onEnd();});
   scene.addEventListener('touchstart',function(e){onStart(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
   window.addEventListener('touchmove',function(e){if(dragging)onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
-  window.addEventListener('touchend',function(e){if(dragging){const t=e.changedTouches[0];onEnd(t.clientX,t.clientY);}},{passive:true});
-
-  function spin(ts){
-    if(!autoSpin||dragging){lastT=null;return;}
-    if(!lastT)lastT=ts;
-    const dt=ts-lastT;lastT=ts;
-    rotY+=dt*.016*dir;
-    rotX+=dt*.003;
-    applyRot();
-    raf=requestAnimationFrame(spin);
-  }
-  setTimeout(function(){if(autoSpin)requestAnimationFrame(spin);}, mirror?300:100);
+  window.addEventListener('touchend',function(){if(dragging)onEnd();},{passive:true});
+  function spin(ts){if(!autoSpin||dragging){lastT=null;return;}if(!lastT)lastT=ts;const dt=ts-lastT;lastT=ts;rotY+=dt*.016*dir;rotX+=dt*.003;applyRot();raf=requestAnimationFrame(spin);}
+  setTimeout(function(){if(autoSpin)requestAnimationFrame(spin);},mirror?300:100);
 }
 
 function triggerCubeRoll(which){
-  const idx = which==='green' ? 0 : 1;
-  const bt = BIG_TOPICS[idx];
-  const cubeEl = document.getElementById(which==='green'?'cube3dGreen':'cube3dBlue');
-  if(!cubeEl || cubeEl.classList.contains('rolling-left') || cubeEl.classList.contains('rolling-right')) return;
-
-  // Melyik irányba gurul
-  const rollClass = which==='green' ? 'rolling-left' : 'rolling-right';
+  const idx=which==='green'?0:1;
+  const bt=BIG_TOPICS[idx];
+  const cubeEl=document.getElementById(which==='green'?'cube3dGreen':'cube3dBlue');
+  if(!cubeEl||cubeEl.classList.contains('rolling-left')||cubeEl.classList.contains('rolling-right'))return;
+  const rollClass=which==='green'?'rolling-left':'rolling-right';
   cubeEl.classList.add(rollClass);
-
-  // Robbanás + altémák megjelenítése az animáció végén
-  setTimeout(function(){
-    triggerExplosion(which, bt);
-  }, 500);
-
-  setTimeout(function(){
-    showSubtopicsInline(bt);
-  }, 900);
+  setTimeout(function(){triggerExplosion(which,bt);},500);
+  setTimeout(function(){showSubtopicsInline(bt);},900);
 }
 
-function triggerExplosion(which, bt){
-  const color = which==='green' ? '#22c55e' : '#38bdf8';
-  const wrapper = document.getElementById(which==='green'?'wrapperGreen':'wrapperBlue');
-  if(!wrapper) return;
-
-  // Flash
-  const flash = document.createElement('div');
+function triggerExplosion(which,bt){
+  const color=which==='green'?'#22c55e':'#38bdf8';
+  const flash=document.createElement('div');
   flash.className='exp-flash';
-  flash.style.background = which==='green'?'rgba(34,197,94,.05)':'rgba(56,189,248,.05)';
+  flash.style.background=which==='green'?'rgba(34,197,94,.05)':'rgba(56,189,248,.05)';
   document.body.appendChild(flash);
   setTimeout(function(){flash.remove();},400);
-
-  // Robbanás konténer
-  const expC = document.createElement('div');
+  const expC=document.createElement('div');
   expC.className='explosion-container';
-  expC.style.left = (which==='green'?'25%':'75%');
-  expC.style.top  = '100px';
-  document.getElementById('dualCubes').appendChild(expC);
-
-  // Ring 1
-  const r1=document.createElement('div');
-  r1.className='exp-ring';
-  r1.style.borderColor=color;
-  expC.appendChild(r1);
-  // Ring 2
-  const r2=document.createElement('div');
-  r2.className='exp-ring2';
-  r2.style.borderColor=color;
-  expC.appendChild(r2);
-
-  // Szikrák
-  const numSparks=14;
-  for(let i=0;i<numSparks;i++){
-    const sp=document.createElement('div');
-    sp.className='exp-spark';
-    const ang=(i/numSparks)*360;
-    const dist=(60+Math.random()*60)+'px';
+  expC.style.left=which==='green'?'25%':'75%';
+  expC.style.top='100px';
+  const dc=document.getElementById('dualCubes');
+  if(!dc)return;
+  dc.appendChild(expC);
+  const r1=document.createElement('div');r1.className='exp-ring';r1.style.borderColor=color;expC.appendChild(r1);
+  const r2=document.createElement('div');r2.className='exp-ring2';r2.style.borderColor=color;expC.appendChild(r2);
+  for(let i=0;i<14;i++){
+    const sp=document.createElement('div');sp.className='exp-spark';
+    const ang=(i/14)*360;const dist=(60+Math.random()*60)+'px';
     sp.style.cssText='--ang:'+ang+'deg;--dist:'+dist+';background:'+color+';';
-    sp.style.animationDelay=(Math.random()*.08)+'s';
-    expC.appendChild(sp);
+    sp.style.animationDelay=(Math.random()*.08)+'s';expC.appendChild(sp);
   }
-
-  // Emoji
-  const em=document.createElement('div');
-  em.className='exp-text';
-  em.textContent=which==='green'?'🌾':'💧';
-  expC.appendChild(em);
-
+  const em=document.createElement('div');em.className='exp-text';em.textContent=which==='green'?'🌾':'💧';expC.appendChild(em);
   setTimeout(function(){expC.remove();},800);
 }
 
 function showSubtopicsInline(bt){
-  const isWater = bt.id==='vizek';
-  const color = isWater ? 'blue' : 'green';
+  const isWater=bt.id==='vizek';
   let rows='';
   bt.subtopics.forEach(function(t){
     const locked=t.ready?'':'locked';
     const click=t.ready?'onclick="inlineSub(\''+bt.id+'\','+t.id+')"':'';
     const wStyle=isWater?'water-style':'';
-    const badge=t.ready
-      ?'<span class="ready-badge'+(isWater?' water':'')+'">✅</span>'
-      :'<span class="coming-badge">⏳</span>';
-    rows+=
-      '<button class="subtopic-btn '+wStyle+' '+locked+'" '+click+' style="animation-delay:'+(bt.subtopics.indexOf(t)*.05)+'s">'+
-        '<span class="snum">'+t.id+'.</span>'+
-        '<span class="sicon">'+t.icon+'</span>'+
-        '<span><span class="stitle">'+t.title+'</span></span>'+
-        badge+
-      '</button>';
+    const badge=t.ready?'<span class="ready-badge'+(isWater?' water':'')+'">✅</span>':'<span class="coming-badge">⏳</span>';
+    rows+='<button class="subtopic-btn '+wStyle+' '+locked+'" '+click+' style="animation-delay:'+(bt.subtopics.indexOf(t)*.05)+'s">'+
+      '<span class="snum">'+t.id+'.</span><span class="sicon">'+t.icon+'</span>'+
+      '<span><span class="stitle">'+t.title+'</span></span>'+badge+'</button>';
   });
-
   document.getElementById('gameArea').innerHTML=
     '<div class="card subtopic-reveal-card '+(isWater?'water-theme':'')+'">'+
       '<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">'+
@@ -1197,8 +704,8 @@ function showSubtopicsInline(bt){
     '</div>';
 }
 
-function inlineSub(bigId, topicId){
-  currentBigTopic = BIG_TOPICS.find(function(bt){return bt.id===bigId;});
+function inlineSub(bigId,topicId){
+  currentBigTopic=BIG_TOPICS.find(function(bt){return bt.id===bigId;});
   subtopicSelected(topicId);
 }
 
@@ -1206,27 +713,6 @@ function showCubeToast(msg){
   const el=document.getElementById('cubeToast');if(!el)return;
   el.textContent=msg;el.classList.add('show');
   setTimeout(function(){el.classList.remove('show');},2500);
-}
-
-function showBigTopicsList(){
-  let btns='';
-  BIG_TOPICS.forEach(function(bt){
-    const r=bt.subtopics.filter(function(s){return s.ready;}).length;
-    btns+='<button class="bigtopic-btn '+bt.style+'" onclick="showSubtopics(\''+bt.id+'\')">'+
-      '<span class="bigtopic-icon">'+bt.icon+'</span>'+
-      '<span><span class="bigtopic-title">'+bt.title+'</span>'+
-      '<span class="bigtopic-sub">'+bt.subtopics.length+' altéma · '+r+' elérhető</span></span>'+
-    '</button>';
-  });
-  const modeLabels={tf:'Igaz/Hamis',quiz:'Kvíz',fill:'Lyukas szöveg',sort:'Sorrendbe állítás',cat:'Kategorizálás'};
-  const modeLabel=pendingMode?modeLabels[pendingMode]:'';
-  document.getElementById('gameArea').innerHTML=
-    '<div class="card bigtopic-screen">'+
-      '<h2>🌿 Válassz témakört!</h2>'+
-      (modeLabel?'<p class="sub" style="color:#a78bfa;">Kiválasztott mód: '+modeLabel+'</p>':'<p class="sub">Válaszd ki a nagy témakört!</p>')+
-      '<div class="bigtopic-grid">'+btns+'</div>'+
-      '<button class="back-btn" onclick="showBigTopics()">← Vissza a kockákhoz</button>'+
-    '</div>';
 }
 
 function showSubtopics(bigId){
@@ -1237,19 +723,10 @@ function showSubtopics(bigId){
     const locked=t.ready?'':'locked';
     const click=t.ready?'onclick="subtopicSelected('+t.id+')"':'';
     const wStyle=isWater?'water-style':'';
-    const badge=t.ready
-      ?'<span class="ready-badge'+(isWater?' water':'')+'">✅ Elérhető</span>'
-      :'<span class="coming-badge">⏳ Hamarosan</span>';
-    rows+=
-      '<button class="subtopic-btn '+wStyle+' '+locked+'" '+click+'>'+
-        '<span class="snum">'+t.id+'.</span>'+
-        '<span class="sicon">'+t.icon+'</span>'+
-        '<span>'+
-          '<span class="stitle">'+t.title+'</span>'+
-          '<span class="sstatus">'+(t.ready?'20 Ig/H · 10 Kvíz · 10 Lyukas':'Hamarosan feltölti a tanár')+'</span>'+
-        '</span>'+
-        badge+
-      '</button>';
+    const badge=t.ready?'<span class="ready-badge'+(isWater?' water':'')+'">✅ Elérhető</span>':'<span class="coming-badge">⏳ Hamarosan</span>';
+    rows+='<button class="subtopic-btn '+wStyle+' '+locked+'" '+click+'>'+
+      '<span class="snum">'+t.id+'.</span><span class="sicon">'+t.icon+'</span>'+
+      '<span><span class="stitle">'+t.title+'</span><span class="sstatus">'+(t.ready?'20 Ig/H · 10 Kvíz · 10 Lyukas':'Hamarosan')+'</span></span>'+badge+'</button>';
   });
   document.getElementById('gameArea').innerHTML=
     '<div class="card subtopic-screen'+(isWater?' water-theme':'')+'">'+
@@ -1263,18 +740,10 @@ function showSubtopics(bigId){
 function subtopicSelected(topicId){
   currentTopic=currentBigTopic.subtopics.find(function(t){return t.id===topicId;});
   if(pendingMode){
-    if(pendingMode==='sort'&&(!currentTopic.sort||!currentTopic.sort.length)){
-      showCubeToast('⚠️ Ehhez az altémához nincs sorrendbe állítás!');
-      pendingMode=null;showNameScreen(topicId);return;
-    }
-    if(pendingMode==='cat'&&(!currentTopic.cat||!currentTopic.cat.length)){
-      showCubeToast('⚠️ Ehhez az altémához nincs kategorizálás!');
-      pendingMode=null;showNameScreen(topicId);return;
-    }
-    showNameScreenWithMode(topicId, pendingMode);
-  } else {
-    showNameScreen(topicId);
-  }
+    if(pendingMode==='sort'&&(!currentTopic.sort||!currentTopic.sort.length)){showCubeToast('⚠️ Ehhez az altémához nincs sorrendbe állítás!');pendingMode=null;showNameScreen(topicId);return;}
+    if(pendingMode==='cat'&&(!currentTopic.cat||!currentTopic.cat.length)){showCubeToast('⚠️ Ehhez az altémához nincs kategorizálás!');pendingMode=null;showNameScreen(topicId);return;}
+    showNameScreenWithMode(topicId,pendingMode);
+  } else {showNameScreen(topicId);}
 }
 
 function showModes(topicId){
@@ -1284,16 +753,10 @@ function showModes(topicId){
     '<div class="card mode-screen'+(isWater?' water-theme':'')+'">'+
       '<h2>'+currentTopic.icon+' '+currentTopic.title+'</h2>'+
       '<p class="sub">Melyik játékmódot választod, '+playerName+'?</p>'+
-      '<div class="mode-grid" style="grid-template-columns:1fr 1fr;">'+
-        '<button class="mode-btn igaz" onclick="startGame(\'tf\')">'+
-          '<span class="btn-icon">✅</span><span class="btn-label">Igaz vagy Hamis?</span><span class="btn-sub">20 állítás</span>'+
-        '</button>'+
-        '<button class="mode-btn kviz" onclick="startGame(\'quiz\')">'+
-          '<span class="btn-icon">🧠</span><span class="btn-label">Kvíz</span><span class="btn-sub">10 kérdés</span>'+
-        '</button>'+
-        '<button class="mode-btn lyukas" onclick="startGame(\'fill\')">'+
-          '<span class="btn-icon">✏️</span><span class="btn-label">Lyukas szöveg</span><span class="btn-sub">10 mondat</span>'+
-        '</button>'+
+      '<div class="mode-grid">'+
+        '<button class="mode-btn igaz" onclick="startGame(\'tf\')"><span class="btn-icon">✅</span><span class="btn-label">Igaz vagy Hamis?</span><span class="btn-sub">20 állítás</span></button>'+
+        '<button class="mode-btn kviz" onclick="startGame(\'quiz\')"><span class="btn-icon">🧠</span><span class="btn-label">Kvíz</span><span class="btn-sub">10 kérdés</span></button>'+
+        '<button class="mode-btn lyukas" onclick="startGame(\'fill\')"><span class="btn-icon">✏️</span><span class="btn-label">Lyukas szöveg</span><span class="btn-sub">10 mondat</span></button>'+
         (currentTopic.sort&&currentTopic.sort.length?'<button class="mode-btn sort" onclick="startGame(\'sort\')"><span class="btn-icon">🔢</span><span class="btn-label">Sorrendbe állítás</span><span class="btn-sub">'+currentTopic.sort.length+' feladat</span></button>':'')+
         (currentTopic.cat&&currentTopic.cat.length?'<button class="mode-btn cat" onclick="startGame(\'cat\')"><span class="btn-icon">🗂️</span><span class="btn-label">Kategorizálás</span><span class="btn-sub">'+currentTopic.cat.length+' feladat</span></button>':'')+
       '</div>'+
@@ -1309,9 +772,6 @@ function startGame(m){
   render();
 }
 
-// ═══════════════════════════════
-// RENDER
-// ═══════════════════════════════
 function backToModes(){
   if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
   score=0;streak=0;bestStreak=0;current=0;answered=false;
@@ -1360,7 +820,7 @@ function render(){
   const nextLabel=current+1<total?'Következő ➡️':'Eredmény 🏆';
   const topBar=
     '<div class="top-bar">'+
-      '<button class="back-game-btn" onclick="backToModes()" title="Vissza a módokhoz">← Módok</button>'+
+      '<button class="back-game-btn" onclick="backToModes()">← Módok</button>'+
       '<div class="q-counter">'+(current+1)+' / '+total+'</div>'+
       '<div class="prog-wrap"><div class="prog-fill" style="width:'+prog+'%"></div></div>'+
       '<div class="score-pill">🌟 '+score+'</div>'+
@@ -1410,15 +870,9 @@ function checkFill(){
     if(!sel.value)anyEmpty=true;
     else if(sel.value!==gap.correct)allCorrect=false;
   });
-  if(anyEmpty){
-    const res=document.getElementById('fillResult');
-    res.className='fill-result show partial';res.textContent='⚠️ Kérlek töltsd ki az összes üres helyet!';return;
-  }
+  if(anyEmpty){const res=document.getElementById('fillResult');res.className='fill-result show partial';res.textContent='⚠️ Kérlek töltsd ki az összes üres helyet!';return;}
   answered=true;document.getElementById('checkBtn').disabled=true;
-  q.gaps.forEach(function(gap){
-    const sel=document.getElementById('gap'+gap.id);sel.disabled=true;
-    sel.classList.add(sel.value===gap.correct?'correct':'wrong');
-  });
+  q.gaps.forEach(function(gap){const sel=document.getElementById('gap'+gap.id);sel.disabled=true;sel.classList.add(sel.value===gap.correct?'correct':'wrong');});
   if(allCorrect){score++;streak++;if(streak>bestStreak)bestStreak=streak;}else{streak=0;}
   const pill=document.getElementById('streakPill');
   if(pill){pill.textContent=streakLabel();pill.className='streak-pill';void pill.offsetWidth;if(!allCorrect)pill.classList.add('broken');else{if(streak>=3)pill.classList.add('on-fire');pill.classList.add('pop');}}
@@ -1477,29 +931,19 @@ function saveResult(name,bigTopic,subTopic,modeLabel,score,total,time,bestStreak
   .catch(function(){const msg=document.getElementById('savingMsg');if(msg){msg.textContent='⚠️ Mentés nem sikerült.';msg.className='saving-msg err';}});
 }
 
+let sortDragSrc=null;
 
-// ═══════════════════════════════
-// SORRENDBE ÁLLÍTÁS
-// ═══════════════════════════════
-let sortDragSrc = null;
-
-function renderSort(area, q, topBar, dClass, dLabel, nextLabel) {
-  // Shuffle items for display
-  const shuffled = q.items.map(function(text, i){ return {text:text, origIdx:i}; });
+function renderSort(area,q,topBar,dClass,dLabel,nextLabel){
+  const shuffled=q.items.map(function(text,i){return{text:text,origIdx:i};});
   for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}
-  
-  let itemsHTML = '';
-  shuffled.forEach(function(item, i){
-    itemsHTML += '<div class="sort-item" draggable="true" data-idx="'+i+'" data-orig="'+item.origIdx+'" '+
+  let itemsHTML='';
+  shuffled.forEach(function(item,i){
+    itemsHTML+='<div class="sort-item" draggable="true" data-idx="'+i+'" data-orig="'+item.origIdx+'" '+
       'ondragstart="sortDragStart(event)" ondragover="sortDragOver(event)" '+
       'ondrop="sortDrop(event)" ondragend="sortDragEnd(event)">'+
-      '<span class="sort-handle">☰</span>'+
-      '<span class="sort-num">'+(i+1)+'.</span>'+
-      '<span>'+item.text+'</span>'+
-    '</div>';
+      '<span class="sort-handle">☰</span><span class="sort-num">'+(i+1)+'.</span><span>'+item.text+'</span></div>';
   });
-
-  area.innerHTML = topBar +
+  area.innerHTML=topBar+
     '<div class="card">'+
       '<div class="q-number">🔢 '+(current+1)+'. feladat — '+playerName+'</div>'+
       '<span class="diff-badge '+dClass+'">'+dLabel+'</span>'+
@@ -1510,98 +954,58 @@ function renderSort(area, q, topBar, dClass, dLabel, nextLabel) {
       '<button class="sort-check-btn" id="sortCheckBtn" onclick="checkSort()">✅ Ellenőrzés</button>'+
       '<button class="next-btn" id="nextBtn" onclick="next()">'+nextLabel+'</button>'+
     '</div>';
-  answered = false;
-  // Update numbers after drag
+  answered=false;
   updateSortNumbers();
 }
 
-function sortDragStart(e){
-  sortDragSrc = e.currentTarget;
-  e.currentTarget.classList.add('dragging');
-  e.dataTransfer.effectAllowed='move';
-}
-function sortDragOver(e){
-  e.preventDefault();
-  e.dataTransfer.dropEffect='move';
-  document.querySelectorAll('.sort-item').forEach(function(el){el.classList.remove('drag-over');});
-  if(e.currentTarget!==sortDragSrc) e.currentTarget.classList.add('drag-over');
-}
+function sortDragStart(e){sortDragSrc=e.currentTarget;e.currentTarget.classList.add('dragging');e.dataTransfer.effectAllowed='move';}
+function sortDragOver(e){e.preventDefault();e.dataTransfer.dropEffect='move';document.querySelectorAll('.sort-item').forEach(function(el){el.classList.remove('drag-over');});if(e.currentTarget!==sortDragSrc)e.currentTarget.classList.add('drag-over');}
 function sortDrop(e){
-  e.preventDefault();
-  if(sortDragSrc===e.currentTarget)return;
+  e.preventDefault();if(sortDragSrc===e.currentTarget)return;
   const list=document.getElementById('sortList');
   const items=[...list.querySelectorAll('.sort-item')];
   const srcIdx=items.indexOf(sortDragSrc);
   const tgtIdx=items.indexOf(e.currentTarget);
-  if(srcIdx<tgtIdx) list.insertBefore(sortDragSrc, e.currentTarget.nextSibling);
-  else list.insertBefore(sortDragSrc, e.currentTarget);
+  if(srcIdx<tgtIdx)list.insertBefore(sortDragSrc,e.currentTarget.nextSibling);
+  else list.insertBefore(sortDragSrc,e.currentTarget);
   updateSortNumbers();
 }
-function sortDragEnd(e){
-  e.currentTarget.classList.remove('dragging');
-  document.querySelectorAll('.sort-item').forEach(function(el){el.classList.remove('drag-over');});
-}
-function updateSortNumbers(){
-  document.querySelectorAll('.sort-item').forEach(function(el,i){
-    el.querySelector('.sort-num').textContent=(i+1)+'.';
-  });
-}
+function sortDragEnd(e){e.currentTarget.classList.remove('dragging');document.querySelectorAll('.sort-item').forEach(function(el){el.classList.remove('drag-over');});}
+function updateSortNumbers(){document.querySelectorAll('.sort-item').forEach(function(el,i){el.querySelector('.sort-num').textContent=(i+1)+'.';});}
 
 function checkSort(){
   if(answered)return;
-  const q = currentTopic.sort[current];
-  const list = document.getElementById('sortList');
-  const items = [...list.querySelectorAll('.sort-item')];
-  const userOrder = items.map(function(el){return parseInt(el.getAttribute('data-orig'));});
-  
-  // Build correct order: correct[i] = origIdx that should be at position i
-  const correctOrder = q.correct;
-  let allOk = true;
-  items.forEach(function(el, i){
-    const origIdx = parseInt(el.getAttribute('data-orig'));
-    const isCorrect = origIdx === correctOrder[i];
-    if(!isCorrect) allOk = false;
-    el.classList.add(isCorrect ? 'correct-item' : 'wrong-item');
+  const q=currentTopic.sort[current];
+  const list=document.getElementById('sortList');
+  const items=[...list.querySelectorAll('.sort-item')];
+  const correctOrder=q.correct;
+  let allOk=true;
+  items.forEach(function(el,i){
+    const origIdx=parseInt(el.getAttribute('data-orig'));
+    const isCorrect=origIdx===correctOrder[i];
+    if(!isCorrect)allOk=false;
+    el.classList.add(isCorrect?'correct-item':'wrong-item');
   });
-  
-  answered = true;
-  document.getElementById('sortCheckBtn').disabled = true;
-  
+  answered=true;document.getElementById('sortCheckBtn').disabled=true;
   if(allOk){score++;streak++;if(streak>bestStreak)bestStreak=streak;}else{streak=0;}
   const pill=document.getElementById('streakPill');
   if(pill){pill.textContent=streakLabel();pill.className='streak-pill';void pill.offsetWidth;if(!allOk)pill.classList.add('broken');else{if(streak>=3)pill.classList.add('on-fire');pill.classList.add('pop');}}
-  
   const res=document.getElementById('sortResult');
-  if(allOk){
-    let prefix='✅ Tökéletes sorrend! ';
-    if(streak>=5)prefix='🔥🔥 '+streak+' sorozat! ';
-    else if(streak>=3)prefix='🔥 '+streak+' sorozat! ';
-    res.className='sort-result show correct';
-    res.textContent=prefix+q.explain;
-  } else {
-    res.className='sort-result show wrong';
-    res.textContent='❌ Nem egészen. '+q.explain;
-  }
+  if(allOk){let prefix='✅ Tökéletes sorrend! ';if(streak>=5)prefix='🔥🔥 '+streak+' sorozat! ';else if(streak>=3)prefix='🔥 '+streak+' sorozat! ';res.className='sort-result show correct';res.textContent=prefix+q.explain;}
+  else{res.className='sort-result show wrong';res.textContent='❌ Nem egészen. '+q.explain;}
   document.getElementById('nextBtn').classList.add('show');
 }
 
-// ═══════════════════════════════
-// KATEGORIZÁLÁS
-// ═══════════════════════════════
-let catDragItem = null;
+let catDragItem=null;
 
-function renderCat(area, q, topBar, dClass, dLabel, nextLabel){
-  // Shuffle items
-  const shuffled = [...q.items].sort(function(){return Math.random()-0.5;});
-  
-  let poolHTML = '';
-  shuffled.forEach(function(item, i){
-    poolHTML += '<div class="cat-item" draggable="true" data-i="'+i+'" data-correct="'+item.correct+'" data-text="'+item.text+'" '+
-      'ondragstart="catDragStart(event)" ondragend="catDragEnd(event)" onclick="catItemClick(this)">'+
-      item.text+'</div>';
+function renderCat(area,q,topBar,dClass,dLabel,nextLabel){
+  const shuffled=[...q.items].sort(function(){return Math.random()-0.5;});
+  let poolHTML='';
+  shuffled.forEach(function(item,i){
+    poolHTML+='<div class="cat-item" draggable="true" data-i="'+i+'" data-correct="'+item.correct+'" data-text="'+item.text+'" '+
+      'ondragstart="catDragStart(event)" ondragend="catDragEnd(event)" onclick="catItemClick(this)">'+item.text+'</div>';
   });
-
-  area.innerHTML = topBar +
+  area.innerHTML=topBar+
     '<div class="card">'+
       '<div class="q-number">🗂️ '+(current+1)+'. feladat — '+playerName+'</div>'+
       '<span class="diff-badge '+dClass+'">'+dLabel+'</span>'+
@@ -1622,101 +1026,71 @@ function renderCat(area, q, topBar, dClass, dLabel, nextLabel){
       '<button class="cat-check-btn" id="catCheckBtn" onclick="checkCat()">✅ Ellenőrzés</button>'+
       '<button class="next-btn" id="nextBtn" onclick="next()">'+nextLabel+'</button>'+
     '</div>';
-  answered = false;
+  answered=false;
 }
 
-function catDragStart(e){
-  catDragItem = e.currentTarget;
-  e.currentTarget.classList.add('dragging');
-  e.dataTransfer.effectAllowed='move';
-}
+function catDragStart(e){catDragItem=e.currentTarget;e.currentTarget.classList.add('dragging');e.dataTransfer.effectAllowed='move';}
 function catDragEnd(e){e.currentTarget.classList.remove('dragging');}
 function catBoxOver(e){e.preventDefault();e.currentTarget.classList.add('drag-active');}
 function catPoolOver(e){e.preventDefault();}
-
-function catBoxDrop(e, isYes){
+function catBoxDrop(e,isYes){
   e.preventDefault();
   document.querySelectorAll('.cat-box').forEach(function(b){b.classList.remove('drag-active');});
   if(!catDragItem)return;
-  const target = isYes ? document.getElementById('catBoxYesItems') : document.getElementById('catBoxNoItems');
+  const target=isYes?document.getElementById('catBoxYesItems'):document.getElementById('catBoxNoItems');
   target.appendChild(catDragItem);
-  catDragItem.setAttribute('data-placed', isYes?'yes':'no');
-  catDragItem = null;
+  catDragItem.setAttribute('data-placed',isYes?'yes':'no');
+  catDragItem=null;
 }
 function catPoolDrop(e){
-  e.preventDefault();
-  if(!catDragItem)return;
+  e.preventDefault();if(!catDragItem)return;
   document.getElementById('catPool').appendChild(catDragItem);
-  catDragItem.removeAttribute('data-placed');
-  catDragItem = null;
+  catDragItem.removeAttribute('data-placed');catDragItem=null;
 }
-
-// Click to cycle: pool → yes → no → pool
 function catItemClick(el){
   if(answered)return;
-  const placed = el.getAttribute('data-placed');
-  if(!placed){
-    document.getElementById('catBoxYesItems').appendChild(el);
-    el.setAttribute('data-placed','yes');
-  } else if(placed==='yes'){
-    document.getElementById('catBoxNoItems').appendChild(el);
-    el.setAttribute('data-placed','no');
-  } else {
-    document.getElementById('catPool').appendChild(el);
-    el.removeAttribute('data-placed');
-  }
+  const placed=el.getAttribute('data-placed');
+  if(!placed){document.getElementById('catBoxYesItems').appendChild(el);el.setAttribute('data-placed','yes');}
+  else if(placed==='yes'){document.getElementById('catBoxNoItems').appendChild(el);el.setAttribute('data-placed','no');}
+  else{document.getElementById('catPool').appendChild(el);el.removeAttribute('data-placed');}
 }
-
 function checkCat(){
   if(answered)return;
-  const q = currentTopic.cat[current];
-  // Check all items are placed
-  const pool = document.getElementById('catPool');
-  if(pool.querySelectorAll('.cat-item').length > 0){
+  const q=currentTopic.cat[current];
+  const pool=document.getElementById('catPool');
+  if(pool.querySelectorAll('.cat-item').length>0){
     const res=document.getElementById('catResult');
-    res.className='cat-result show';res.style.background='#fff3c0';res.style.border='2.5px solid #e89c10';res.style.color='#7a5000';
+    res.className='cat-result show';res.style.background='rgba(251,191,36,.1)';res.style.border='1px solid rgba(251,191,36,.3)';res.style.color='#fbbf24';
     res.textContent='⚠️ Még nem soroltad be az összes kártyát!';return;
   }
-  
-  answered = true;
-  document.getElementById('catCheckBtn').disabled = true;
-  
-  let allOk = true;
+  answered=true;document.getElementById('catCheckBtn').disabled=true;
+  let allOk=true;
   document.querySelectorAll('.cat-item').forEach(function(el){
-    const placedYes = el.getAttribute('data-placed')==='yes';
-    const shouldBeYes = el.getAttribute('data-correct')==='true';
-    const isCorrect = placedYes === shouldBeYes;
-    if(!isCorrect) allOk = false;
+    const placedYes=el.getAttribute('data-placed')==='yes';
+    const shouldBeYes=el.getAttribute('data-correct')==='true';
+    const isCorrect=placedYes===shouldBeYes;
+    if(!isCorrect)allOk=false;
     el.classList.add(isCorrect?'correct-item':'wrong-item');
   });
-  
   if(allOk){score++;streak++;if(streak>bestStreak)bestStreak=streak;}else{streak=0;}
   const pill=document.getElementById('streakPill');
   if(pill){pill.textContent=streakLabel();pill.className='streak-pill';void pill.offsetWidth;if(!allOk)pill.classList.add('broken');else{if(streak>=3)pill.classList.add('on-fire');pill.classList.add('pop');}}
-  
   const res=document.getElementById('catResult');
-  if(allOk){
-    let prefix='✅ Tökéletes besorolás! ';
-    if(streak>=5)prefix='🔥🔥 '+streak+' sorozat! ';
-    else if(streak>=3)prefix='🔥 '+streak+' sorozat! ';
-    res.className='cat-result show correct';res.textContent=prefix+q.explain;
-  } else {
-    res.className='cat-result show wrong';res.textContent='❌ Nem teljesen. '+q.explain;
-  }
+  if(allOk){let prefix='✅ Tökéletes besorolás! ';if(streak>=5)prefix='🔥🔥 '+streak+' sorozat! ';else if(streak>=3)prefix='🔥 '+streak+' sorozat! ';res.className='cat-result show correct';res.textContent=prefix+q.explain;}
+  else{res.className='cat-result show wrong';res.textContent='❌ Nem teljesen. '+q.explain;}
   document.getElementById('nextBtn').classList.add('show');
 }
 
-// PARTICLES
 (function(){
   const colors=['#7c3aed','#22c55e','#0ea5e9','#f43f5e','#f59e0b','#3b82f6'];
   for(let i=0;i<22;i++){
-    const p=document.createElement('div');
-    p.className='particle';
+    const p=document.createElement('div');p.className='particle';
     const size=Math.random()*3+1.5;
     p.style.cssText='width:'+size+'px;height:'+size+'px;left:'+(Math.random()*100)+'vw;background:'+colors[Math.floor(Math.random()*colors.length)]+';animation-duration:'+(9+Math.random()*14)+'s;animation-delay:'+(Math.random()*12)+'s;';
     document.body.appendChild(p);
   }
 })();
+
 showBigTopics();
 </script>
 </body>
