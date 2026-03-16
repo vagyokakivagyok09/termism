@@ -173,7 +173,8 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .cat-box{border-radius:14px;padding:12px;min-height:90px;border:1px dashed;}
 .cat-box.box-yes{background:rgba(34,197,94,.05);border-color:rgba(34,197,94,.25);}
 .cat-box.box-no{background:rgba(244,63,94,.05);border-color:rgba(244,63,94,.25);}
-.cat-box.drag-active{transform:scale(1.02);box-shadow:0 0 0 3px rgba(124,58,237,.2);}
+.cat-box.drag-active{transform:scale(1.02);box-shadow:0 0 0 3px rgba(124,58,237,.35);border-color:rgba(124,58,237,.6)!important;}
+.sort-list.drag-over-zone{background:rgba(124,58,237,.04);}
 .cat-box-title{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;margin-bottom:8px;text-align:center;letter-spacing:.04em;}
 .cat-box.box-yes .cat-box-title{color:#4ade80;}
 .cat-box.box-no .cat-box-title{color:#fb7185;}
@@ -1105,16 +1106,14 @@ function saveResult(name,bigTopic,subTopic,modeLabel,score,total,time,bestStreak
   .catch(function(){const msg=document.getElementById('savingMsg');if(msg){msg.textContent='⚠️ Mentés nem sikerült.';msg.className='saving-msg err';}});
 }
 
-let sortDragSrc=null;
+
 
 function renderSort(area,q,topBar,dClass,dLabel,nextLabel){
   const shuffled=q.items.map(function(text,i){return{text:text,origIdx:i};});
   for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}
   let itemsHTML='';
   shuffled.forEach(function(item,i){
-    itemsHTML+='<div class="sort-item" draggable="true" data-idx="'+i+'" data-orig="'+item.origIdx+'" '+
-      'ondragstart="sortDragStart(event)" ondragover="sortDragOver(event)" '+
-      'ondrop="sortDrop(event)" ondragend="sortDragEnd(event)">'+
+    itemsHTML+='<div class="sort-item" data-idx="'+i+'" data-orig="'+item.origIdx+'">'+
       '<span class="sort-handle">☰</span><span class="sort-num">'+(i+1)+'.</span><span>'+item.text+'</span></div>';
   });
   area.innerHTML=topBar+
@@ -1130,22 +1129,99 @@ function renderSort(area,q,topBar,dClass,dLabel,nextLabel){
     '</div>';
   answered=false;
   updateSortNumbers();
+  initSortDrag();
 }
 
-function sortDragStart(e){sortDragSrc=e.currentTarget;e.currentTarget.classList.add('dragging');e.dataTransfer.effectAllowed='move';}
-function sortDragOver(e){e.preventDefault();e.dataTransfer.dropEffect='move';document.querySelectorAll('.sort-item').forEach(function(el){el.classList.remove('drag-over');});if(e.currentTarget!==sortDragSrc)e.currentTarget.classList.add('drag-over');}
-function sortDrop(e){
-  e.preventDefault();if(sortDragSrc===e.currentTarget)return;
-  const list=document.getElementById('sortList');
-  const items=[...list.querySelectorAll('.sort-item')];
-  const srcIdx=items.indexOf(sortDragSrc);
-  const tgtIdx=items.indexOf(e.currentTarget);
-  if(srcIdx<tgtIdx)list.insertBefore(sortDragSrc,e.currentTarget.nextSibling);
-  else list.insertBefore(sortDragSrc,e.currentTarget);
-  updateSortNumbers();
-}
-function sortDragEnd(e){e.currentTarget.classList.remove('dragging');document.querySelectorAll('.sort-item').forEach(function(el){el.classList.remove('drag-over');});}
 function updateSortNumbers(){document.querySelectorAll('.sort-item').forEach(function(el,i){el.querySelector('.sort-num').textContent=(i+1)+'.';});}
+
+function initSortDrag(){
+  const list=document.getElementById('sortList');
+  if(!list)return;
+  let dragEl=null,ghost=null,startY=0,startX=0,origRect=null,placeholder=null;
+
+  function getItems(){return [...list.querySelectorAll('.sort-item')];}
+
+  function createGhost(el,cx,cy){
+    const r=el.getBoundingClientRect();
+    ghost=el.cloneNode(true);
+    ghost.style.cssText='position:fixed;z-index:9999;left:'+(r.left)+'px;top:'+(r.top)+'px;width:'+r.width+'px;opacity:0.85;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.5);transform:scale(1.03);transition:none;background:rgba(124,58,237,.18);border:1px solid rgba(124,58,237,.6);border-radius:12px;';
+    document.body.appendChild(ghost);
+    startX=cx-r.left;startY=cy-r.top;
+  }
+
+  function moveGhost(cx,cy){
+    if(!ghost)return;
+    ghost.style.left=(cx-startX)+'px';
+    ghost.style.top=(cy-startY)+'px';
+  }
+
+  function getTargetEl(cy){
+    const items=getItems().filter(function(el){return el!==dragEl&&el!==placeholder;});
+    for(let i=0;i<items.length;i++){
+      const r=items[i].getBoundingClientRect();
+      if(cy<r.top+r.height/2)return{el:items[i],before:true};
+    }
+    return{el:items[items.length-1]||null,before:false};
+  }
+
+  function onStart(el,cx,cy){
+    if(answered)return;
+    dragEl=el;
+    origRect=el.getBoundingClientRect();
+    placeholder=document.createElement('div');
+    placeholder.className='sort-item';
+    placeholder.style.cssText='opacity:0.25;border:1px dashed rgba(124,58,237,.4);background:rgba(124,58,237,.05);';
+    placeholder.style.height=origRect.height+'px';
+    list.insertBefore(placeholder,dragEl.nextSibling);
+    dragEl.classList.add('dragging');
+    createGhost(el,cx,cy);
+  }
+
+  function onMove(cx,cy){
+    if(!dragEl)return;
+    moveGhost(cx,cy);
+    const t=getTargetEl(cy);
+    if(t.el){
+      if(t.before)list.insertBefore(placeholder,t.el);
+      else list.insertBefore(placeholder,t.el.nextSibling);
+    }
+    // highlight
+    getItems().forEach(function(el){el.classList.remove('drag-over');});
+    const t2=getTargetEl(cy);
+    if(t2.el)t2.el.classList.add('drag-over');
+  }
+
+  function onEnd(){
+    if(!dragEl)return;
+    dragEl.classList.remove('dragging');
+    getItems().forEach(function(el){el.classList.remove('drag-over');});
+    if(placeholder&&placeholder.parentNode){
+      list.insertBefore(dragEl,placeholder);
+      placeholder.remove();
+    }
+    if(ghost){ghost.remove();ghost=null;}
+    dragEl=null;placeholder=null;
+    updateSortNumbers();
+  }
+
+  // Mouse events
+  list.addEventListener('mousedown',function(e){
+    const item=e.target.closest('.sort-item');
+    if(item)onStart(item,e.clientX,e.clientY);
+  });
+  document.addEventListener('mousemove',function(e){if(dragEl)onMove(e.clientX,e.clientY);});
+  document.addEventListener('mouseup',function(){if(dragEl)onEnd();});
+
+  // Touch events
+  list.addEventListener('touchstart',function(e){
+    const item=e.target.closest('.sort-item');
+    if(item){e.preventDefault();onStart(item,e.touches[0].clientX,e.touches[0].clientY);}
+  },{passive:false});
+  document.addEventListener('touchmove',function(e){
+    if(dragEl){e.preventDefault();onMove(e.touches[0].clientX,e.touches[0].clientY);}
+  },{passive:false});
+  document.addEventListener('touchend',function(){if(dragEl)onEnd();},{passive:true});
+}
 
 function checkSort(){
   if(answered)return;
@@ -1170,28 +1246,25 @@ function checkSort(){
   document.getElementById('nextBtn').classList.add('show');
 }
 
-let catDragItem=null;
-
 function renderCat(area,q,topBar,dClass,dLabel,nextLabel){
   const shuffled=[...q.items].sort(function(){return Math.random()-0.5;});
   let poolHTML='';
   shuffled.forEach(function(item,i){
-    poolHTML+='<div class="cat-item" draggable="true" data-i="'+i+'" data-correct="'+item.correct+'" data-text="'+item.text+'" '+
-      'ondragstart="catDragStart(event)" ondragend="catDragEnd(event)" onclick="catItemClick(this)">'+item.text+'</div>';
+    poolHTML+='<div class="cat-item" data-i="'+i+'" data-correct="'+item.correct+'" data-text="'+item.text+'">'+item.text+'</div>';
   });
   area.innerHTML=topBar+
     '<div class="card">'+
       '<div class="q-number">🗂️ '+(current+1)+'. feladat — '+playerName+'</div>'+
       '<span class="diff-badge '+dClass+'">'+dLabel+'</span>'+
       '<div class="q-text">'+q.question+'</div>'+
-      '<div class="cat-intro">💡 Húzd (vagy kattints) a kártyákat a megfelelő dobozba! Minden kártyát be kell sorolni!</div>'+
-      '<div class="cat-items-pool" id="catPool" ondragover="catPoolOver(event)" ondrop="catPoolDrop(event)">'+poolHTML+'</div>'+
+      '<div class="cat-intro">💡 Húzd (vagy koppints) a kártyákat a megfelelő dobozba!</div>'+
+      '<div class="cat-items-pool" id="catPool">'+poolHTML+'</div>'+
       '<div class="cat-boxes">'+
-        '<div class="cat-box box-yes" id="catBoxYes" ondragover="catBoxOver(event)" ondrop="catBoxDrop(event,true)">'+
+        '<div class="cat-box box-yes" id="catBoxYes">'+
           '<div class="cat-box-title">'+q.boxYes+'</div>'+
           '<div class="cat-box-items" id="catBoxYesItems"></div>'+
         '</div>'+
-        '<div class="cat-box box-no" id="catBoxNo" ondragover="catBoxOver(event)" ondrop="catBoxDrop(event,false)">'+
+        '<div class="cat-box box-no" id="catBoxNo">'+
           '<div class="cat-box-title">'+q.boxNo+'</div>'+
           '<div class="cat-box-items" id="catBoxNoItems"></div>'+
         '</div>'+
@@ -1201,33 +1274,119 @@ function renderCat(area,q,topBar,dClass,dLabel,nextLabel){
       '<button class="next-btn" id="nextBtn" onclick="next()">'+nextLabel+'</button>'+
     '</div>';
   answered=false;
+  initCatDrag();
 }
 
-function catDragStart(e){catDragItem=e.currentTarget;e.currentTarget.classList.add('dragging');e.dataTransfer.effectAllowed='move';}
-function catDragEnd(e){e.currentTarget.classList.remove('dragging');}
-function catBoxOver(e){e.preventDefault();e.currentTarget.classList.add('drag-active');}
-function catPoolOver(e){e.preventDefault();}
-function catBoxDrop(e,isYes){
-  e.preventDefault();
-  document.querySelectorAll('.cat-box').forEach(function(b){b.classList.remove('drag-active');});
-  if(!catDragItem)return;
-  const target=isYes?document.getElementById('catBoxYesItems'):document.getElementById('catBoxNoItems');
-  target.appendChild(catDragItem);
-  catDragItem.setAttribute('data-placed',isYes?'yes':'no');
-  catDragItem=null;
+function initCatDrag(){
+  let dragEl=null,ghost=null,startX=0,startY=0;
+
+  function getDropZone(cx,cy){
+    const zones=['catBoxYes','catBoxNo','catPool'];
+    for(let i=0;i<zones.length;i++){
+      const el=document.getElementById(zones[i]);
+      if(!el)continue;
+      const r=el.getBoundingClientRect();
+      if(cx>=r.left&&cx<=r.right&&cy>=r.top&&cy<=r.bottom)return el;
+    }
+    return null;
+  }
+
+  function createGhost(el,cx,cy){
+    const r=el.getBoundingClientRect();
+    ghost=el.cloneNode(true);
+    ghost.style.cssText='position:fixed;z-index:9999;left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;opacity:0.9;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.5);transform:scale(1.08);transition:none;';
+    document.body.appendChild(ghost);
+    startX=cx-r.left;startY=cy-r.top;
+  }
+
+  function moveGhost(cx,cy){
+    if(!ghost)return;
+    ghost.style.left=(cx-startX)+'px';
+    ghost.style.top=(cy-startY)+'px';
+    // highlight drop zones
+    ['catBoxYes','catBoxNo','catPool'].forEach(function(id){
+      const el=document.getElementById(id);
+      if(el)el.classList.remove('drag-active');
+    });
+    const zone=getDropZone(cx,cy);
+    if(zone)zone.classList.add('drag-active');
+  }
+
+  function onStart(el,cx,cy){
+    if(answered)return;
+    dragEl=el;
+    createGhost(el,cx,cy);
+    el.style.opacity='0.3';
+  }
+
+  function onEnd(cx,cy){
+    if(!dragEl)return;
+    dragEl.style.opacity='';
+    if(ghost){ghost.remove();ghost=null;}
+    ['catBoxYes','catBoxNo','catPool'].forEach(function(id){
+      const el=document.getElementById(id);
+      if(el)el.classList.remove('drag-active');
+    });
+    const zone=getDropZone(cx,cy);
+    if(zone){
+      if(zone.id==='catBoxYes'){
+        document.getElementById('catBoxYesItems').appendChild(dragEl);
+        dragEl.setAttribute('data-placed','yes');
+      } else if(zone.id==='catBoxNo'){
+        document.getElementById('catBoxNoItems').appendChild(dragEl);
+        dragEl.setAttribute('data-placed','no');
+      } else {
+        document.getElementById('catPool').appendChild(dragEl);
+        dragEl.removeAttribute('data-placed');
+      }
+    }
+    dragEl=null;
+  }
+
+  // Click/tap cycle fallback
+  function catItemClick(el){
+    if(answered)return;
+    const placed=el.getAttribute('data-placed');
+    if(!placed){document.getElementById('catBoxYesItems').appendChild(el);el.setAttribute('data-placed','yes');}
+    else if(placed==='yes'){document.getElementById('catBoxNoItems').appendChild(el);el.setAttribute('data-placed','no');}
+    else{document.getElementById('catPool').appendChild(el);el.removeAttribute('data-placed');}
+  }
+
+  const container=document.querySelector('.card');
+  if(!container)return;
+
+  // Mouse
+  container.addEventListener('mousedown',function(e){
+    const item=e.target.closest('.cat-item');
+    if(item)onStart(item,e.clientX,e.clientY);
+  });
+  document.addEventListener('mousemove',function(e){if(dragEl)moveGhost(e.clientX,e.clientY);});
+  document.addEventListener('mouseup',function(e){
+    if(dragEl){
+      // if barely moved → treat as click
+      const dx=Math.abs(e.clientX-(parseFloat(ghost.style.left)+startX));
+      const dy=Math.abs(e.clientY-(parseFloat(ghost.style.top)+startY));
+      if(dx<6&&dy<6){const el=dragEl;if(ghost){ghost.remove();ghost=null;}dragEl.style.opacity='';dragEl=null;catItemClick(el);return;}
+      onEnd(e.clientX,e.clientY);
+    }
+  });
+
+  // Touch
+  container.addEventListener('touchstart',function(e){
+    const item=e.target.closest('.cat-item');
+    if(item){e.preventDefault();onStart(item,e.touches[0].clientX,e.touches[0].clientY);}
+  },{passive:false});
+  document.addEventListener('touchmove',function(e){
+    if(dragEl){e.preventDefault();moveGhost(e.touches[0].clientX,e.touches[0].clientY);}
+  },{passive:false});
+  document.addEventListener('touchend',function(e){
+    if(dragEl){
+      const t=e.changedTouches[0];
+      onEnd(t.clientX,t.clientY);
+    }
+  },{passive:true});
 }
-function catPoolDrop(e){
-  e.preventDefault();if(!catDragItem)return;
-  document.getElementById('catPool').appendChild(catDragItem);
-  catDragItem.removeAttribute('data-placed');catDragItem=null;
-}
-function catItemClick(el){
-  if(answered)return;
-  const placed=el.getAttribute('data-placed');
-  if(!placed){document.getElementById('catBoxYesItems').appendChild(el);el.setAttribute('data-placed','yes');}
-  else if(placed==='yes'){document.getElementById('catBoxNoItems').appendChild(el);el.setAttribute('data-placed','no');}
-  else{document.getElementById('catPool').appendChild(el);el.removeAttribute('data-placed');}
-}
+
 function checkCat(){
   if(answered)return;
   const q=currentTopic.cat[current];
