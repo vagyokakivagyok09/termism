@@ -3529,7 +3529,8 @@ function renderFill(area,q,topBar,dClass,dLabel,nextLabel){
 
 function checkFill(){
   if(answered)return;
-  const q=currentTopic.fill[current];
+  const questions=shuffledQuestions.length?shuffledQuestions:currentTopic.fill;
+  const q=questions[current];
   let allCorrect=true,anyEmpty=false;
   q.gaps.forEach(function(gap){
     const sel=document.getElementById('gap'+gap.id);
@@ -3564,7 +3565,8 @@ function handleResult(correct,explain){
 
 function answerTF(choice){
   if(answered)return;answered=true;
-  const q=currentTopic.tf[current];const correct=choice===q.answer;
+  const questions=shuffledQuestions.length?shuffledQuestions:currentTopic.tf;
+  const q=questions[current];const correct=choice===q.answer;
   const bT=document.getElementById('btnTrue'),bF=document.getElementById('btnFalse');
   bT.disabled=true;bF.disabled=true;
   const chosen=choice?bT:bF;
@@ -3575,7 +3577,8 @@ function answerTF(choice){
 
 function answerQuiz(i){
   if(answered)return;answered=true;
-  const q=currentTopic.quiz[current];const correct=i===q.correct;
+  const questions=shuffledQuestions.length?shuffledQuestions:currentTopic.quiz;
+  const q=questions[current];const correct=i===q.correct;
   for(let j=0;j<q.opts.length;j++){
     const btn=document.getElementById('opt'+j);btn.disabled=true;
     if(j===i&&correct)btn.classList.add('selected-correct');
@@ -3682,7 +3685,6 @@ function initSortDrag(){
       if(t.before)list.insertBefore(placeholder,t.el);
       else list.insertBefore(placeholder,t.el.nextSibling);
     }
-    // highlight
     getItems().forEach(function(el){el.classList.remove('drag-over');});
     const t2=getTargetEl(cy);
     if(t2.el)t2.el.classList.add('drag-over');
@@ -3701,28 +3703,42 @@ function initSortDrag(){
     updateSortNumbers();
   }
 
-  // Mouse events
+  function handleMouseMove(e){if(dragEl)onMove(e.clientX,e.clientY);}
+  function handleMouseUp(){if(dragEl)onEnd();}
+  function handleTouchMove(e){if(dragEl){e.preventDefault();onMove(e.touches[0].clientX,e.touches[0].clientY);}}
+  function handleTouchEnd(){if(dragEl)onEnd();}
+
   list.addEventListener('mousedown',function(e){
     const item=e.target.closest('.sort-item');
     if(item)onStart(item,e.clientX,e.clientY);
   });
-  document.addEventListener('mousemove',function(e){if(dragEl)onMove(e.clientX,e.clientY);});
-  document.addEventListener('mouseup',function(){if(dragEl)onEnd();});
+  document.addEventListener('mousemove',handleMouseMove);
+  document.addEventListener('mouseup',handleMouseUp);
 
-  // Touch events
   list.addEventListener('touchstart',function(e){
     const item=e.target.closest('.sort-item');
     if(item){e.preventDefault();onStart(item,e.touches[0].clientX,e.touches[0].clientY);}
   },{passive:false});
-  document.addEventListener('touchmove',function(e){
-    if(dragEl){e.preventDefault();onMove(e.touches[0].clientX,e.touches[0].clientY);}
-  },{passive:false});
-  document.addEventListener('touchend',function(){if(dragEl)onEnd();},{passive:true});
+  document.addEventListener('touchmove',handleTouchMove,{passive:false});
+  document.addEventListener('touchend',handleTouchEnd,{passive:true});
+
+  // Cleanup when navigating away
+  var obs=new MutationObserver(function(){
+    if(!document.getElementById('sortList')){
+      document.removeEventListener('mousemove',handleMouseMove);
+      document.removeEventListener('mouseup',handleMouseUp);
+      document.removeEventListener('touchmove',handleTouchMove);
+      document.removeEventListener('touchend',handleTouchEnd);
+      obs.disconnect();
+    }
+  });
+  obs.observe(document.getElementById('gameArea'),{childList:true,subtree:false});
 }
 
 function checkSort(){
   if(answered)return;
-  const q=currentTopic.sort[current];
+  const questions=shuffledQuestions.length?shuffledQuestions:currentTopic.sort;
+  const q=questions[current];
   const list=document.getElementById('sortList');
   const items=[...list.querySelectorAll('.sort-item')];
   const correctOrder=q.correct;
@@ -3922,15 +3938,9 @@ function initCatDrag(){
   const container=document.querySelector('.card');
   if(!container)return;
 
-  // Mouse
-  container.addEventListener('mousedown',function(e){
-    const item=e.target.closest('.cat-item');
-    if(item)onStart(item,e.clientX,e.clientY);
-  });
-  document.addEventListener('mousemove',function(e){if(dragEl)moveGhost(e.clientX,e.clientY);});
-  document.addEventListener('mouseup',function(e){
+  function handleMouseMove(e){if(dragEl)moveGhost(e.clientX,e.clientY);}
+  function handleMouseUp(e){
     if(dragEl){
-      // if barely moved → treat as click
       if(ghost){
         const dx=Math.abs(e.clientX-(parseFloat(ghost.style.left)+startX));
         const dy=Math.abs(e.clientY-(parseFloat(ghost.style.top)+startY));
@@ -3938,27 +3948,43 @@ function initCatDrag(){
       }
       onEnd(e.clientX,e.clientY);
     }
+  }
+  function handleTouchMove(e){if(dragEl){e.preventDefault();moveGhost(e.touches[0].clientX,e.touches[0].clientY);}}
+  function handleTouchEnd(e){if(dragEl){const t=e.changedTouches[0];onEnd(t.clientX,t.clientY);}}
+
+  // Mouse
+  container.addEventListener('mousedown',function(e){
+    const item=e.target.closest('.cat-item');
+    if(item)onStart(item,e.clientX,e.clientY);
   });
+  document.addEventListener('mousemove',handleMouseMove);
+  document.addEventListener('mouseup',handleMouseUp);
 
   // Touch
   container.addEventListener('touchstart',function(e){
     const item=e.target.closest('.cat-item');
     if(item){e.preventDefault();onStart(item,e.touches[0].clientX,e.touches[0].clientY);}
   },{passive:false});
-  document.addEventListener('touchmove',function(e){
-    if(dragEl){e.preventDefault();moveGhost(e.touches[0].clientX,e.touches[0].clientY);}
-  },{passive:false});
-  document.addEventListener('touchend',function(e){
-    if(dragEl){
-      const t=e.changedTouches[0];
-      onEnd(t.clientX,t.clientY);
+  document.addEventListener('touchmove',handleTouchMove,{passive:false});
+  document.addEventListener('touchend',handleTouchEnd,{passive:true});
+
+  // Cleanup when navigating away
+  var obs=new MutationObserver(function(){
+    if(!document.getElementById('catPool')){
+      document.removeEventListener('mousemove',handleMouseMove);
+      document.removeEventListener('mouseup',handleMouseUp);
+      document.removeEventListener('touchmove',handleTouchMove);
+      document.removeEventListener('touchend',handleTouchEnd);
+      obs.disconnect();
     }
-  },{passive:true});
+  });
+  obs.observe(document.getElementById('gameArea'),{childList:true,subtree:false});
 }
 
 function checkCat(){
   if(answered)return;
-  const q=currentTopic.cat[current];
+  const questions=shuffledQuestions.length?shuffledQuestions:currentTopic.cat;
+  const q=questions[current];
   const pool=document.getElementById('catPool');
   if(pool.querySelectorAll('.cat-item').length>0){
     const res=document.getElementById('catResult');
