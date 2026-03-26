@@ -288,10 +288,64 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 #cubeToast{position:fixed;bottom:60px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(12,12,22,.95);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:8px 20px;font-size:.75rem;color:#cbd5e1;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap;z-index:20;font-family:'Space Grotesk',sans-serif;}
 #cubeToast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 @media(max-width:520px){header h1{font-size:1.8rem;}.mode-grid{grid-template-columns:1fr;}.opts-grid{grid-template-columns:1fr;}.tf-row .ans-btn{font-size:.95rem;padding:13px 8px;}}
+
+/* ===== TÉMA-ALAPÚ VIZUÁLIS RENDSZER ===== */
+body { transition: background 1.2s cubic-bezier(.4,0,.2,1); }
+
+/* FÜVES */
+body.theme-fuves { background: radial-gradient(ellipse 120% 80% at 50% 100%, rgba(20,60,20,.95) 0%, #0a1a0e 55%, #10141a 100%); }
+body.theme-fuves .bg-deco::before { background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(34,197,94,.18) 0%, transparent 70%); }
+body.theme-fuves .bg-deco::after { background: radial-gradient(ellipse at 50% 100%, rgba(34,197,94,.16) 0%, rgba(251,191,36,.07) 40%, transparent 70%); }
+body.theme-fuves .card { border-color: rgba(34,197,94,.25) !important; box-shadow: 0 0 0 1px rgba(34,197,94,.15), 0 20px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(34,197,94,.10) !important; }
+body.theme-fuves .prog-fill { background: linear-gradient(90deg, #22c55e, #fbbf24); }
+
+/* VIZEK */
+body.theme-vizek { background: radial-gradient(ellipse 120% 80% at 50% 100%, rgba(5,30,60,.98) 0%, #030d1e 55%, #0a0f18 100%); }
+body.theme-vizek .bg-deco::before { background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(56,189,248,.18) 0%, transparent 70%); }
+body.theme-vizek .bg-deco::after { background: radial-gradient(ellipse at 50% 100%, rgba(56,189,248,.18) 0%, rgba(14,165,233,.07) 40%, transparent 70%); }
+body.theme-vizek .card { border-color: rgba(56,189,248,.25) !important; box-shadow: 0 0 0 1px rgba(56,189,248,.15), 0 20px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(56,189,248,.10) !important; }
+body.theme-vizek .prog-fill { background: linear-gradient(90deg, #0ea5e9, #7dd3fc); }
+
+/* ERDŐ */
+body.theme-erdo { background: radial-gradient(ellipse 120% 80% at 50% 100%, rgba(10,35,10,.98) 0%, #060f06 55%, #0c1210 100%); }
+body.theme-erdo .bg-deco::before { background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(20,160,80,.16) 0%, transparent 70%); }
+body.theme-erdo .bg-deco::after { background: radial-gradient(ellipse at 50% 100%, rgba(20,160,80,.14) 0%, rgba(139,90,43,.08) 40%, transparent 70%); }
+body.theme-erdo .card { border-color: rgba(20,160,80,.28) !important; box-shadow: 0 0 0 1px rgba(20,160,80,.16), 0 20px 60px rgba(0,0,0,.65), inset 0 1px 0 rgba(20,160,80,.10) !important; }
+body.theme-erdo .prog-fill { background: linear-gradient(90deg, #14a050, #a3e635); }
+
+/* KÖLCSÖNHATÁSOK */
+body.theme-kolcson { background: radial-gradient(ellipse 120% 80% at 50% 100%, rgba(60,30,5,.98) 0%, #1a0e03 55%, #141008 100%); }
+body.theme-kolcson .bg-deco::before { background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(245,158,11,.16) 0%, transparent 70%); }
+body.theme-kolcson .bg-deco::after { background: radial-gradient(ellipse at 50% 100%, rgba(245,158,11,.14) 0%, rgba(239,68,68,.06) 40%, transparent 70%); }
+body.theme-kolcson .card { border-color: rgba(245,158,11,.28) !important; box-shadow: 0 0 0 1px rgba(245,158,11,.16), 0 20px 60px rgba(0,0,0,.65), inset 0 1px 0 rgba(245,158,11,.10) !important; }
+body.theme-kolcson .prog-fill { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+
+/* FÖLD */
+body.theme-fold { background: radial-gradient(ellipse 120% 80% at 50% 100%, rgba(5,20,50,.98) 0%, #030a1a 55%, #080c18 100%); }
+body.theme-fold .bg-deco::before { background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(99,102,241,.18) 0%, transparent 70%); }
+body.theme-fold .bg-deco::after { background: radial-gradient(ellipse at 50% 100%, rgba(99,102,241,.14) 0%, rgba(56,189,248,.06) 40%, transparent 70%); }
+body.theme-fold .card { border-color: rgba(99,102,241,.28) !important; box-shadow: 0 0 0 1px rgba(99,102,241,.16), 0 20px 60px rgba(0,0,0,.65), inset 0 1px 0 rgba(99,102,241,.10) !important; }
+body.theme-fold .prog-fill { background: linear-gradient(90deg, #6366f1, #38bdf8); }
+
+/* TERMÉSZET ERŐI */
+body.theme-termeszet { background: radial-gradient(ellipse 120% 80% at 50% 100%, rgba(50,10,10,.98) 0%, #180505 55%, #120808 100%); }
+body.theme-termeszet .bg-deco::before { background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(220,38,38,.18) 0%, transparent 70%); }
+body.theme-termeszet .bg-deco::after { background: radial-gradient(ellipse at 50% 100%, rgba(220,38,38,.14) 0%, rgba(245,158,11,.07) 40%, transparent 70%); }
+body.theme-termeszet .card { border-color: rgba(220,38,38,.28) !important; box-shadow: 0 0 0 1px rgba(220,38,38,.16), 0 20px 60px rgba(0,0,0,.65), inset 0 1px 0 rgba(220,38,38,.10) !important; }
+body.theme-termeszet .prog-fill { background: linear-gradient(90deg, #dc2626, #f59e0b); }
+
+/* Emoji deco */
+.bg-emoji-deco { position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden; }
+.bg-emoji-deco span { position:absolute;font-size:1.6rem;opacity:0;animation:emojiFloat linear infinite;user-select:none;pointer-events:none; }
+@keyframes emojiFloat { 0%{transform:translateY(110vh) rotate(0deg) scale(0.6);opacity:0} 8%{opacity:0.12} 88%{opacity:0.07} 100%{transform:translateY(-12vh) rotate(360deg) scale(1.1);opacity:0} }
+.particle.tp { border-radius:2px 50% 2px 50%; }
+.particle.tp-w { border-radius:50% 50% 50% 0; }
+.particle.tp-r { border-radius:3px; }
 </style>
 </head>
 <body>
 <div class="bg-deco" id="bgDeco"></div>
+<div class="bg-emoji-deco" id="bgEmojiDeco"></div>
 <div id="cubeToast"></div>
 <div id="app">
   <header>
@@ -4018,6 +4072,67 @@ function checkCat(){
     p.style.cssText='width:'+size+'px;height:'+size+'px;left:'+(Math.random()*100)+'vw;background:'+colors[Math.floor(Math.random()*colors.length)]+';animation-duration:'+(9+Math.random()*14)+'s;animation-delay:'+(Math.random()*12)+'s;';
     document.body.appendChild(p);
   }
+})();
+
+
+/* ===== TÉMA JS ===== */
+(function(){
+  const THEMES = {
+    fuves:      { cls:'theme-fuves',    pc:['#22c55e','#4ade80','#86efac','#fbbf24','#d9f99d','#a3e635'], ps:'tp',       em:['🌿','🌾','🌻','🐝','🦋','🌱','🌼','🍀','🐛','🦗'] },
+    vizek:      { cls:'theme-vizek',    pc:['#38bdf8','#7dd3fc','#bae6fd','#0ea5e9','#e0f2fe','#93c5fd'], ps:'tp tp-w',  em:['💧','🐟','🦆','🐠','🌊','🐢','🦢','🐸','🦭','🌿'] },
+    erdo:       { cls:'theme-erdo',     pc:['#14a050','#4ade80','#a3e635','#854d0e','#d97706','#86efac'], ps:'tp',       em:['🌲','🍂','🦔','🦌','🐿️','🍄','🦉','🌿','🐦','🍁'] },
+    kolcsonhatasok: { cls:'theme-kolcson',  pc:['#f59e0b','#fbbf24','#ef4444','#fb923c','#fde68a','#fca5a5'], ps:'tp tp-r',  em:['⚡','🔋','🌡️','💡','🔥','⚙️','🧲','☀️','💥','🌊'] },
+    fold:       { cls:'theme-fold',     pc:['#6366f1','#818cf8','#38bdf8','#a5b4fc','#e0e7ff','#7dd3fc'], ps:'tp tp-w',  em:['🌍','🪐','⭐','🌙','☄️','🌌','🔭','🛸','💫','🌠'] },
+    termeszet:  { cls:'theme-termeszet',pc:['#dc2626','#f87171','#f59e0b','#fb923c','#fca5a5','#fde68a'], ps:'tp tp-r',  em:['🌋','⛰️','🌪️','🌊','❄️','🏔️','💨','🌩️','🔥','🌡️'] }
+  };
+  let active=null, tPart=[];
+
+  function applyTheme(id){
+    if(active===id)return;
+    document.body.classList.remove('theme-fuves','theme-vizek','theme-erdo','theme-kolcson','theme-fold','theme-termeszet');
+    clearTP(); clearEM();
+    if(!id||!THEMES[id]){active=null;restoreP();return;}
+    const T=THEMES[id];
+    document.body.classList.add(T.cls);
+    active=id;
+    hideP(); spawnTP(T); spawnEM(T);
+  }
+
+  function clearTP(){tPart.forEach(function(p){if(p.parentNode)p.remove();});tPart=[];}
+  function clearEM(){var c=document.getElementById('bgEmojiDeco');if(c)c.innerHTML='';}
+  function hideP(){document.querySelectorAll('.particle:not(.tp)').forEach(function(p){p.style.opacity='0';p.style.transition='opacity 1s';});}
+  function restoreP(){document.querySelectorAll('.particle:not(.tp)').forEach(function(p){p.style.opacity='';p.style.transition='';});}
+
+  function spawnTP(T){
+    for(var i=0;i<22;i++){
+      var p=document.createElement('div');
+      p.className='particle '+T.ps;
+      var sz=Math.random()*5+2;
+      var col=T.pc[Math.floor(Math.random()*T.pc.length)];
+      p.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100)+'vw;background:'+col+';box-shadow:0 0 '+(sz*2)+'px '+col+';animation-duration:'+(8+Math.random()*12)+'s;animation-delay:'+(Math.random()*10)+'s;';
+      document.body.appendChild(p);
+      tPart.push(p);
+    }
+  }
+
+  function spawnEM(T){
+    var c=document.getElementById('bgEmojiDeco');
+    if(!c)return;
+    for(var i=0;i<16;i++){
+      var s=document.createElement('span');
+      s.textContent=T.em[Math.floor(Math.random()*T.em.length)];
+      var sz=(1.1+Math.random()*1.5);
+      s.style.cssText='font-size:'+sz+'rem;left:'+(Math.random()*95)+'vw;animation-duration:'+(14+Math.random()*18)+'s;animation-delay:'+(Math.random()*14)+'s;';
+      c.appendChild(s);
+    }
+  }
+
+  var _ss=window.showSubtopics;
+  window.showSubtopics=function(id){applyTheme(id);_ss(id);};
+  var _sb=window.showBigTopics;
+  window.showBigTopics=function(){applyTheme(null);_sb();};
+  var _si=window.showSubtopicsInline;
+  if(_si)window.showSubtopicsInline=function(bt){applyTheme(bt&&bt.id?bt.id:null);_si(bt);};
 })();
 
 showBigTopics();
