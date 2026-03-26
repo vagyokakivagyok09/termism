@@ -288,6 +288,38 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 #cubeToast{position:fixed;bottom:60px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(12,12,22,.95);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:8px 20px;font-size:.75rem;color:#cbd5e1;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap;z-index:20;font-family:'Space Grotesk',sans-serif;}
 #cubeToast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 @media(max-width:520px){header h1{font-size:1.8rem;}.mode-grid{grid-template-columns:1fr;}.opts-grid{grid-template-columns:1fr;}.tf-row .ans-btn{font-size:.95rem;padding:13px 8px;}}
+.tananyag-open-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-bottom:16px;font-family:'Space Grotesk',sans-serif;font-size:.93rem;font-weight:600;padding:12px 18px;border-radius:14px;border:1px solid rgba(124,58,237,.45);background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(56,189,248,.08));color:#c4b5fd;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.tananyag-open-btn:hover{border-color:rgba(124,58,237,.8);background:linear-gradient(135deg,rgba(124,58,237,.22),rgba(56,189,248,.12));transform:translateY(-2px);box-shadow:0 6px 24px rgba(124,58,237,.2);color:#e9d5ff;}
+.tananyag-game-btn{border-color:rgba(124,58,237,.35)!important;color:#a78bfa!important;font-size:.85rem;padding:4px 8px;}
+.tananyag-game-btn:hover{border-color:rgba(124,58,237,.7)!important;color:#e9d5ff!important;background:rgba(124,58,237,.12)!important;}
+.tananyag-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:200;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;}
+.tananyag-overlay.open{opacity:1;pointer-events:all;}
+.tananyag-panel{width:100%;max-width:860px;max-height:88vh;background:#0e0e1e;border-top:1px solid rgba(255,255,255,.1);border-radius:24px 24px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .35s cubic-bezier(.22,.82,.26,1);box-shadow:0 -20px 80px rgba(0,0,0,.7);}
+.tananyag-overlay.open .tananyag-panel{transform:translateY(0);}
+.tananyag-handle{width:40px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:14px auto 0;}
+.tananyag-header{display:flex;align-items:center;gap:12px;padding:16px 22px 12px;border-bottom:1px solid rgba(255,255,255,.07);}
+.tananyag-header-icon{font-size:1.8rem;flex-shrink:0;}
+.tananyag-header-title{flex:1;}
+.tananyag-header-title h3{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.15rem;font-weight:400;color:#fff;line-height:1.2;}
+.tananyag-header-title p{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#475569;font-weight:500;margin-top:2px;}
+.tananyag-close{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#64748b;border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;transition:all .15s;flex-shrink:0;}
+.tananyag-close:hover{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.4);color:#fb7185;}
+.tananyag-body{overflow-y:auto;padding:18px 22px 32px;flex:1;}
+.tananyag-body::-webkit-scrollbar{width:4px;}
+.tananyag-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px;}
+.tananyag-section{margin-bottom:20px;}
+.tananyag-section-title{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.07);}
+.tananyag-text{font-family:'DM Sans',sans-serif;font-size:.93rem;color:#cbd5e1;line-height:1.7;}
+.tananyag-fogalom-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.tananyag-fogalom{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:10px 13px;}
+.tananyag-fogalom strong{font-family:'Space Grotesk',sans-serif;font-size:.82rem;font-weight:700;display:block;margin-bottom:3px;}
+.tananyag-fogalom span{font-size:.8rem;color:#94a3b8;line-height:1.5;}
+.tananyag-erdekes{background:rgba(124,58,237,.07);border:1px solid rgba(124,58,237,.2);border-radius:12px;padding:13px 15px;margin-top:4px;}
+.tananyag-erdekes p{font-size:.88rem;color:#c4b5fd;line-height:1.6;}
+.tananyag-erdekes p::before{content:'💡 ';}
+.tananyag-btn-row{padding:0 22px 22px;display:flex;gap:10px;}
+.tananyag-start-btn{flex:1;font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;padding:13px 20px;border-radius:14px;border:1px solid;cursor:pointer;transition:all .18s;text-align:center;}
+@media(max-width:520px){.tananyag-fogalom-grid{grid-template-columns:1fr;}.tananyag-panel{max-height:92vh;}}
 
 /* ===== TÉMA-ALAPÚ VIZUÁLIS RENDSZER ===== */
 body { transition: background 1.2s cubic-bezier(.4,0,.2,1); }
@@ -848,6 +880,20 @@ const BIG_TOPICS = [
         ]
       },
       {id:2,icon:"🌿",title:"Lágyszárúak a vízben és a vízparton",ready:true,
+        tananyag:{
+          bevezeto:"A vízparti növényzet élő szűrőként működik — beépíti a tápanyagokat, felfogja a szennyeződéseket, védi a partot az eróziótól és oxigént termel. A hínárosok az iszapos, sekély vizekben gyökereznek vagy lebegnek — túlszaporodásuk oxigénhiányt okozhat. A nád és a gyékény 2 méteres vízmélységig is megél, bugavirágzatát a szél porozza be. A tündérrózsa és a vízitök iszapban gyökerezik, viaszos levelük a víz felszínén terül szét.",
+          fogalmak:[
+            {nev:"Élő szűrő",leiras:"A vízparti növényzet felfogja a part mögül érkező szennyeződéseket és beépíti a tápanyagokat — megakadályozza az eutrofizációt."},
+            {nev:"Fonalas zöldmoszat",leiras:"Telepes felépítésű vízi növény — nincs gyökér, szár, levél, virág; sekély vizekben tömegesen elszaporodik."},
+            {nev:"Hínáros békaszőlő",leiras:"Gyöktörzse az iszapban van, virágzata a víz fölé emelkedik — az áramló víz porozza be."},
+            {nev:"Tündérrózsa és vízitök",leiras:"Iszapban gyökereznek, viaszos leveleik a víz felszínén terülnek szét — levegőt a levelek veszik fel, tápanyagot a gyöktörzs tárolja."},
+            {nev:"Békalencse",leiras:"Apró, 1 cm-es lebegő vízi növény — lencse alakú szára van, levele elcsökevényesedett, gyökérszála lefelé lóg."},
+            {nev:"Közönséges nád",leiras:"Erős, üreges szárú, párhuzamos erezetű vízparti növény — bugavirágzatát a szél porozza be, 2 méteres vízmélységig is megél."},
+            {nev:"Széleslevelű gyékény",leiras:"Náddal közös élőhelyű növény — szélesebb levelek, torzsavirágzat (buzogány), szél porozza be."},
+            {nev:"Nádas szerepe",leiras:"Élőhelyet biztosít, védi a partot, meggátolja a tápanyagok feldúsulását — nélkülözhetetlen a vízparti ökoszisztémában."},
+          ],
+          erdekes:"A békalencse a világ egyik legkisebb virágos növénye — alig 1 cm, mégis oxigént termel és táplálékot ad a vízimadarak számára. Gyorsan szaporodik: kedvező körülmények között néhány nap alatt beboríthatja az egész vízfelszínt.",
+        },
         tf:[
           {text:"A vízparti növényzet élő szűrőként működik, megakadályozva a tápanyagok feldúsulását.",answer:true,diff:1,explain:"Igen! A vízparti növényzet beépíti a tápanyagokat, megakadályozza az eutrofizációt és a part mögül érkező szennyezéseket is felfogja."},
           {text:"A hínáros növények kizárólag a víz felszínén lebegnek, nem gyökereznek.",answer:false,diff:1,explain:"Nem! A hínárosok egy része gyökerezik az iszapban, mások levelei a felszínen terülnek szét, megint mások lebegnek."},
@@ -946,6 +992,26 @@ const BIG_TOPICS = [
         ]
       },
       {id:4,icon:"🐌",title:"Az orvosi pióca. Csigák és kagylók a vízben",ready:true,
+        tananyag:{
+          bevezeto:"Az orvosi pióca kb. 15 cm, barnászöld, narancssárga sávos. Nyálkás kültakarón lélegzik — NEM tüdővel. Vízben és szárazföldön egyaránt mozog. Testtömegénél ötször több vért szív fel. Petéit a parti öv talajába rakja — NEM a vízbe szórja. A nagy mocsári csiga kezdetleges tüdővel lélegzik, NEM kopoltyúval. A tavi kagyló szűrőtáplálkozással él — légzése és táplálkozása összekapcsolódik.",
+          fogalmak:[
+            {nev:"Hirudin",leiras:"Az orvosi pióca nyálában lévő véralvadásgátló anyag — ma kémiai úton állítják elő gyógyszeralapanyagként."},
+            {nev:"Szívókorong / tapadókorong",leiras:"A pióca két végén lévő rögzítőszervek — egyikkel kapaszkodik, másikkal táplálkozik."},
+            {nev:"Pontszemek",leiras:"Fényérzékelő szervek a pióca testén — képet nem alkot, csak fényt és árnyékot érzékel."},
+            {nev:"Hímnős",leiras:"Egy egyedben hím és nőstény ivarszerv is van — de kölcsönös párzással szaporodnak."},
+            {nev:"Nagy mocsári csiga",leiras:"6 cm-es, csúcsos házú vízi csiga — kezdetleges tüdővel lélegzik, a vízfelszínre mászik levegőért."},
+            {nev:"Haslábak",leiras:"A csiga mozgásszerve — izmos talpán csúszik."},
+            {nev:"Tavi kagyló",leiras:"Iszapos tavak és folyók lakója, akár 20 cm hosszú — tolólábbal mozog, szűrőtáplálkozással él."},
+            {nev:"Szűrőtáplálkozás",leiras:"A kagyló vizet szív be, kiszűri a lebegő apró élőlényeket — légzése és táplálkozása összekapcsolódik."},
+            {nev:"Pióca mérete és légzése",leiras:"Kb. 15 cm hosszú, barnászöld, narancssárga sávos. Nyálkás kültakarón lélegzik — oxigént vesz fel, szén-dioxidot ad le."},
+            {nev:"Petézés",leiras:"Hímnős állat — párzás után a parti öv talajába rakja petéit, a kis piócák a következő év tavaszán kelnek ki."},
+            {nev:"Csiga légzése",leiras:"A nagy mocsári csiga kezdetleges tüdővel lélegzik — NEM kopoltyúval. Időnként a vízfelszínre mászik levegőért."},
+            {nev:"Pióca légzése és mozgása",leiras:"Nyálkás kültakarón lélegzik — NEM tüdővel. Vízben úszik (test hullámmozgása), szárazföldön féregmozgással is halad."},
+            {nev:"Pióca vérszívás",leiras:"Testtömegénél ÖTSZÖR több vért képes felszívni — nem kétszeresét. Fogazott állkapcsokkal sebzi meg a gazdát."},
+            {nev:"Pióca petézése",leiras:"Petéit a parti öv talajába rakja — NEM a vízbe szórja. A kis piócák a következő év tavaszán kelnek ki."},
+          ],
+          erdekes:"Az orvosi pióca testtömegénél ötször több vért is képes felszívni egyetlen táplálkozáskor! Fogazott állkapcsával ejt sebet, nyálával megakadályozza a véralvadást, így a vér folyamatosan szivárog.",
+        },
         tf:[
           {text:"Az orvosi pióca nyálában véralvadásgátló anyag található.",answer:true,diff:1,explain:"Igen! A pióca nyálában hirudin nevű véralvadásgátló anyag van – ez biztosítja, hogy a vér folyamatosan szivárogjon a sebből."},
           {text:"Az orvosi pióca szemekkel látja a zsákmányát.",answer:false,diff:1,explain:"Nem! A piócának nincs szeme – fényérzékelő pontszemekkel érzékeli a fényt, de képet nem alkot."},
@@ -995,6 +1061,23 @@ const BIG_TOPICS = [
         ]
       },
       {id:5,icon:"🦟",title:"Ízeltlábúak a vízben és a vízparton",ready:true,
+        tananyag:{
+          bevezeto:"A folyami rák hideg, tiszta vizek lakója — 5 pár lába van, az első olló. Kitinpáncélja kitin és mész keverékéből áll, vedléssel nő. Veszélyezteti az amerikai folyami rák, amely rákpestist terjeszt. A szitakötő lárvaként 2-3 évet tölt a vízben, kifejlett korában repülő rovarokat kap el. A szúnyog teljes átalakulással fejlődik — lárváik a vízben élnek, légcsővel lélegeznek.",
+          fogalmak:[
+            {nev:"Kitinpáncél",leiras:"A folyami rák kültakarója — kitin és mész keveréke, védelem és tartás. Vedléssel cserélődik."},
+            {nev:"Fejtor",leiras:"A rák feje és torának összenőtt része — itt vannak a kopoltyúk, csápok és összetett szemek."},
+            {nev:"Farki lemezek",leiras:"A rák potrohának végén lévő lemezek — hátrafelé való gyors úszásra szolgálnak."},
+            {nev:"Rákpestis",leiras:"Az amerikai folyami rák által terjesztett betegség — az őshonos folyami rákokat elpusztítja."},
+            {nev:"Szitakötő álarc",leiras:"A szitakötőlárva alsó ajkából képződött fogókészülék — apró rovarokat, halivadékokat, békalárvát fog."},
+            {nev:"Szitakötő fejlődése",leiras:"Nincs bábállapot — a lárva 2-3 évig él a vízben, majd a felszínen vedlik és szárnyas kifejlett egyeddé válik."},
+            {nev:"Szúnyog fejlődése",leiras:"Teljes átalakulás: pete → lárva (vízben, légcsővel lélegzik) → mozgó báb → kifejlett szúnyog."},
+            {nev:"Szúnyog nőstény",leiras:"Szúró-szívó szájszervvel vért szív — a hímek nem szúrnak, növényi nedvekkel táplálkoznak."},
+            {nev:"Folyami rák lábai",leiras:"5 pár lába van — az első pár ollóvá alakult zsákmányszerzésre és védekezésre. Összetett szemei rövid nyélen ülnek."},
+            {nev:"Szitakötő szárnyai",leiras:"Két pár hártyás szárnyát egymástól függetlenül mozgatja — ezért rendkívül manőverező repülő."},
+            {nev:"Tiszavirág",leiras:"Egynapos életű kérész — lárvája évekig él a vízben, a tömeges rajzás a folyó jó vízminőségét jelzi."},
+          ],
+          erdekes:"A szitakötőlárva akár 2-3 évet tölt a vízben, miközben a kifejlett szitakötő csak néhány hétig él! Az álarcát villámgyorsan löki ki zsákmányszerzéskor — ez az egyik leggyorsabb mozgás a rovatok között.",
+        },
         tf:[
           {text:"A folyami rák tiszta, hideg vizű tavakban és patakokban él.",answer:true,diff:1,explain:"Igen! A folyami rák érzékeny az oxigénszintre – csak tiszta, hideg, oxigéndús vizekben él meg."},
           {text:"A folyami rák első lábpárja ollóvá alakult.",answer:true,diff:1,explain:"Helyes! Az első lábpár ollóvá módosult – ez szolgál zsákmányszerzésre és védekezésre."},
@@ -1044,6 +1127,22 @@ const BIG_TOPICS = [
         ]
       },
       {id:6,icon:"🐟",title:"A hazai vizekben élő halak",ready:true,
+        tananyag:{
+          bevezeto:"A halak alkalmazkodása a vizes élőhelyekhez rendkívül sokféle. A tiszta, oxigéndús folyóvizekben a fejes domolykó és a sebes pisztráng él — áramvonalas testük a gyors sodráshoz igazodik. Az iszapos, tápanyagban gazdag állóvizekben a keszegfélék, kárászok és pontyok honosak — ők az alacsonyabb oxigénszintet is elviselik. A tőponty (és nemesített változata, a tükörponty) gyorsan nő, mindenevő, télen elvermel a mederben.",
+          fogalmak:[
+            {nev:"Euritóp hal",leiras:"Széles tűrőképességű — pl. ponty, kárász: iszapos, meleg, kevés oxigénű vizekben is megél."},
+            {nev:"Sztenotóp hal",leiras:"Szűk tűrőképességű — pl. sebes pisztráng: csak tiszta, hideg, oxigéndús vizet tűr."},
+            {nev:"Kopoltyú",leiras:"A hal légzőszerve — szájon át veszi fel a vizet, a kopoltyún kivonja az oxigént, a kopoltyúfedőn engedi ki."},
+            {nev:"Úszóhólyag",leiras:"Levegővel teli szerv — a hal sűrűségét szabályozza, segít a lebegésben."},
+            {nev:"Oldalvonal",leiras:"Érzékszerv a hal oldalán — a víz áramlását és rezgéseit érzékeli."},
+            {nev:"Pikkelyek + nyálka",leiras:"A hal kültakarója — védelmet nyújt a kórokozók ellen, csökkenti a vízállást."},
+            {nev:"Elvermelés",leiras:"Téli életmód: a ponty a meder iszapjába húzódik, életfunkciói lelassulnak."},
+            {nev:"Tükörponty",leiras:"A tőponty nemesített változata — kevesebb, nagyobb pikkely, gyors növekedés."},
+            {nev:"Változó testhőmérséklet",leiras:"A hal hidegvérű — testhőmérséklete a vízéval egyezik meg, ezért télen elvermel, 26°C felett elpusztulhat."},
+            {nev:"Gátak és vándorló halak",leiras:"A gátak megakadályozzák a halak ívóhelyre való felvándorlását — a szaporodás meghiúsul, a populáció összeomlik."},
+          ],
+          erdekes:"A ponty szaporodáskor rengeteg ikrát rak, de ezeknek csak töredéke éri meg a felnőttkort — a legtöbb ikrát és lárvát más élőlények eszik meg. A fogassüllő értékes ragadozó halfajunk, amely más halakat fogyaszt.",
+        },
         tf:[
           {text:"A hal testfelépítése áramvonalas – ez segíti a mozgást a vízben.",answer:true,diff:1,explain:"Igen! Az áramvonalas testalak csökkenti a víz ellenállását, ezért tudnak gyorsan úszni a halak."},
           {text:"A ponty csak állóvizekben él.",answer:false,diff:1,explain:"Nem! A ponty álló- és folyóvizekben is megél – alkalmazkodóképes halfaj."},
@@ -1093,6 +1192,28 @@ const BIG_TOPICS = [
         ]
       },
       {id:7,icon:"🐸",title:"Békák a vízben és a vízparton",ready:true,
+        tananyag:{
+          bevezeto:"A kecskebéka 10 cm, nyálkás bőrű, rejtőszínű. Tüdővel ÉS bőrrel lélegzik — változó testhőmérsékletű. Petéit kocsonyás burok védi — NEM kemény héj. Az ebihal kopoltyúval lélegzik; átalakuláskor a farok és kopoltyú VISSZAFEJLŐDIK, végtagok nőnek. A barna varangy csak szaporodáskor keresi fel a vizet. Gőték és szalamandrák szintén kétéltűek. A kétéltűek NEM kizárólag víziek — két életterük van.",
+          fogalmak:[
+            {nev:"Kétéltűek",leiras:"Két élettérben élő gerincesek — lárvájuk vízben él, kifejlett korukban a szárazföldön is megélnek."},
+            {nev:"Bőrlégzés",leiras:"A kecskebéka nedves bőrén keresztül is vesz fel oxigént — téli álomban szinte kizárólag így lélegzik."},
+            {nev:"Ebihal",leiras:"A béka lárvaállapota — külső kopoltyúval lélegzik, planktonokkal táplálkozik, farka és kopoltyúja az átalakulás során visszafejlődik."},
+            {nev:"Külső megtermékenyítés",leiras:"A hím a vízbe rakott peték mellé engedi ivarsejtjeit — a megtermékenyítés a vízben történik."},
+            {nev:"Kocsonyás peték",leiras:"A béka petéit kocsonyás burok védi és táplálja — átlátszó gömb alakú tömegben úsznak a vízben."},
+            {nev:"Barna varangy",leiras:"Akár 15 cm-es kétéltű — nyirkos erdőkben, kertekben él, csak szaporodáskor keresi fel a vizet."},
+            {nev:"Fültőmirigy",leiras:"A barna varangy fejének két oldalán lévő mirigy — mérgező váladékot termel védekezésként."},
+            {nev:"Békamentés",leiras:"Tavaszi vonuláskor az utakon kerítésekkel és gyűjtőedényekkel segítik a békák biztonságos átkelését."},
+            {nev:"Változó testhőmérséklet",leiras:"A béka hidegvérű — testhőmérséklete a környezettel változik, télen iszapba ásva tölti a hideget."},
+            {nev:"Gőték és szalamandrák",leiras:"A kétéltűek közeli rokonai — szintén vízben szaporodnak, lárvájuk vízben fejlődik."},
+            {nev:"Amfibiaátjárók",leiras:"Az utak alá épített békaátjárók — lehetővé teszik a biztonságos tavaszi vonulást a szaporodóhelyre."},
+            {nev:"Béka petéje",leiras:"Kocsonyás burok védi és táplálja — NEM kemény héj. A kocsonyaburok átlátszó, csoportosan úszik a vízben."},
+            {nev:"Átalakulás menete",leiras:"Ebihal → végtagok nőnek → farok és kopoltyú VISSZAFEJLŐDIK → tüdő + bőrlégzés alakul ki. NEM farok nő!"},
+            {nev:"Változó testhőmérséklet",leiras:"A béka hidegvérű — testhőmérséklete a környezettel változik. Télen iszapba ásva telel."},
+            {nev:"Kétéltűek két élettere",leiras:"NEM kizárólag víziek — lárvájuk vízben él, de kifejletten szárazföldön is megélnek. Gőték, szalamandrák is kétéltűek."},
+            {nev:"Bőrlégzés és szennyezés",leiras:"A béka nedves bőrén át is lélegzik — ezért a vizes élőhelyek szennyezése különösen veszélyes rájuk."},
+          ],
+          erdekes:"A kecskebéka kicsapható nyelve villámgyors — a zsákmányt ragadós nyelvével kapja el. A barna varangy hasznos kertész: egyetlen nyáron több száz kártevő rovart, csigát és férget fogyaszt el!",
+        },
         tf:[
           {text:"A kecskebéka nyálkás bőre rejtőszín – zöldes-barna, nehéz észrevenni.",answer:true,diff:1,explain:"Igen! A kecskebéka rejtőszínű bőre védi a ragadozóktól – a zöld szín remekül beillik a parti növényzetbe."},
           {text:"A béka kizárólag tüdővel lélegzik.",answer:false,diff:1,explain:"Nem! A béka tüdővel ÉS bőrrel lélegzik – a nedves bőrfelületen keresztül is felvesz oxigént."},
@@ -1142,6 +1263,22 @@ const BIG_TOPICS = [
         ]
       },
       {id:8,icon:"🐍",title:"A vízisikló és a mocsári teknős",ready:true,
+        tananyag:{
+          bevezeto:"A vízisikló 1-1,5 méteres, mérgetlen hüllő — sárga félhold foltok jelzik a fejét. Száraz szarupikkelyei védenek a kiszáradás ellen. Ragadozó: halakat és békákat nyel le egészben, tágulékony bélcsatornával. A mocsári teknős hazánk egyetlen vadon élő teknősfaja — 20 cm-es, szarupajzsos páncélja van. Mindkettő változó testhőmérsékletű, tojásokkal szaporodik és téli álmot alszik.",
+          fogalmak:[
+            {nev:"Szarupikkelyek",leiras:"A vízisikló száraz, pikkelyes bőre — védi a testet és megakadályozza a kiszáradást."},
+            {nev:"Sárga félhold foltok",leiras:"A vízisikló fejének megkülönböztető jelzése — segít elkülöníteni más kígyóktól."},
+            {nev:"Haspajzsok",leiras:"A vízisikló hasán lévő nagyobb pikkelyek — szűk helyeken ezekkel kapaszkodik és mozog."},
+            {nev:"Tágulékony bélcsatorna",leiras:"A vízisikló egészben nyeli le a zsákmányát — bélcsatornája a nagy falat befogadásához kitágul."},
+            {nev:"Telelőközösség",leiras:"A vízisiklók fagymentes helyeken együtt telelnek — testmelegük közösen tartja a hőmérsékletet."},
+            {nev:"Mocsári teknős páncélja",leiras:"Szarupajzsokból álló páncél — veszély esetén a teknős fejét és végtagjait behúzza."},
+            {nev:"Szarukáva",leiras:"A mocsári teknős fogak nélküli, kemény szájpereme — a zsákmányt karmaival marcangolja szét, szarukávával aprítja."},
+            {nev:"Változó testhőmérséklet",leiras:"Mindkét állat hidegvérű — testhőmérsékletük a környezet hőmérsékletével változik, ezért alszanak télen."},
+            {nev:"Vízisikló: mérgetlen",leiras:"A vízisikló NEM mérgező — sárga félhold foltjai alapján azonosítható. Védekezéskor kellemetlen váladékot bocsát ki."},
+            {nev:"Ellenségek",leiras:"A vízisikló természetes ellenségei a gólyák, gémek és a rétihéják — ezért fontos a rejtőzés és a gyors menekülés."},
+          ],
+          erdekes:"A vízisiklónak több mint 100 csigolyája van — ez teszi lehetővé a hajlékony kígyózó mozgást. A mocsári teknős tojásait homokos talajba ássa el, és a nap melege költi ki a tojásokat nyár végén.",
+        },
         tf:[
           {text:"A vízisikló mérgező kígyó.",answer:false,diff:1,explain:"Nem! A vízisikló NEM mérgező – ártalmatlan kígyó, sárga félhold foltjai alapján könnyen felismerhető."},
           {text:"A vízisikló sárga félhold foltjai a fejénél láthatók.",answer:true,diff:1,explain:"Igen! A fején lévő sárga félhold foltok a vízisikló legjellegzetesebb megkülönböztető jegyei."},
@@ -1192,6 +1329,26 @@ const BIG_TOPICS = [
         ]
       },
       {id:9,icon:"🦢",title:"A vizek, vízpartok madarai",ready:true,
+        tananyag:{
+          bevezeto:"A vízparti madarak különböző életterekre specializálódtak — ezzel csökken a versengés a táplálékért és a fészkelőhelyért. A tőkés réce csónak alakú testű, úszóhártyás, vízlepergető tollazatú úszómadár. A fehér gólya gázlólábon jár, vitorlázórepüléssel vonul Afrikába. A gémfélék nagy telepekben költenek, hegyes csőrükkel nyársalják fel a zsákmányt. A barna rétihéja nádasokban fészkel.",
+          fogalmak:[
+            {nev:"Tőkés réce tollazata",leiras:"Zsíros váladék fedi a tollakat — a víz lepereg róluk, a madár nem ázik meg."},
+            {nev:"Fészekhagyó fiókák",leiras:"A tőkés réce fiókái kikelés után hamar elhagyják a fészket — szemük nyitva van, szőrösek, önállóan követik az anyát."},
+            {nev:"Gázlóláb",leiras:"A gólya hosszú lábú, hosszú csüdű — sekély vízben gázol, ujjai között nincs úszóhártya."},
+            {nev:"Vitorlázórepülés",leiras:"A fehér gólya szárnyait mozdulatlanul tartja, meleg felszálló légáramlaton emelkedik — energiatakarékos vonulási módszer."},
+            {nev:"Gémfélék",leiras:"Szürke gém, vörös gém, kis kócsag, nagy kócsag — nagy telepekben költenek, hegyes csőrükkel nyársalják fel a halat."},
+            {nev:"Barna rétihéja",leiras:"Kb. 60 cm-es, 130 cm szárnyfesztávolságú ragadozó — nádasokban fészkel, békákat, vízimaderakat, siklókat, rágcsálókat eszik."},
+            {nev:"Gólya vonulása",leiras:"Afrika középső és déli részére vonul — több ezer kilométeres út, vitorlázórepüléssel."},
+            {nev:"Gólya fészke",leiras:"Ágakból épített, villanyoszlopra vagy kéményre rakott fészek — tavasszal a régi fészket újítják fel."},
+            {nev:"Gólya lába",leiras:"Gázlóláb — hosszú lábszár és csüd, ujjai között NINCS úszóhártya. Sekély vízben gázolva vadászik."},
+            {nev:"Gémek vadászmódszere",leiras:"Mozdulatlanul várakoznak a vízparton, majd villámsebesen nyársalják fel a zsákmányt hegyes csőrükkel."},
+            {nev:"Rétihéja mérete",leiras:"Kb. 60 cm, szárnyfesztávolsága 130 cm — nádasokban fészkel, békákat, vízimaderakat, siklókat, rágcsálókat eszik."},
+            {nev:"Gólyafiókák — fészeklakók",leiras:"A gólyafiókák fészeklakók — szüleik etetik őket. Ellentétben a réce fészekhagyó fiókáival, akik azonnal önállóak."},
+            {nev:"Gémek vadászmódszere",leiras:"Mozdulatlanul állnak a vízparton, majd villámsebesen nyársalják fel a zsákmányt — energiatakarékosabb, mint az üldözés."},
+            {nev:"Gólya fészkelőhely",leiras:"Villanyoszlopokra, kéményekre, épületekre rakja fészkét — az állatok alkalmazkodtak az emberi környezethez."},
+          ],
+          erdekes:"A fehér gólya egyáltalán nem ver szárnyat a vonulás nagy részén — meleg felszálló légáramlatokon emelkedik, majd siklva halad. Így takarítja meg az energiát az Afrikáig tartó hosszú úton.",
+        },
         tf:[
           {text:"A tőkés réce a házi kacsa őse.",answer:true,diff:1,explain:"Igen! A tőkés réce (vadrécze) az összes házi kacsafajta őse – a tenyésztett kacsa belőle nemesítve."},
           {text:"A tőkés réce tollazata nem vízálló.",answer:false,diff:1,explain:"Nem! A tőkés réce tollaira zsíros váladékot ken, amely vízlepergető hatású – a toll szárazon marad."},
@@ -1245,6 +1402,25 @@ const BIG_TOPICS = [
         ]
       },
       {id:10,icon:"🌊",title:"A vizek, vízpartok életközössége",ready:true,
+        tananyag:{
+          bevezeto:"A vízi életközösségben termelők (plankton, hínár, parti növények), fogyasztók (növényevők és ragadozók) és lebontók (baktériumok, gombák, férgek, rovarlárvák) alkotnak táplálékhálózatot. A lebontók az elpusztult élőlényeket egyszerű anyagokká bontják, amelyeket a növények újra felhasználnak. A környezeti tényezők — különösen a víz hőmérséklete — szabályozzák az életközösség működését.",
+          fogalmak:[
+            {nev:"Táplálkozási lánc",leiras:"Termelők → elsődleges fogyasztók → másodlagos fogyasztók → csúcsragadozó. Pl.: plankton növényei → békalárva → szitakötőlárva → dévérkeszeg → lesőharcsa."},
+            {nev:"Lebontók",leiras:"Baktériumok, gombák, férgek, rovarlárvák — elpusztult élőlények maradványait bontják le tápanyagokká a növények számára."},
+            {nev:"Anyagok körforgása",leiras:"Az anyagok állandóan körforgásban vannak a táplálkozási láncokon keresztül — a lebontók zárják le a kört."},
+            {nev:"Optimum",leiras:"Az a környezeti feltétel, amelyen az élőlény a legjobban él és szaporodik — pl. pontynak 20°C."},
+            {nev:"Tűrőképesség",leiras:"Az élőlény elviseli a környezeti tényezők változásait egy bizonyos határig — ezen túl elpusztul."},
+            {nev:"Szűk tűrőképesség",leiras:"Kis változást visel el — pl. sebes pisztráng csak hideg, tiszta, oxigéndús vízben él."},
+            {nev:"Tág tűrőképesség",leiras:"Nagy változást is elvisel — pl. róka sokféle élőhelyen megél."},
+            {nev:"Ponty hőtűrése",leiras:"+4°C alatt elvermel; 20°C-on optimális, szaporodik; 26°C felett elpusztul az oxigénhiány miatt."},
+            {nev:"Euritóp faj",leiras:"Tág tűrőképességű — nagy változásokat is elvisel. Pl. ponty, róka: sokféle körülmény között megél."},
+            {nev:"Sztenotóp faj",leiras:"Szűk tűrőképességű — kis változást visel el. Pl. sebes pisztráng: csak hideg, oxigéndús, tiszta vízben él."},
+            {nev:"Vonuló madarak",leiras:"Szűk tűrőképességűek az évszakos változások szempontjából — télen elhagyják a hideg területeket."},
+            {nev:"Életközösségi egyensúly",leiras:"Az egyensúly azt jelenti, hogy egyik faj sem szaporodik túl a másik kárára — mindenki elegendő táplálékhoz és helyhez jut."},
+            {nev:"Csúcsragadozó szerepe",leiras:"Ha a csúcsragadozó eltűnik, a zsákmányfajok elszaporodnak — ez az egész táplálékhálózat egyensúlyát felborítja."},
+          ],
+          erdekes:"A lesőharcsa az egyik legnehezebb hazai édesvízi halunk — akár 100 kg-ot is elér! A táplálékláncban csúcsragadozóként tartja egyensúlyban a többi halfaj állományát.",
+        },
         tf:[
           {text:"A vízi életközösség termelői a planktonok, a hínárosok és a parti növények.",answer:true,diff:1,explain:"Igen! A vizekben a zöld növények (planktonalgák, hínár, parti fák) a termelők, amelyek fotoszintézissel állítják elő a szerves anyagot."},
           {text:"A táplálkozási lánc nyila a zsákmánytól a fogyasztó felé mutat.",answer:true,diff:1,explain:"Igen! A nyíl az energiaáramlás irányát mutatja: aki megeszi a másikat – felé mutat."},
@@ -1297,6 +1473,23 @@ const BIG_TOPICS = [
         ]
       },
       {id:11,icon:"♻️",title:"A vizek szennyezése. A vizes élőhelyek védelme",ready:true,
+        tananyag:{
+          bevezeto:"A vizeket háztartási szennyvíz, ipari szennyvíz és mezőgazdasági műtrágyák szennyezik. Az eutrofizáció (tápanyag-feldúsulás) az algák elszaporodásához, oxigénhiányhoz és tömeges halpusztuláshoz vezet. A folyók és tavak bizonyos mértékig képesek az öntisztulásra — planktonok, nádasok, kagylók szűrik a vizet. A Natura 2000 program segítségével ártéri erdők és mocsárvilág újul meg.",
+          fogalmak:[
+            {nev:"Eutrofizáció",leiras:"Tápanyagok (nitrogén, foszfor) feldúsulása a vízben — algák és planktonok elszaporodnak, oxigén elfogy, élőlények pusztulnak."},
+            {nev:"Nehézfémek",leiras:"Ipari szennyvízből kerülnek a vízbe — beépülnek a táplálkozási láncba, a csúcsragadozókban feldúsulnak."},
+            {nev:"Öntisztulás",leiras:"A folyók és tavak természetes védekezése — planktonok, hinarasok, nádasok, kagylók, csigák szűrik és bontják le a szennyezőanyagokat."},
+            {nev:"Tömeges halpusztulás",leiras:"Az öntisztulás megszűnésének jele — oxigénhiány és mérgező gázok (metán, kén-dioxid) ölik el a halakat."},
+            {nev:"Ártéri erdők pusztulása",leiras:"A folyószabályozás megszüntette az elöntéseket — az ártéri erdők kiszáradtak, a folyó és az ártér kapcsolata megszakadt."},
+            {nev:"Natura 2000",leiras:"Az EU természetvédelmi programja — ártéri erdők, mocsárvilág, szikes tavak élőhely-rekonstrukcióját támogatja."},
+            {nev:"Vidra",leiras:"A vizes élőhelyek csúcsragadozója — száma Magyarországon növekszik az élőhely-visszaállításnak köszönhetően."},
+            {nev:"Ivóvíz",leiras:"Egyre értékesebb erőforrás — a felszín közeli kutak sok helyen fertőzöttek, egyre mélyebbre kell fúrni a tiszta vízért."},
+            {nev:"Folyószabályozás és vízlépcsők",leiras:"Megváltoztatják a folyók természetes állapotát — az ártéri erdők kiszáradnak, a hal vándorlása akadályozva van."},
+            {nev:"Mocsarak lecsapolása",leiras:"Értékes vizes élőhelyek tűnnek el — csökken a természetes vízvisszatartó kapacitás és a biodiverzitás."},
+            {nev:"Balaton eutrofizáció",leiras:"A Balaton és más tavak tápanyag-feldúsulása komoly probléma — a foszforterhelés csökkentése a védekezés fő módja."},
+          ],
+          erdekes:"Egy 4 fős háztartás naponta 400-600 liter szennyvizet termel — ez mind visszakerül valamilyen formában a természetbe. A szennyvíztisztítás ezért minden település alapvető környezetvédelmi feladata.",
+        },
         tf:[
           {text:"Mi az eutrofizáció?",opts:["A víz kiszáradása","A vizek tápanyagokkal való túldúsulása, ami tömeges algaszaporodáshoz vezet","A víz sózódása","A halak betegségei"],correct:1,diff:1,explain:"Az eutrofizáció a vizek tápanyagokkal (nitrogén, foszfor) való túldúsulása – az algák elszaporodnak, a fény és az oxigén csökken, ami tömeges pusztuláshoz vezet."},
           {diff:1,question:"Rendezd sorba az eutrofizáció folyamatát!",items:["Algák tömeges elszaporodása","Mérgező gázok képződnek, élőlények pusztulnak","Tápanyagok (műtrágya, szennyvíz) kerülnek a vízbe","Fény nem jut a mélyre, oxigénszint csökken"],correct:[2,0,3,1],explain:"Szennyezés → algák elszaporodnak → fény és oxigén csökken → mérgező gázok és pusztulás."},
@@ -1346,6 +1539,119 @@ const BIG_TOPICS = [
         ]
       },
       {id:12,icon:"📋",title:"Rendszerezzük ismereteinket!",ready:true,
+        tananyag:{
+          bevezeto:"A Vizek, vízpartok életközössége témakör összefoglalója. A vízben és vízparton rendkívül sokféle élőlény él: parányi planktonoktól a halakig, kétéltűektől a hüllőkig, vízi rovaroktól a vízimadarak és ragadozók csúcsáig. Mindenkit összeköt a táplálkozási hálózat és az anyagok körforgása. A vizek védelme — az eutrofizáció, szennyezés és élőhely-pusztítás elleni küzdelem — az egész életközösség fennmaradásának kulcsa.",
+          fogalmak:[
+            {nev:"🌿 Élő szűrő",leiras:"A vízparti növényzet felfogja a part mögül érkező szennyeződéseket és beépíti a tápanyagokat — megakadályozza az eutrofizációt."},
+            {nev:"🌿 Fonalas zöldmoszat",leiras:"Telepes felépítésű vízi növény — nincs gyökér, szár, levél, virág; sekély vizekben tömegesen elszaporodik."},
+            {nev:"🌿 Hínáros békaszőlő",leiras:"Gyöktörzse az iszapban van, virágzata a víz fölé emelkedik — az áramló víz porozza be."},
+            {nev:"🌿 Tündérrózsa és vízitök",leiras:"Iszapban gyökereznek, viaszos leveleik a víz felszínén terülnek szét — levegőt a levelek veszik fel, tápanyagot a gyöktörzs tárolja."},
+            {nev:"🌿 Békalencse",leiras:"Apró, 1 cm-es lebegő vízi növény — lencse alakú szára van, levele elcsökevényesedett, gyökérszála lefelé lóg."},
+            {nev:"🌿 Közönséges nád",leiras:"Erős, üreges szárú, párhuzamos erezetű vízparti növény — bugavirágzatát a szél porozza be, 2 méteres vízmélységig is megél."},
+            {nev:"🌿 Széleslevelű gyékény",leiras:"Náddal közös élőhelyű növény — szélesebb levelek, torzsavirágzat (buzogány), szél porozza be."},
+            {nev:"🌿 Nádas szerepe",leiras:"Élőhelyet biztosít, védi a partot, meggátolja a tápanyagok feldúsulását — nélkülözhetetlen a vízparti ökoszisztémában."},
+            {nev:"🐌 Hirudin",leiras:"Az orvosi pióca nyálában lévő véralvadásgátló anyag — ma kémiai úton állítják elő gyógyszeralapanyagként."},
+            {nev:"🐌 Szívókorong / tapadókorong",leiras:"A pióca két végén lévő rögzítőszervek — egyikkel kapaszkodik, másikkal táplálkozik."},
+            {nev:"🐌 Pontszemek",leiras:"Fényérzékelő szervek a pióca testén — képet nem alkot, csak fényt és árnyékot érzékel."},
+            {nev:"🐌 Hímnős",leiras:"Egy egyedben hím és nőstény ivarszerv is van — de kölcsönös párzással szaporodnak."},
+            {nev:"🐌 Nagy mocsári csiga",leiras:"6 cm-es, csúcsos házú vízi csiga — kezdetleges tüdővel lélegzik, a vízfelszínre mászik levegőért."},
+            {nev:"🐌 Haslábak",leiras:"A csiga mozgásszerve — izmos talpán csúszik."},
+            {nev:"🐌 Tavi kagyló",leiras:"Iszapos tavak és folyók lakója, akár 20 cm hosszú — tolólábbal mozog, szűrőtáplálkozással él."},
+            {nev:"🐌 Szűrőtáplálkozás",leiras:"A kagyló vizet szív be, kiszűri a lebegő apró élőlényeket — légzése és táplálkozása összekapcsolódik."},
+            {nev:"🐌 Pióca mérete és légzése",leiras:"Kb. 15 cm hosszú, barnászöld, narancssárga sávos. Nyálkás kültakarón lélegzik — oxigént vesz fel, szén-dioxidot ad le."},
+            {nev:"🐌 Petézés",leiras:"Hímnős állat — párzás után a parti öv talajába rakja petéit, a kis piócák a következő év tavaszán kelnek ki."},
+            {nev:"🐌 Csiga légzése",leiras:"A nagy mocsári csiga kezdetleges tüdővel lélegzik — NEM kopoltyúval. Időnként a vízfelszínre mászik levegőért."},
+            {nev:"🐌 Pióca légzése és mozgása",leiras:"Nyálkás kültakarón lélegzik — NEM tüdővel. Vízben úszik (test hullámmozgása), szárazföldön féregmozgással is halad."},
+            {nev:"🐌 Pióca vérszívás",leiras:"Testtömegénél ÖTSZÖR több vért képes felszívni — nem kétszeresét. Fogazott állkapcsokkal sebzi meg a gazdát."},
+            {nev:"🐌 Pióca petézése",leiras:"Petéit a parti öv talajába rakja — NEM a vízbe szórja. A kis piócák a következő év tavaszán kelnek ki."},
+            {nev:"🦟 Kitinpáncél",leiras:"A folyami rák kültakarója — kitin és mész keveréke, védelem és tartás. Vedléssel cserélődik."},
+            {nev:"🦟 Fejtor",leiras:"A rák feje és torának összenőtt része — itt vannak a kopoltyúk, csápok és összetett szemek."},
+            {nev:"🦟 Farki lemezek",leiras:"A rák potrohának végén lévő lemezek — hátrafelé való gyors úszásra szolgálnak."},
+            {nev:"🦟 Rákpestis",leiras:"Az amerikai folyami rák által terjesztett betegség — az őshonos folyami rákokat elpusztítja."},
+            {nev:"🦟 Szitakötő álarc",leiras:"A szitakötőlárva alsó ajkából képződött fogókészülék — apró rovarokat, halivadékokat, békalárvát fog."},
+            {nev:"🦟 Szitakötő fejlődése",leiras:"Nincs bábállapot — a lárva 2-3 évig él a vízben, majd a felszínen vedlik és szárnyas kifejlett egyeddé válik."},
+            {nev:"🦟 Szúnyog fejlődése",leiras:"Teljes átalakulás: pete → lárva (vízben, légcsővel lélegzik) → mozgó báb → kifejlett szúnyog."},
+            {nev:"🦟 Szúnyog nőstény",leiras:"Szúró-szívó szájszervvel vért szív — a hímek nem szúrnak, növényi nedvekkel táplálkoznak."},
+            {nev:"🦟 Folyami rák lábai",leiras:"5 pár lába van — az első pár ollóvá alakult zsákmányszerzésre és védekezésre. Összetett szemei rövid nyélen ülnek."},
+            {nev:"🦟 Szitakötő szárnyai",leiras:"Két pár hártyás szárnyát egymástól függetlenül mozgatja — ezért rendkívül manőverező repülő."},
+            {nev:"🦟 Tiszavirág",leiras:"Egynapos életű kérész — lárvája évekig él a vízben, a tömeges rajzás a folyó jó vízminőségét jelzi."},
+            {nev:"🐟 Euritóp hal",leiras:"Széles tűrőképességű — pl. ponty, kárász: iszapos, meleg, kevés oxigénű vizekben is megél."},
+            {nev:"🐟 Sztenotóp hal",leiras:"Szűk tűrőképességű — pl. sebes pisztráng: csak tiszta, hideg, oxigéndús vizet tűr."},
+            {nev:"🐟 Kopoltyú",leiras:"A hal légzőszerve — szájon át veszi fel a vizet, a kopoltyún kivonja az oxigént, a kopoltyúfedőn engedi ki."},
+            {nev:"🐟 Úszóhólyag",leiras:"Levegővel teli szerv — a hal sűrűségét szabályozza, segít a lebegésben."},
+            {nev:"🐟 Oldalvonal",leiras:"Érzékszerv a hal oldalán — a víz áramlását és rezgéseit érzékeli."},
+            {nev:"🐟 Pikkelyek + nyálka",leiras:"A hal kültakarója — védelmet nyújt a kórokozók ellen, csökkenti a vízállást."},
+            {nev:"🐟 Elvermelés",leiras:"Téli életmód: a ponty a meder iszapjába húzódik, életfunkciói lelassulnak."},
+            {nev:"🐟 Tükörponty",leiras:"A tőponty nemesített változata — kevesebb, nagyobb pikkely, gyors növekedés."},
+            {nev:"🐟 Változó testhőmérséklet",leiras:"A hal hidegvérű — testhőmérséklete a vízéval egyezik meg, ezért télen elvermel, 26°C felett elpusztulhat."},
+            {nev:"🐟 Gátak és vándorló halak",leiras:"A gátak megakadályozzák a halak ívóhelyre való felvándorlását — a szaporodás meghiúsul, a populáció összeomlik."},
+            {nev:"🐸 Kétéltűek",leiras:"Két élettérben élő gerincesek — lárvájuk vízben él, kifejlett korukban a szárazföldön is megélnek."},
+            {nev:"🐸 Bőrlégzés",leiras:"A kecskebéka nedves bőrén keresztül is vesz fel oxigént — téli álomban szinte kizárólag így lélegzik."},
+            {nev:"🐸 Ebihal",leiras:"A béka lárvaállapota — külső kopoltyúval lélegzik, planktonokkal táplálkozik, farka és kopoltyúja az átalakulás során visszafejlődik."},
+            {nev:"🐸 Külső megtermékenyítés",leiras:"A hím a vízbe rakott peték mellé engedi ivarsejtjeit — a megtermékenyítés a vízben történik."},
+            {nev:"🐸 Kocsonyás peték",leiras:"A béka petéit kocsonyás burok védi és táplálja — átlátszó gömb alakú tömegben úsznak a vízben."},
+            {nev:"🐸 Barna varangy",leiras:"Akár 15 cm-es kétéltű — nyirkos erdőkben, kertekben él, csak szaporodáskor keresi fel a vizet."},
+            {nev:"🐸 Fültőmirigy",leiras:"A barna varangy fejének két oldalán lévő mirigy — mérgező váladékot termel védekezésként."},
+            {nev:"🐸 Békamentés",leiras:"Tavaszi vonuláskor az utakon kerítésekkel és gyűjtőedényekkel segítik a békák biztonságos átkelését."},
+            {nev:"🐸 Változó testhőmérséklet",leiras:"A béka hidegvérű — testhőmérséklete a környezettel változik, télen iszapba ásva tölti a hideget."},
+            {nev:"🐸 Gőték és szalamandrák",leiras:"A kétéltűek közeli rokonai — szintén vízben szaporodnak, lárvájuk vízben fejlődik."},
+            {nev:"🐸 Amfibiaátjárók",leiras:"Az utak alá épített békaátjárók — lehetővé teszik a biztonságos tavaszi vonulást a szaporodóhelyre."},
+            {nev:"🐸 Béka petéje",leiras:"Kocsonyás burok védi és táplálja — NEM kemény héj. A kocsonyaburok átlátszó, csoportosan úszik a vízben."},
+            {nev:"🐸 Átalakulás menete",leiras:"Ebihal → végtagok nőnek → farok és kopoltyú VISSZAFEJLŐDIK → tüdő + bőrlégzés alakul ki. NEM farok nő!"},
+            {nev:"🐸 Változó testhőmérséklet",leiras:"A béka hidegvérű — testhőmérséklete a környezettel változik. Télen iszapba ásva telel."},
+            {nev:"🐸 Kétéltűek két élettere",leiras:"NEM kizárólag víziek — lárvájuk vízben él, de kifejletten szárazföldön is megélnek. Gőték, szalamandrák is kétéltűek."},
+            {nev:"🐸 Bőrlégzés és szennyezés",leiras:"A béka nedves bőrén át is lélegzik — ezért a vizes élőhelyek szennyezése különösen veszélyes rájuk."},
+            {nev:"🐍 Szarupikkelyek",leiras:"A vízisikló száraz, pikkelyes bőre — védi a testet és megakadályozza a kiszáradást."},
+            {nev:"🐍 Sárga félhold foltok",leiras:"A vízisikló fejének megkülönböztető jelzése — segít elkülöníteni más kígyóktól."},
+            {nev:"🐍 Haspajzsok",leiras:"A vízisikló hasán lévő nagyobb pikkelyek — szűk helyeken ezekkel kapaszkodik és mozog."},
+            {nev:"🐍 Tágulékony bélcsatorna",leiras:"A vízisikló egészben nyeli le a zsákmányát — bélcsatornája a nagy falat befogadásához kitágul."},
+            {nev:"🐍 Telelőközösség",leiras:"A vízisiklók fagymentes helyeken együtt telelnek — testmelegük közösen tartja a hőmérsékletet."},
+            {nev:"🐍 Mocsári teknős páncélja",leiras:"Szarupajzsokból álló páncél — veszély esetén a teknős fejét és végtagjait behúzza."},
+            {nev:"🐍 Szarukáva",leiras:"A mocsári teknős fogak nélküli, kemény szájpereme — a zsákmányt karmaival marcangolja szét, szarukávával aprítja."},
+            {nev:"🐍 Változó testhőmérséklet",leiras:"Mindkét állat hidegvérű — testhőmérsékletük a környezet hőmérsékletével változik, ezért alszanak télen."},
+            {nev:"🐍 Vízisikló: mérgetlen",leiras:"A vízisikló NEM mérgező — sárga félhold foltjai alapján azonosítható. Védekezéskor kellemetlen váladékot bocsát ki."},
+            {nev:"🐍 Ellenségek",leiras:"A vízisikló természetes ellenségei a gólyák, gémek és a rétihéják — ezért fontos a rejtőzés és a gyors menekülés."},
+            {nev:"🦢 Tőkés réce tollazata",leiras:"Zsíros váladék fedi a tollakat — a víz lepereg róluk, a madár nem ázik meg."},
+            {nev:"🦢 Fészekhagyó fiókák",leiras:"A tőkés réce fiókái kikelés után hamar elhagyják a fészket — szemük nyitva van, szőrösek, önállóan követik az anyát."},
+            {nev:"🦢 Gázlóláb",leiras:"A gólya hosszú lábú, hosszú csüdű — sekély vízben gázol, ujjai között nincs úszóhártya."},
+            {nev:"🦢 Vitorlázórepülés",leiras:"A fehér gólya szárnyait mozdulatlanul tartja, meleg felszálló légáramlaton emelkedik — energiatakarékos vonulási módszer."},
+            {nev:"🦢 Gémfélék",leiras:"Szürke gém, vörös gém, kis kócsag, nagy kócsag — nagy telepekben költenek, hegyes csőrükkel nyársalják fel a halat."},
+            {nev:"🦢 Barna rétihéja",leiras:"Kb. 60 cm-es, 130 cm szárnyfesztávolságú ragadozó — nádasokban fészkel, békákat, vízimaderakat, siklókat, rágcsálókat eszik."},
+            {nev:"🦢 Gólya vonulása",leiras:"Afrika középső és déli részére vonul — több ezer kilométeres út, vitorlázórepüléssel."},
+            {nev:"🦢 Gólya fészke",leiras:"Ágakból épített, villanyoszlopra vagy kéményre rakott fészek — tavasszal a régi fészket újítják fel."},
+            {nev:"🦢 Gólya lába",leiras:"Gázlóláb — hosszú lábszár és csüd, ujjai között NINCS úszóhártya. Sekély vízben gázolva vadászik."},
+            {nev:"🦢 Gémek vadászmódszere",leiras:"Mozdulatlanul várakoznak a vízparton, majd villámsebesen nyársalják fel a zsákmányt hegyes csőrükkel."},
+            {nev:"🦢 Rétihéja mérete",leiras:"Kb. 60 cm, szárnyfesztávolsága 130 cm — nádasokban fészkel, békákat, vízimaderakat, siklókat, rágcsálókat eszik."},
+            {nev:"🦢 Gólyafiókák — fészeklakók",leiras:"A gólyafiókák fészeklakók — szüleik etetik őket. Ellentétben a réce fészekhagyó fiókáival, akik azonnal önállóak."},
+            {nev:"🦢 Gémek vadászmódszere",leiras:"Mozdulatlanul állnak a vízparton, majd villámsebesen nyársalják fel a zsákmányt — energiatakarékosabb, mint az üldözés."},
+            {nev:"🦢 Gólya fészkelőhely",leiras:"Villanyoszlopokra, kéményekre, épületekre rakja fészkét — az állatok alkalmazkodtak az emberi környezethez."},
+            {nev:"🌊 Táplálkozási lánc",leiras:"Termelők → elsődleges fogyasztók → másodlagos fogyasztók → csúcsragadozó. Pl.: plankton növényei → békalárva → szitakötőlárva → dévérkeszeg → lesőharcsa."},
+            {nev:"🌊 Lebontók",leiras:"Baktériumok, gombák, férgek, rovarlárvák — elpusztult élőlények maradványait bontják le tápanyagokká a növények számára."},
+            {nev:"🌊 Anyagok körforgása",leiras:"Az anyagok állandóan körforgásban vannak a táplálkozási láncokon keresztül — a lebontók zárják le a kört."},
+            {nev:"🌊 Optimum",leiras:"Az a környezeti feltétel, amelyen az élőlény a legjobban él és szaporodik — pl. pontynak 20°C."},
+            {nev:"🌊 Tűrőképesség",leiras:"Az élőlény elviseli a környezeti tényezők változásait egy bizonyos határig — ezen túl elpusztul."},
+            {nev:"🌊 Szűk tűrőképesség",leiras:"Kis változást visel el — pl. sebes pisztráng csak hideg, tiszta, oxigéndús vízben él."},
+            {nev:"🌊 Tág tűrőképesség",leiras:"Nagy változást is elvisel — pl. róka sokféle élőhelyen megél."},
+            {nev:"🌊 Ponty hőtűrése",leiras:"+4°C alatt elvermel; 20°C-on optimális, szaporodik; 26°C felett elpusztul az oxigénhiány miatt."},
+            {nev:"🌊 Euritóp faj",leiras:"Tág tűrőképességű — nagy változásokat is elvisel. Pl. ponty, róka: sokféle körülmény között megél."},
+            {nev:"🌊 Sztenotóp faj",leiras:"Szűk tűrőképességű — kis változást visel el. Pl. sebes pisztráng: csak hideg, oxigéndús, tiszta vízben él."},
+            {nev:"🌊 Vonuló madarak",leiras:"Szűk tűrőképességűek az évszakos változások szempontjából — télen elhagyják a hideg területeket."},
+            {nev:"🌊 Életközösségi egyensúly",leiras:"Az egyensúly azt jelenti, hogy egyik faj sem szaporodik túl a másik kárára — mindenki elegendő táplálékhoz és helyhez jut."},
+            {nev:"🌊 Csúcsragadozó szerepe",leiras:"Ha a csúcsragadozó eltűnik, a zsákmányfajok elszaporodnak — ez az egész táplálékhálózat egyensúlyát felborítja."},
+            {nev:"♻️ Eutrofizáció",leiras:"Tápanyagok (nitrogén, foszfor) feldúsulása a vízben — algák és planktonok elszaporodnak, oxigén elfogy, élőlények pusztulnak."},
+            {nev:"♻️ Nehézfémek",leiras:"Ipari szennyvízből kerülnek a vízbe — beépülnek a táplálkozási láncba, a csúcsragadozókban feldúsulnak."},
+            {nev:"♻️ Öntisztulás",leiras:"A folyók és tavak természetes védekezése — planktonok, hinarasok, nádasok, kagylók, csigák szűrik és bontják le a szennyezőanyagokat."},
+            {nev:"♻️ Tömeges halpusztulás",leiras:"Az öntisztulás megszűnésének jele — oxigénhiány és mérgező gázok (metán, kén-dioxid) ölik el a halakat."},
+            {nev:"♻️ Ártéri erdők pusztulása",leiras:"A folyószabályozás megszüntette az elöntéseket — az ártéri erdők kiszáradtak, a folyó és az ártér kapcsolata megszakadt."},
+            {nev:"♻️ Natura 2000",leiras:"Az EU természetvédelmi programja — ártéri erdők, mocsárvilág, szikes tavak élőhely-rekonstrukcióját támogatja."},
+            {nev:"♻️ Vidra",leiras:"A vizes élőhelyek csúcsragadozója — száma Magyarországon növekszik az élőhely-visszaállításnak köszönhetően."},
+            {nev:"♻️ Ivóvíz",leiras:"Egyre értékesebb erőforrás — a felszín közeli kutak sok helyen fertőzöttek, egyre mélyebbre kell fúrni a tiszta vízért."},
+            {nev:"♻️ Folyószabályozás és vízlépcsők",leiras:"Megváltoztatják a folyók természetes állapotát — az ártéri erdők kiszáradnak, a hal vándorlása akadályozva van."},
+            {nev:"♻️ Mocsarak lecsapolása",leiras:"Értékes vizes élőhelyek tűnnek el — csökken a természetes vízvisszatartó kapacitás és a biodiverzitás."},
+            {nev:"♻️ Balaton eutrofizáció",leiras:"A Balaton és más tavak tápanyag-feldúsulása komoly probléma — a foszforterhelés csökkentése a védekezés fő módja."},
+          ],
+          erdekes:"A vizek öntisztulásának megszűnését a tömeges halpusztulás jelzi — ez a vészjelzés, hogy az életközösség egyensúlya felborult. A vidra visszatérése Magyarország vizeire viszont azt mutatja, hogy a természetvédelmi munkának van eredménye!",
+        },
         tf:[
           {text:"A táplálkozási lánc nyila a zsákmánytól a fogyasztó felé mutat.",answer:true,diff:1,explain:"Igen! A nyíl az energiaáramlás irányát mutatja: aki megeszi a másikat – felé mutat."},
           {text:"A fűzfa és a nyárfa jellegzetes vízparti fafajok.",answer:true,diff:1,explain:"Igen! A fűzfák és nyárfák a vízpartok és ligeterdők jellegzetes, nedvességkedvelő fái."},
@@ -3450,10 +3756,12 @@ function subtopicSelected(topicId){
 function showModes(topicId){
   currentTopic=currentBigTopic.subtopics.find(function(t){return t.id===topicId;});
   const isWater=currentBigTopic.id==='vizek';
+  const hasTananyag=!!(currentTopic.tananyag);
   document.getElementById('gameArea').innerHTML=
     '<div class="card mode-screen'+(isWater?' water-theme':'')+'">'+
       '<h2>'+currentTopic.icon+' '+currentTopic.title+'</h2>'+
       '<p class="sub">Melyik játékmódot választod, '+playerName+'?</p>'+
+      (hasTananyag?'<button class="tananyag-open-btn" onclick="openTananyag()"><span>📖</span> Tananyag megtekintése</button>':'')+
       '<div class="mode-grid">'+
         '<button class="mode-btn igaz" onclick="startGame(\'tf\')"><span class="btn-icon">✅</span><span class="btn-label">Igaz vagy Hamis?</span><span class="btn-sub">20 állítás</span></button>'+
         '<button class="mode-btn kviz" onclick="startGame(\'quiz\')"><span class="btn-icon">🧠</span><span class="btn-label">Kvíz</span><span class="btn-sub">10 kérdés</span></button>'+
@@ -3546,6 +3854,7 @@ function render(){
       (current>0?'<div class="pct-pill'+(Math.round(score/current*100)<70?' low':'')+'" id="pctPill">'+Math.round(score/current*100)+'%</div>':'')+
       '<div class="streak-pill '+(onFire?'on-fire':'')+'" id="streakPill">'+streakLabel()+'</div>'+
       '<div class="timer-pill" id="timerPill">⏱ '+formatTime(elapsedSeconds)+'</div>'+
+      (currentTopic&&currentTopic.tananyag?'<button class="back-game-btn tananyag-game-btn" onclick="openTananyag()" title="Tananyag">📖</button>':'')+
     '</div>';
   if(mode==='fill'){renderFill(area,q,topBar,dClass,dLabel,nextLabel);}
   else if(mode==='sort'){renderSort(area,q,topBar,dClass,dLabel,nextLabel);}
@@ -4136,6 +4445,52 @@ function checkCat(){
 })();
 
 showBigTopics();
+</script>
+
+<div class="tananyag-overlay" id="tananyagOverlay" onclick="closeTananyagOnBg(event)">
+  <div class="tananyag-panel" id="tananyagPanel">
+    <div class="tananyag-handle"></div>
+    <div class="tananyag-header" id="tananyagHeader">
+      <span class="tananyag-header-icon" id="tananyagIcon">📖</span>
+      <div class="tananyag-header-title">
+        <h3 id="tananyagTitle">Tananyag</h3>
+        <p>Olvasd el, majd indítsd el a feladatot!</p>
+      </div>
+      <button class="tananyag-close" onclick="closeTananyag()">✕</button>
+    </div>
+    <div class="tananyag-body" id="tananyagBody"></div>
+    <div class="tananyag-btn-row">
+      <button class="tananyag-start-btn" id="tananyagStartBtn" onclick="closeTananyag()">Értettem, játsszunk!</button>
+    </div>
+  </div>
+</div>
+<script>
+function openTananyag(){
+  if(!currentTopic||!currentTopic.tananyag)return;
+  var t=currentTopic.tananyag;
+  var th=currentBigTopic?(CUBE_THEME[currentBigTopic.id]||CUBE_THEME.fuves):CUBE_THEME.fuves;
+  var color=th.color||'#a78bfa';
+  document.getElementById('tananyagIcon').textContent=currentTopic.icon;
+  document.getElementById('tananyagTitle').textContent=currentTopic.title;
+  var startBtn=document.getElementById('tananyagStartBtn');
+  startBtn.style.borderColor=color;startBtn.style.color=color;startBtn.style.background='rgba(124,58,237,.1)';
+  var html='';
+  if(t.bevezeto){html+='<div class="tananyag-section"><div class="tananyag-section-title" style="color:'+color+'">📝 Összefoglaló</div><p class="tananyag-text">'+t.bevezeto+'</p></div>';}
+  if(t.fogalmak&&t.fogalmak.length){
+    html+='<div class="tananyag-section"><div class="tananyag-section-title" style="color:'+color+'">🔑 Fontos fogalmak</div><div class="tananyag-fogalom-grid">';
+    t.fogalmak.forEach(function(f){html+='<div class="tananyag-fogalom"><strong style="color:'+color+'">'+f.nev+'</strong><span>'+f.leiras+'</span></div>';});
+    html+='</div></div>';
+  }
+  if(t.erdekes){html+='<div class="tananyag-section"><div class="tananyag-erdekes"><p>'+t.erdekes+'</p></div></div>';}
+  document.getElementById('tananyagBody').innerHTML=html;
+  document.getElementById('tananyagOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeTananyag(){
+  document.getElementById('tananyagOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeTananyagOnBg(e){if(e.target===document.getElementById('tananyagOverlay'))closeTananyag();}
 </script>
 </body>
 </html>
